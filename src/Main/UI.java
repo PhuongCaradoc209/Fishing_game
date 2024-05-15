@@ -119,7 +119,7 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
         if (commandNum == 0) {
-            g2.setColor(new Color(0xFFFAB7));
+            g2.setColor(new Color(0xF9F07A));
             g2.drawString(text, x, y);
             g2.drawString(">", x - gp.tileSize, y);
             g2.setColor(Color.white);
@@ -142,7 +142,7 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
         if (commandNum == 1) {
-            g2.setColor(new Color(0xFFFAB7));
+            g2.setColor(new Color(0xF9F07A));
             g2.drawString(text, x, y);
             g2.drawString(">", x - gp.tileSize, y);
             g2.setColor(Color.white);
@@ -165,7 +165,7 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
         if (commandNum == 2) {
-            g2.setColor(new Color(0xFFFAB7));
+            g2.setColor(new Color(0xF9F07A));
             g2.drawString(text, x, y);
             g2.drawString(">", x - gp.tileSize, y);
             g2.setColor(Color.white);
