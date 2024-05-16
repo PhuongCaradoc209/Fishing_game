@@ -47,16 +47,26 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         //OPTIONS STATE
         else if (gp.gameState == gp.optionState) {
             optionState(key);
-        } else if (gp.gameState == gp.fishingState) {
-            if (key == KeyEvent.VK_SPACE) {
-                gp.ui.completion += 10;
-                if (gp.ui.completion >= 110) {
-                    gp.ui.completion = 0;
-                    gp.im.Fishing(gp.player.rod);
-                    gp.gameState = gp.afterFishingState;
-                }
-            }
         }
+
+        //FISHING STATE
+        else if (gp.gameState == gp.fishingState) {
+            fishingState(key);
+        }
+
+        //AFTER FISHING STATE
+        else if (gp.gameState == gp.afterFishingState) {
+            afterFishingState(key);
+        }
+
+        //INVENTORY STATE
+        else if (gp.gameState == gp.inventoryState) {
+            inventoryState(key);
+        }
+
+
+
+
     }
 
     @Override

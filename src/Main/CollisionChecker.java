@@ -4,6 +4,7 @@ import entity.Entity;
 
 public class CollisionChecker {
     GamePanel gp;
+    public boolean isWater = false;
 
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
@@ -76,6 +77,14 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
+                
+                for(int i = 27; i<=40 ; i++){
+                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
+                    isWater = true;
+                    break;
+                    }
+                }
+                
                 break;
 
             case "down":
@@ -84,6 +93,12 @@ public class CollisionChecker {
                 tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
+                }
+                for(int i = 27; i<=40 ; i++){
+                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
+                    isWater = true;
+                    break;
+                    }
                 }
                 break;
 
@@ -94,6 +109,12 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
+                for(int i = 27; i<=40 ; i++){
+                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
+                    isWater = true;
+                    break;
+                    }
+                }
                 break;
 
             case "left":
@@ -102,6 +123,12 @@ public class CollisionChecker {
                 tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
+                }
+                for(int i = 27; i<=40 ; i++){
+                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
+                    isWater = true;
+                    break;
+                    }
                 }
                 break;
         }
