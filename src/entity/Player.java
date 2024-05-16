@@ -17,6 +17,7 @@ public class Player extends Entity {
     public double screenX;
     public double screenY;
     private int objIndex;
+    public int rod = 2;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
