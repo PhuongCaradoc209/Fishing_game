@@ -4,6 +4,7 @@ import entity.Entity;
 
 public class CollisionChecker {
     GamePanel gp;
+    public boolean isWater = false;
 
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
@@ -76,6 +77,14 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
+                    }
+                }
+
                 break;
 
             case "down":
@@ -84,6 +93,13 @@ public class CollisionChecker {
                 tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
+                }
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
+                    }
                 }
                 break;
 
@@ -94,6 +110,13 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
+                    }
+                }
                 break;
 
             case "left":
@@ -102,6 +125,13 @@ public class CollisionChecker {
                 tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
+                }
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
+                    }
                 }
                 break;
         }
@@ -183,7 +213,7 @@ public class CollisionChecker {
                         break;
                 }
                 if (entity.solidArea.intersects(target[i].solidArea)) {
-                    if (target[i] != entity){
+                    if (target[i] != entity) {
                         entity.collisionOn = true;
                         index = i;
                     }

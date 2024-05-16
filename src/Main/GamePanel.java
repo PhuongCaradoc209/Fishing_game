@@ -1,6 +1,7 @@
 package Main;
 
 import Environment.EnvironmentManager;
+import Item.ItemManager;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -39,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileMgr = new TileManager(this);
+    public ItemManager itemManager = new ItemManager(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
@@ -72,6 +74,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 4;
     public final int notificationState = 5;
     public final int optionState = 6;
+    public final int afterFishingState = 7;
+    public final int inventoryState = 8;
+    public final int fishingState = 9;
 
     //FPS (Frame Per Second)
     int FPS = 60;

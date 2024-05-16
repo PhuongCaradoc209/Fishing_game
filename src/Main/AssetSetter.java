@@ -115,8 +115,8 @@ public class AssetSetter {
         gp.animal[3].worldY = gp.tileSize * 20;
 
         gp.animal[4] = new Animal_Cow(gp);
-        gp.animal[4].worldX = gp.tileSize * 15;
-        gp.animal[4].worldY = gp.tileSize * 4;
+        gp.animal[4].worldX = gp.tileSize * 17;
+        gp.animal[4].worldY = gp.tileSize * 2;
     }
 
 //    public void setDoorStatus(boolean isClosed){

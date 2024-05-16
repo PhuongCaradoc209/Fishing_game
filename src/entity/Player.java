@@ -2,8 +2,6 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
-import Main.UI;
-import object.OBJ_DOOR_OPEN;
 import tile.TileManager;
 
 import java.awt.*;
@@ -17,6 +15,7 @@ public class Player extends Entity {
     public double screenX;
     public double screenY;
     private int objIndex;
+    public int rod = 2;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
@@ -102,9 +101,11 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
+
+        checkNear(gp.animal[4]);
+        messageOn(gp.animal[4]);
         checkNear(gp.npc[0]);
         messageOn(gp.npc[0]);
-
         //CHECK TILE COLLISION
         collisionOn = false;
         gp.cChecker.checkTile(this, false);
@@ -189,12 +190,21 @@ public class Player extends Entity {
 
     public void messageOn(Entity target) {
         if (gp.gameState == gp.autoDisplayState) {
-            if (gp.keyHandler.enterPressed) {
-                gp.gameState = gp.dialogueState;
-                target.speak(0);
-                gp.playSoundEffect("oldMan", 3);
-            } else {
-                gp.stopMusic("oldMan");
+            switch (target.name) {
+                case "old man":
+                    if (gp.keyHandler.enterPressed) {
+                        gp.gameState = gp.dialogueState;
+                        target.speak(0);
+                        gp.playSoundEffect("oldMan", 3);
+                    } else {
+                        gp.stopMusic("oldMan");
+                    }
+                    break;
+                case "Cow":
+                    if (gp.keyHandler.enterPressed) {
+                        gp.playSoundEffect("Cow", 8);
+                    }
+                    break;
             }
         }
         gp.keyHandler.enterPressed = false;

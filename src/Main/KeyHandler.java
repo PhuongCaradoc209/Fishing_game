@@ -48,6 +48,21 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         else if (gp.gameState == gp.optionState) {
             optionState(key);
         }
+
+        //FISHING STATE
+        else if (gp.gameState == gp.fishingState) {
+            fishingState(key);
+        }
+
+        //AFTER FISHING STATE
+        else if (gp.gameState == gp.afterFishingState) {
+            afterFishingState(key);
+        }
+
+        //INVENTORY STATE
+        else if (gp.gameState == gp.inventoryState) {
+            inventoryState(key);
+        }
     }
 
     @Override
@@ -120,7 +135,10 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
             enterPressed = true;
         }
         if (key == KeyEvent.VK_SPACE) {
-            spacePressed = true;
+            if (gp.cChecker.isWater) {
+                gp.gameState = gp.fishingState;
+                spacePressed = true;
+            }  gp.cChecker.isWater = false;
         }
         if (key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.optionState;
@@ -134,6 +152,9 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
 
         if (key == KeyEvent.VK_H) {
             gp.player.physical = gp.player.maxPhysical;
+        }
+        if (key == KeyEvent.VK_B) {
+            gp.gameState = gp.inventoryState;
         }
     }
 
@@ -225,6 +246,49 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
                         gp.ui.commandNum = 0;
                     }
                 }
+        }
+    }
+
+    public void fishingState(int key) {
+        if (key == KeyEvent.VK_SPACE) {
+            gp.ui.completion += 10;
+            if (gp.ui.completion >= 110) {
+                gp.ui.completion = 0;
+                gp.itemManager.Fishing(gp.player.rod);
+                gp.gameState = gp.afterFishingState;
+            }
+        }
+    }
+
+    public void afterFishingState(int key) {
+        if (key == KeyEvent.VK_SPACE) {
+            gp.gameState = gp.playState;
+        }
+    }
+
+    public void inventoryState(int key) {
+        if (key == KeyEvent.VK_D) {
+            if (gp.ui.slotCol != 5) {
+                gp.ui.slotCol++;
+            }
+        }
+        if (key == KeyEvent.VK_A) {
+            if (gp.ui.slotCol != 0) {
+                gp.ui.slotCol--;
+            }
+        }
+        if (key == KeyEvent.VK_W) {
+            if (gp.ui.slotRow != 0) {
+                gp.ui.slotRow--;
+            }
+        }
+        if (key == KeyEvent.VK_S) {
+            if (gp.ui.slotRow != 3) {
+                gp.ui.slotRow++;
+            }
+
+        } else if (key == KeyEvent.VK_B) {
+            gp.gameState = gp.playState;
         }
     }
 
