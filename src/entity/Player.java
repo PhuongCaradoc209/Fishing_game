@@ -190,12 +190,18 @@ public class Player extends Entity {
 
     public void messageOn(Entity target) {
         if (gp.gameState == gp.autoDisplayState) {
-            if (gp.keyHandler.enterPressed) {
-                gp.gameState = gp.dialogueState;
-                target.speak(0);
-                gp.playSoundEffect("oldMan", 3);
-            } else {
-                gp.stopMusic("oldMan");
+            switch (target.name) {
+                case "old man":
+                    if (gp.keyHandler.enterPressed) {
+                        gp.gameState = gp.dialogueState;
+                        target.speak(0);
+                        gp.playSoundEffect("oldMan", 3);
+                    } else {
+                        gp.stopMusic("oldMan");
+                    }
+                    break;
+                case "Cow":
+//                    gp.playSoundEffect();
             }
         }
         gp.keyHandler.enterPressed = false;

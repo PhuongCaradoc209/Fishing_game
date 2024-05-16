@@ -274,7 +274,7 @@ public class ItemManager {
         gp.ui.text1 =  item.name;
         gp.ui.text2 = item.price + "";
         gp.ui.text3 =  item.rarity;
-        gp.ui.image =  item.image;
+        gp.ui.imageOfFish =  item.image;
 
         if(item.rarity.equals("Legendary")){
             item.fishingFrame = legendaryFrame;

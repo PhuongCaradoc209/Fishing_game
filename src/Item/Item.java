@@ -16,8 +16,4 @@ public class Item {
     public int star;
     public BufferedImage finalImage;
     public BufferedImage fishingFrame;
-
-
-
-
 }

@@ -1,6 +1,7 @@
 package Main;
 
 import Environment.EnvironmentManager;
+import Item.ItemManager;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;

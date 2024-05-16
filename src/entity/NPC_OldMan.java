@@ -11,6 +11,7 @@ public class NPC_OldMan extends Entity {
     private BufferedImage down3;
     public NPC_OldMan(GamePanel gp) {
         super(gp);
+        name = "old man";
         direction = "down";
         speed = 0;
         getImage();
