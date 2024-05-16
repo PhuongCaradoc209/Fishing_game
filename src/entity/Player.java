@@ -2,8 +2,6 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
-import Main.UI;
-import object.OBJ_DOOR_OPEN;
 import tile.TileManager;
 
 import java.awt.*;
@@ -103,9 +101,11 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
+
+        checkNear(gp.animal[4]);
+        messageOn(gp.animal[4]);
         checkNear(gp.npc[0]);
         messageOn(gp.npc[0]);
-
         //CHECK TILE COLLISION
         collisionOn = false;
         gp.cChecker.checkTile(this, false);
@@ -201,7 +201,10 @@ public class Player extends Entity {
                     }
                     break;
                 case "Cow":
-//                    gp.playSoundEffect();
+                    if (gp.keyHandler.enterPressed) {
+                        gp.playSoundEffect("Cow", 8);
+                    }
+                    break;
             }
         }
         gp.keyHandler.enterPressed = false;

@@ -159,7 +159,6 @@ public class ItemManager {
 
     }
     public void Fishing(int rod) {
-
             Random rd = new Random();
             Item item = new Item();
             switch (rod) {
@@ -167,33 +166,33 @@ public class ItemManager {
                     int value = rd.nextInt(100) + 1;
                     //int value = 100;
                     if (value >= 1 && value <= 35) {
-                        item = gp.im.item[0];
-                        gp.im.item[0].caught = true;
-                        gp.im.item[0].count++;
+                        item = gp.itemManager.item[0];
+                        gp.itemManager.item[0].caught = true;
+                        gp.itemManager.item[0].count++;
                     } else if (value >= 36 && value <= 70) {
-                        item = gp.im.item[1];
-                        gp.im.item[1].caught = true;
-                        gp.im.item[1].count++;
+                        item = gp.itemManager.item[1];
+                        gp.itemManager.item[1].caught = true;
+                        gp.itemManager.item[1].count++;
                     } else if (value >= 70 && value <= 75) {
-                        item = gp.im.item[15];
-                        gp.im.item[15].caught = true;
-                        gp.im.item[15].count++;
+                        item = gp.itemManager.item[15];
+                        gp.itemManager.item[15].caught = true;
+                        gp.itemManager.item[15].count++;
                     } else if (value >= 76 && value <= 80) {
-                        item = gp.im.item[16];
-                        gp.im.item[16].caught = true;
-                        gp.im.item[16].count++;
+                        item = gp.itemManager.item[16];
+                        gp.itemManager.item[16].caught = true;
+                        gp.itemManager.item[16].count++;
                     } else if (value >= 81 && value <= 92) {
-                        item = gp.im.item[2];
-                        gp.im.item[2].caught = true;
-                        gp.im.item[2].count++;
+                        item = gp.itemManager.item[2];
+                        gp.itemManager.item[2].caught = true;
+                        gp.itemManager.item[2].count++;
                     } else if (value >= 93 && value <= 99) {
-                        item = gp.im.item[3];
-                        gp.im.item[3].caught = true;
-                        gp.im.item[3].count++;
+                        item = gp.itemManager.item[3];
+                        gp.itemManager.item[3].caught = true;
+                        gp.itemManager.item[3].count++;
                     } else if (value == 100) {
-                        item = gp.im.item[4];
-                        gp.im.item[4].caught = true;
-                        gp.im.item[4].count++;
+                        item = gp.itemManager.item[4];
+                        gp.itemManager.item[4].caught = true;
+                        gp.itemManager.item[4].count++;
                     }
                     gp.gameState = gp.fishingState;
                     setItem(item);
@@ -202,53 +201,53 @@ public class ItemManager {
                       value = rd.nextInt(1000) + 1;
                    // value = 969;
                     if (value >= 1 && value <= 16) {
-                        item = gp.im.item[0];
-                        gp.im.item[0].caught = true;
-                        gp.im.item[0].count++;
+                        item = gp.itemManager.item[0];
+                        gp.itemManager.item[0].caught = true;
+                        gp.itemManager.item[0].count++;
                     } else if (value >= 17 && value <= 32) {
-                        item = gp.im.item[1];
-                        gp.im.item[1].caught = true;
-                        gp.im.item[1].count++;
+                        item = gp.itemManager.item[1];
+                        gp.itemManager.item[1].caught = true;
+                        gp.itemManager.item[1].count++;
                     } else if (value >= 33 && value <= 72) {
-                        item = gp.im.item[15];
-                        gp.im.item[15].caught = true;
-                        gp.im.item[15].count++;
+                        item = gp.itemManager.item[15];
+                        gp.itemManager.item[15].caught = true;
+                        gp.itemManager.item[15].count++;
                     } else if (value >= 73 && value <= 112) {
-                        item = gp.im.item[16];
-                        gp.im.item[16].caught = true;
-                        gp.im.item[16].count++;
+                        item = gp.itemManager.item[16];
+                        gp.itemManager.item[16].caught = true;
+                        gp.itemManager.item[16].count++;
                     } else if (value >= 113 && value <= 144) {
-                        item = gp.im.item[2];
-                        gp.im.item[2].caught = true;
-                        gp.im.item[2].count++;
+                        item = gp.itemManager.item[2];
+                        gp.itemManager.item[2].caught = true;
+                        gp.itemManager.item[2].count++;
                     } else if (value >= 145 && value <= 180) {
-                        item = gp.im.item[3];
-                        gp.im.item[3].caught = true;
-                        gp.im.item[3].count++;
+                        item = gp.itemManager.item[3];
+                        gp.itemManager.item[3].caught = true;
+                        gp.itemManager.item[3].count++;
                     } else if (value >= 181 && value <= 200) {
-                        item = gp.im.item[4];
-                        gp.im.item[4].caught = true;
-                        gp.im.item[4].count++;
+                        item = gp.itemManager.item[4];
+                        gp.itemManager.item[4].caught = true;
+                        gp.itemManager.item[4].count++;
                     } else if (value >= 201 && value <= 520) {
-                        item = gp.im.item[5];
-                        gp.im.item[5].caught = true;
-                        gp.im.item[5].count++;
+                        item = gp.itemManager.item[5];
+                        gp.itemManager.item[5].caught = true;
+                        gp.itemManager.item[5].count++;
                     } else if (value >= 521 && value <= 840) {
-                        item = gp.im.item[6];
-                        gp.im.item[6].caught = true;
-                        gp.im.item[6].count++;
+                        item = gp.itemManager.item[6];
+                        gp.itemManager.item[6].caught = true;
+                        gp.itemManager.item[6].count++;
                     } else if (value >= 841 && value <= 920) {
-                        item = gp.im.item[7];
-                        gp.im.item[7].caught = true;
-                        gp.im.item[7].count++;
+                        item = gp.itemManager.item[7];
+                        gp.itemManager.item[7].caught = true;
+                        gp.itemManager.item[7].count++;
                     } else if (value >= 921 && value <= 970) {
-                        item = gp.im.item[8];
-                        gp.im.item[8].caught = true;
-                        gp.im.item[8].count++;
+                        item = gp.itemManager.item[8];
+                        gp.itemManager.item[8].caught = true;
+                        gp.itemManager.item[8].count++;
                     } else if (value >= 971 && value <= 1000) {
-                        item = gp.im.item[9];
-                        gp.im.item[9].caught = true;
-                        gp.im.item[9].count++;
+                        item = gp.itemManager.item[9];
+                        gp.itemManager.item[9].caught = true;
+                        gp.itemManager.item[9].count++;
                     }
 
                     gp.gameState = gp.fishingState;

@@ -77,14 +77,14 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
-                
-                for(int i = 27; i<=40 ; i++){
-                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
-                    isWater = true;
-                    break;
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
                     }
                 }
-                
+
                 break;
 
             case "down":
@@ -94,10 +94,11 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
-                for(int i = 27; i<=40 ; i++){
-                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
-                    isWater = true;
-                    break;
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
                     }
                 }
                 break;
@@ -109,10 +110,11 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
-                for(int i = 27; i<=40 ; i++){
-                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
-                    isWater = true;
-                    break;
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
                     }
                 }
                 break;
@@ -124,10 +126,11 @@ public class CollisionChecker {
                 if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
                     entity.collisionOn = !isDuck;
                 }
-                for(int i = 27; i<=40 ; i++){
-                if (gp.tm.tile[tileNum1] == gp.tm.tile[3] || gp.tm.tile[tileNum2] == gp.tm.tile[3]) {
-                    isWater = true;
-                    break;
+                //CHECK NEAR WATER
+                for (int i = 27; i <= 40; i++) {
+                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+                        isWater = true;
+                        break;
                     }
                 }
                 break;
@@ -210,7 +213,7 @@ public class CollisionChecker {
                         break;
                 }
                 if (entity.solidArea.intersects(target[i].solidArea)) {
-                    if (target[i] != entity){
+                    if (target[i] != entity) {
                         entity.collisionOn = true;
                         index = i;
                     }

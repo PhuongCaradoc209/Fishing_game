@@ -651,10 +651,10 @@ public class UI {
         int amountY = gp.tileSize * 35/8;
         for(int i = 0;i < 4;i++){
             for(int j = 0; j < 6;j++){
-                if (gp.im.item[count] != null){
+                if (gp.itemManager.item[count] != null){
                     //draw imageOfFish
-                    gp.im.setImage(gp.im.item[count]);
-                    g2.drawImage(gp.im.item[count].finalImage, imageAndBorderX, imageAndBorderY,gp.tileSize,gp.tileSize, null);
+                    gp.itemManager.setImage(gp.itemManager.item[count]);
+                    g2.drawImage(gp.itemManager.item[count].finalImage, imageAndBorderX, imageAndBorderY,gp.tileSize,gp.tileSize, null);
 
                     //draw border
                     g2.setColor(new Color(0xA26D48));
@@ -664,7 +664,7 @@ public class UI {
                     //display amount
                     g2.setFont(font2);
                     g2.setColor(Color.BLACK);
-                    g2.drawString(String.valueOf(gp.im.item[count].count),amountX,amountY);
+                    g2.drawString(String.valueOf(gp.itemManager.item[count].count),amountX,amountY);
 
                     imageAndBorderX+= gp.tileSize * 3/2;
                     amountX += gp.tileSize * 3/2;
@@ -728,9 +728,9 @@ public class UI {
         g2.drawImage(imageOfFish, gp.tileSize *7/2, gp.tileSize *5,gp.tileSize *5/2,gp.tileSize *5/2,null);
         //draw star
         if(star == 2){
-            g2.drawImage(gp.im.starZero,gp.tileSize *7/2, gp.tileSize *8,gp.tileSize /2,gp.tileSize /2,null);
-            g2.drawImage(gp.im.starZero,gp.tileSize *9/2, gp.tileSize *8,gp.tileSize /2,gp.tileSize /2,null);
-            g2.drawImage(gp.im.starZero,gp.tileSize *11/2, gp.tileSize *8,gp.tileSize /2,gp.tileSize /2,null);
+            g2.drawImage(gp.itemManager.starZero,gp.tileSize *7/2, gp.tileSize *8,gp.tileSize /2,gp.tileSize /2,null);
+            g2.drawImage(gp.itemManager.starZero,gp.tileSize *9/2, gp.tileSize *8,gp.tileSize /2,gp.tileSize /2,null);
+            g2.drawImage(gp.itemManager.starZero,gp.tileSize *11/2, gp.tileSize *8,gp.tileSize /2,gp.tileSize /2,null);
         }
     }
 
@@ -750,40 +750,40 @@ public class UI {
     public void displayItemIsChosen(){
 
         int choose = 6 * slotRow + slotCol;
-        if(gp.im.item[choose] != null){
-            g2.drawImage(gp.im.item[choose].finalImage,gp.tileSize *12,gp.tileSize *3,gp.tileSize *2,gp.tileSize *2,null);
+        if(gp.itemManager.item[choose] != null){
+            g2.drawImage(gp.itemManager.item[choose].finalImage,gp.tileSize *12,gp.tileSize *3,gp.tileSize *2,gp.tileSize *2,null);
             g2.setFont(font3);
             FontMetrics fm = g2.getFontMetrics(g2.getFont());
             g2.setColor(new Color(0x7B342E));
 
             String text;
 
-            if(gp.im.item[choose].caught == false){
+            if(gp.itemManager.item[choose].caught == false){
                 text = "?";
             }
             else {
-                text = gp.im.item[choose].name;
+                text = gp.itemManager.item[choose].name;
             }
             int textWidth = fm.stringWidth(text);
             int centerX = gp.tileSize *45/4 + (gp.tileSize *7/2 - textWidth)/2;
             g2.drawString(text,centerX,gp.tileSize *11/2);
 
-            textWidth = fm.stringWidth("Count: "+gp.im.item[choose].count);
+            textWidth = fm.stringWidth("Count: "+gp.itemManager.item[choose].count);
             centerX = gp.tileSize *45/4 + (gp.tileSize *7/2 - textWidth)/2;
-            g2.drawString("Count: "+gp.im.item[choose].count, centerX,gp.tileSize *6);
+            g2.drawString("Count: "+gp.itemManager.item[choose].count, centerX,gp.tileSize *6);
 
 
-            if(gp.im.item[choose].caught == false){
+            if(gp.itemManager.item[choose].caught == false){
                 text = "?";
             }
             else {
-                text = gp.im.item[choose].rarity;
+                text = gp.itemManager.item[choose].rarity;
             }
             textWidth = fm.stringWidth(text);
             centerX = gp.tileSize *45/4 + (gp.tileSize *7/2 - textWidth)/2;
             int y = gp.tileSize *13/2;
 
-            if(gp.im.item[choose].caught == false){
+            if(gp.itemManager.item[choose].caught == false){
                 g2.setColor(new Color(0x7B342E));
                 g2.drawString(text,centerX,y);
             }
