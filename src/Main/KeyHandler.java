@@ -49,6 +49,23 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
             optionState(key);
         }
 
+        //FISHING STATE
+        else if (gp.gameState == gp.fishingState) {
+            fishingState(key);
+        }
+        
+        //AFTER FISHING STATE
+        else if (gp.gameState == gp.afterFishingState) {
+            afterFishingState(key);
+        }
+        
+        //INVENTORY STATE
+        else if (gp.gameState == gp.inventoryState) {
+            inventoryState(key);
+        }
+
+        
+
        
     }
 
@@ -139,7 +156,7 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         }
 
         if (key == KeyEvent.VK_SPACE) {
-                if(gp.cCheck.isWater){
+                if(gp.cCheck.isWater == true){
                     gp.gameState = gp.fishingState;}
             }
         if (key == KeyEvent.VK_B){
@@ -237,6 +254,49 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
                 }
         }
     }
+
+    public void fishingState(int key){
+        if(key == KeyEvent.VK_SPACE){
+            gp.ui.completion += 10;
+            if(gp.ui.completion >=110){
+                gp.ui.completion = 0;
+                gp.im.Fishing(gp.player.rod);
+                gp.gameState = gp.afterFishingState;
+            }
+    }
+
+    public void afterFishingState(int key) {
+        if (key == KeyEvent.VK_SPACE) {
+            gp.gameState = gp.playState;
+        }
+    }
+
+    public void inventoryState(int key) {
+        if (key == KeyEvent.VK_D) {
+            if (gp.ui.slotCol != 5) {
+                gp.ui.slotCol++;
+            }
+        }
+        if (key == KeyEvent.VK_A) {
+            if (gp.ui.slotCol != 0) {
+                gp.ui.slotCol--;
+            }
+        }
+        if (key == KeyEvent.VK_W) {
+            if (gp.ui.slotRow != 0) {
+                gp.ui.slotRow--;
+            }
+        }
+        if (key == KeyEvent.VK_S) {
+            if (gp.ui.slotRow != 3) {
+                gp.ui.slotRow++;
+            }
+
+        } else if (key == KeyEvent.VK_B) {
+            gp.gameState = gp.playState;
+        }
+    }
+        
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
