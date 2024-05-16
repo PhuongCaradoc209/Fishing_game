@@ -49,15 +49,7 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
             optionState(key);
         }
 
-        else if(gp.gameState == gp.fishingState){
-            if(code == KeyEvent.VK_SPACE){
-                gp.ui.completion += 10;
-                if(gp.ui.completion >=110){
-                    gp.ui.completion = 0;
-                    gp.im.Fishing(gp.player.rod);
-                    gp.gameState = gp.afterFishingState;
-                }
-            }
+       
     }
 
     @Override
@@ -145,6 +137,14 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         if (key == KeyEvent.VK_H) {
             gp.player.physical = gp.player.maxPhysical;
         }
+
+        if (key == KeyEvent.VK_SPACE) {
+                if(gp.cCheck.isWater){
+                    gp.gameState = gp.fishingState;}
+            }
+        if (key == KeyEvent.VK_B){
+                gp.gameState = gp.inventoryState;
+            }
     }
 
     public void dialogState(int key) {
