@@ -1,7 +1,6 @@
 package Main;
 
 import Environment.EnvironmentManager;
-import Item.ItemManager;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -40,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileMgr = new TileManager(this);
-    public ItemManager itemManager = new ItemManager(this);
+    public InventoryManagement iManage = new InventoryManagement(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
