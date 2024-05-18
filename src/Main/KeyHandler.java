@@ -289,7 +289,7 @@ public class KeyHandler implements KeyListener {
             gp.ui.completion += 10;
             if (gp.ui.completion >= 110) {
                 gp.ui.completion = 0;
-                gp.itemManager.Fishing(gp.player.rod);
+                gp.iManage.Fishing(gp.player.rod);
                 gp.gameState = gp.afterFishingState;
             }
         }
@@ -303,26 +303,26 @@ public class KeyHandler implements KeyListener {
 
     public void inventoryState(int key) {
         if (key == KeyEvent.VK_D) {
-            if (gp.ui.slotCol != 5) {
-                gp.ui.slotCol++;
+            if (gp.ui.inventorySlotCol != 5) {
+                gp.ui.inventorySlotCol++;
                 gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_A) {
-            if (gp.ui.slotCol != 0) {
-                gp.ui.slotCol--;
+            if (gp.ui.inventorySlotCol != 0) {
+                gp.ui.inventorySlotCol--;
                 gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_W) {
-            if (gp.ui.slotRow != 0) {
-                gp.ui.slotRow--;
+            if (gp.ui.inventorySlotRow != 0) {
+                gp.ui.inventorySlotRow--;
                 gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_S) {
-            if (gp.ui.slotRow != 3) {
-                gp.ui.slotRow++;
+            if (gp.ui.inventorySlotRow != 3) {
+                gp.ui.inventorySlotRow++;
                 gp.playSoundEffect("select_sound", 6);
             }
 
