@@ -27,7 +27,6 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
-        getPlayerImage();
 
         //AREA COLLISION
         solidArea = new Rectangle();
@@ -42,6 +41,14 @@ public class Player extends Entity {
         direction = "down";
     }
 
+    public void setPlayerImage(String playerType){
+        if (playerType.equals("Human")){
+            getPlayerImage_HumanVer();
+        }
+        else
+            getPlayerImage_DinoVer();
+    }
+
     public void setDefaultValues() {
         worldX = gp.tileSize * 10;
         worldY = gp.tileSize * 7;
@@ -53,7 +60,22 @@ public class Player extends Entity {
         physical = maxPhysical;
     }
 
-    public void getPlayerImage() {
+    public void getPlayerImage_DinoVer(){
+        standUp = setup("player/dino_up_1", 16, 16);
+        standDown = setup("player/dino_down_1", 16, 16);
+        standRight = setup("player/dino_down_1", 16, 16);
+        standLeft = setup("player/dino_up_1", 16, 16);
+        up1 = setup("player/dino_up_1", 16, 16);
+        up2 = setup("player/dino_up_2", 16, 16);
+        down1 = setup("player/dino_down_1", 16, 16);
+        down2 = setup("player/dino_down_2", 16, 16);
+        left1 = setup("player/dino_left_1", 16, 16);
+        left2 = setup("player/dino_left_2", 16, 16);
+        right1 = setup("player/dino_right_1", 16, 16);
+        right2 = setup("player/dino_right_2", 16, 16);
+    }
+
+    public void getPlayerImage_HumanVer() {
         standUp = setup("player/standUp", gp.tileSize, gp.tileSize);
         standDown = setup("player/standDown", gp.tileSize, gp.tileSize);
         standRight = setup("player/right", gp.tileSize, gp.tileSize);

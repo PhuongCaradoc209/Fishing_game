@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-public class KeyHandler implements KeyListener, MouseWheelListener {
+public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
     //DEBUG
     boolean checkDrawTime = false;
@@ -27,6 +27,10 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         //TITTLE STATE
         if (gp.gameState == gp.tittleState) {
             tittleState(key);
+        }
+
+        if (gp.gameState == gp.selectPlayerState) {
+            selectPlayerState(key);
         }
 
         //PLAY STATE
@@ -107,7 +111,7 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         if (key == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.playSoundEffect("click_sound", 7);
-                gp.gameState = gp.playState;
+                gp.gameState = gp.selectPlayerState;
             }
             if (gp.ui.commandNum == 1) {
                 //add later
@@ -115,6 +119,36 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
             if (gp.ui.commandNum == 2) {
                 System.exit(0);
             }
+        }
+    }
+
+    public void selectPlayerState(int key) {
+        if (key == KeyEvent.VK_A) {
+            gp.ui.commandNum--;
+            gp.playSoundEffect("select_sound", 6);
+            if (gp.ui.commandNum < 1) {
+                gp.ui.commandNum = 2;
+            }
+        }
+        if (key == KeyEvent.VK_D) {
+            gp.ui.commandNum++;
+            gp.playSoundEffect("select_sound", 6);
+            if (gp.ui.commandNum > 2) {
+                gp.ui.commandNum = 1;
+            }
+        }
+        if (key == KeyEvent.VK_ENTER) {
+            if (gp.ui.commandNum == 1) {
+                gp.playSoundEffect("click_sound", 7);
+                gp.player.setPlayerImage("Human");
+                gp.gameState = gp.playState;
+            } else if (gp.ui.commandNum == 2) {
+                gp.playSoundEffect("click_sound", 7);
+                gp.player.setPlayerImage("Dino");
+                gp.gameState = gp.playState;
+            }
+            gp.ui.commandNum = 0;
+
         }
     }
 
@@ -138,7 +172,8 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
             if (gp.cChecker.isWater) {
                 gp.gameState = gp.fishingState;
                 spacePressed = true;
-            }  gp.cChecker.isWater = false;
+                gp.cChecker.isWater = false;
+            }
         }
         if (key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.optionState;
@@ -270,21 +305,25 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         if (key == KeyEvent.VK_D) {
             if (gp.ui.slotCol != 5) {
                 gp.ui.slotCol++;
+                gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_A) {
             if (gp.ui.slotCol != 0) {
                 gp.ui.slotCol--;
+                gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_W) {
             if (gp.ui.slotRow != 0) {
                 gp.ui.slotRow--;
+                gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_S) {
             if (gp.ui.slotRow != 3) {
                 gp.ui.slotRow++;
+                gp.playSoundEffect("select_sound", 6);
             }
 
         } else if (key == KeyEvent.VK_B) {
@@ -292,13 +331,13 @@ public class KeyHandler implements KeyListener, MouseWheelListener {
         }
     }
 
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        int scroll = e.getWheelRotation();
-        if (scroll < 0) {
-            gp.zoomInOut(2);
-        } else {
-            gp.zoomInOut(-2);
-        }
-    }
+//    @Override
+//    public void mouseWheelMoved(MouseWheelEvent e) {
+//        int scroll = e.getWheelRotation();
+//        if (scroll < 0) {
+//            gp.zoomInOut(2);
+//        } else {
+//            gp.zoomInOut(-2);
+//        }
+//    }
 }

@@ -55,7 +55,7 @@ public class NPC_OldMan extends Entity {
     public void update(boolean isDuck) {
         if (!isDuck) {
             spriteCounter++;
-            if (spriteCounter > 12) {
+            if (spriteCounter > 13) {
                 if (spriteNum == 2)
                     spriteNum = 3;
                 else if (spriteNum == 3)
