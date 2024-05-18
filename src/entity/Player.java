@@ -102,8 +102,6 @@ public class Player extends Entity {
 
         //CHECK AUTO DISPLAY
 
-        checkNear(gp.animal[4]);
-        messageOn(gp.animal[4]);
         checkNear(gp.npc[0]);
         messageOn(gp.npc[0]);
         //CHECK TILE COLLISION

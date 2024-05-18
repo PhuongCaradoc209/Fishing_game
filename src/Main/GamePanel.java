@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     //PLAYER
     public Player player = new Player(this, keyHandler, tileMgr);
     //OBJECT
-    public Entity[] obj = new Entity[20];
+    public Entity[] obj = new Entity[50];
     //ENTITY
     public Entity[] npc = new Entity[10];
     //ANIMAL
@@ -102,9 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D) tempScreen.getGraphics();
 
-//        if (fullScreenOn) {
 //        setFullScreen();
-//        }
     }
 
     public void zoomInOut(int i) {
