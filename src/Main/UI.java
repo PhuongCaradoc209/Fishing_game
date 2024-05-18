@@ -286,8 +286,13 @@ public class UI {
     }
 
     public void drawPlayerPhysical() {
-        int x = gp.tileSize / 2;
+        int x = gp.tileSize;
         int y = gp.tileSize / 2;
+
+        //DRAW PHYSICAL FRAME
+        image = setup("background/PhysicalFrame", 423, 107);
+        g2.drawImage(image, gp.tileSize/2, y - 5, gp.tileSize * 5, gp.tileSize + 10, null);
+
         int i = 0;
 
         //DRAW BLANK PHYSICAL
@@ -297,7 +302,7 @@ public class UI {
             x += gp.tileSize;
         }
         //RESET
-        x = gp.tileSize / 2;
+        x = gp.tileSize;
         y = gp.tileSize / 2;
         i = 0;
         while (i < gp.player.physical) {
@@ -684,6 +689,7 @@ public class UI {
         completion -= 0.5;
         drawSubWindow1(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, Color.GRAY, new Color(0, 0, 0, 0), 15, 5);
         double n = completion / 10;
+
         int x = gp.tileSize * 29 / 4;
         int y = gp.tileSize * 15 / 2;
         for (int i = 1; i <= n; i++) {
@@ -691,7 +697,7 @@ public class UI {
             g2.fillRect(x, y, gp.tileSize * 3 / 2, gp.tileSize / 2);
             y -= gp.tileSize / 2;
         }
-        drawSubWindow1(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, new Color(255, 255, 255, 0), Color.BLACK, 15, 3);
+    drawSubWindow1(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, new Color(255, 255, 255, 0), Color.BLACK, 15, 3);
     }
     public void drawInventoryScreen() {
         drawInventoryBackground();
