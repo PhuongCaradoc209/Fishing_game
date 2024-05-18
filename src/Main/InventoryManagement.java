@@ -33,8 +33,6 @@ public class InventoryManagement {
         inventory[14] = new Fish_Shark(gp);
         inventory[15] = new OBJ_Can(gp);
         inventory[16] = new OBJ_Bottle(gp);
-        inventory[17] = new OBJ_Grass(gp);
-        inventory[18] = new OBJ_Milk(gp);
     }
 
     public void Fishing(int rod) {
