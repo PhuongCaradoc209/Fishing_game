@@ -169,10 +169,8 @@ public class KeyHandler implements KeyListener {
             enterPressed = true;
         }
         if (key == KeyEvent.VK_SPACE) {
-            if (gp.cChecker.isWater) {
-                gp.gameState = gp.fishingState;
+            if (gp.cChecker.checkNearWater(gp.player)) {
                 spacePressed = true;
-                gp.cChecker.isWater = false;
             }
         }
         if (key == KeyEvent.VK_ESCAPE) {
@@ -296,7 +294,7 @@ public class KeyHandler implements KeyListener {
     }
 
     public void afterFishingState(int key) {
-        if (key == KeyEvent.VK_SPACE) {
+        if (key == KeyEvent.VK_ENTER) {
             gp.gameState = gp.playState;
         }
     }

@@ -679,7 +679,7 @@ public class UI {
     }
 
     public void drawFishingScreen() {
-        completion -= 1;
+        completion -= 2;
         drawSubWindow(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, Color.GRAY, new Color(0, 0, 0, 0), 15, 5);
         int n = completion / 10;
         int x = gp.tileSize * 29 / 4;
