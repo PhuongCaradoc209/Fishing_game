@@ -14,7 +14,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font pixel;
-    Font font,font1,font2,font3 ;
+    Font font,font1,font2,font3,font4;
     BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2,fishImage;
     public String currentDialogue = "";
     public String currentNotification = "";
@@ -25,7 +25,7 @@ public class UI {
     final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect;
     public int inventorySlotCol = 0;
     public int inventorySlotRow = 0;
-    public int completion;
+    public double completion;
     public String fishName="", fishPrice="", fishRarity="";
 
     public UI(GamePanel gp) {
@@ -52,10 +52,11 @@ public class UI {
         physical_1 = physical.image3;
         physical_1_5 = physical.image4;
         physical_2 = physical.image5;
-        font  = pixel.deriveFont(Font.BOLD,40f);
+        font  = pixel.deriveFont(Font.BOLD,60f);
         font1 = pixel.deriveFont(Font.BOLD,30f);
         font2 = pixel.deriveFont(Font.BOLD,8f);
         font3 = pixel.deriveFont(Font.BOLD,20f);
+        font4 = pixel.deriveFont(Font.BOLD,25f);
     }
 
     public void draw(Graphics2D g2) {
@@ -680,9 +681,9 @@ public class UI {
         g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, arc, arc);
     }
     public void drawFishingScreen() {
-        completion -= 1;
+        completion -= 0.5;
         drawSubWindow1(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, Color.GRAY, new Color(0, 0, 0, 0), 15, 5);
-        int n = completion / 10;
+        double n = completion / 10;
         int x = gp.tileSize * 29 / 4;
         int y = gp.tileSize * 15 / 2;
         for (int i = 1; i <= n; i++) {
@@ -694,28 +695,28 @@ public class UI {
     }
     public void drawInventoryScreen() {
         drawInventoryBackground();
-        drawString("INVENTORY", gp.tileSize * 13 / 4, gp.tileSize * 3, font, new Color(0x74342E));
+        drawString("COLLECTION", gp.tileSize * 22 / 4, gp.tileSize * 4, font, new Color(0x74342E));
         drawInventoryItemImage_Border_Number();
         drawCursor();
         displayItemIsChosen();
     }
     public void drawInventoryBackground() {
         int x = gp.tileSize*3;
-        int y = gp.tileSize * 2;
+        int y = gp.tileSize * 5/2;
         int width = gp.tileSize * 19 / 2;
-        int height = gp.tileSize * 8;
+        int height = gp.tileSize * 15/2;
         Color cbg = new Color(0xF4CE98);
         Color cs = new Color(0x5e3622);
         drawSubWindow1(x, y, width, height, cbg, cs, 10, 10);
-        drawSubWindow1(x * 5 / 4 + width, y, gp.tileSize * 9 / 2, gp.tileSize * 8, cbg, cs, 10, 10);
+        drawSubWindow1(x * 5 / 4 + width, y, gp.tileSize * 9 / 2, height, cbg, cs, 10, 10);
     }
 
     public void drawInventoryItemImage_Border_Number(){
         int count = 0;
         int imageAndBorderX = gp.tileSize * 7/2;
-        int imageAndBorderY = gp.tileSize * 7/2;
+        int imageAndBorderY = gp.tileSize * 9/2;
         int amountX =gp.tileSize * 69/16;
-        int amountY = gp.tileSize * 35/8;
+        int amountY = gp.tileSize * 43/8;
         for(int i = 0;i < 4;i++){
             for(int j = 0; j < 6;j++){
                 if (gp.iManage.inventory[count] != null){
@@ -746,7 +747,7 @@ public class UI {
     }
     public void drawCursor() {
         final int xStart = gp.tileSize * 7 / 2;
-        final int yStart = gp.tileSize * 7 / 2;
+        final int yStart = gp.tileSize * 9 / 2;
 
         int cursorX = xStart + (gp.tileSize * 3 / 2 * inventorySlotCol);
         int cursorY = yStart + (gp.tileSize * 3 / 2 * inventorySlotRow);
@@ -761,7 +762,7 @@ public class UI {
         if(gp.iManage.inventory[choose] != null){
             // display fish chosen image
             g2.drawImage(gp.iManage.inventory[choose].fishFinalImage,gp.tileSize *29/2,gp.tileSize *3,gp.tileSize *2,gp.tileSize *2,null);
-            g2.setFont(font1);
+            g2.setFont(font4);
             FontMetrics fm = g2.getFontMetrics(g2.getFont());
             g2.setColor(new Color(0x7B342E));
 

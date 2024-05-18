@@ -287,7 +287,7 @@ public class KeyHandler implements KeyListener {
     public void fishingState(int key) {
         if (key == KeyEvent.VK_SPACE) {
             gp.ui.completion += 10;
-            if (gp.ui.completion >= 110) {
+            if (gp.ui.completion >= 100) {
                 gp.ui.completion = 0;
                 gp.iManage.Fishing(gp.player.rod);
                 gp.gameState = gp.afterFishingState;
@@ -321,7 +321,7 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_S) {
-            if (gp.ui.inventorySlotRow != 3) {
+            if (gp.ui.inventorySlotRow != 2) {
                 gp.ui.inventorySlotRow++;
                 gp.playSoundEffect("select_sound", 6);
             }
