@@ -282,6 +282,11 @@ public class UI {
     public void drawPlayerPhysical() {
         int x = gp.tileSize / 2;
         int y = gp.tileSize / 2;
+
+        //DRAW PHYSICAL FRAME
+        image = setup("background/PhysicalFrame", 423, 107);
+        g2.drawImage(image, 0, y - 5, gp.tileSize * 5, gp.tileSize + 10, null);
+
         int i = 0;
 
         //DRAW BLANK PHYSICAL
@@ -685,8 +690,6 @@ public class UI {
             y -= gp.tileSize / 2;
         }
         drawSubWindow(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, new Color(255, 255, 255, 0), Color.BLACK, 15, 3);
-
-
     }
 
     public void drawAfterFishingScreen() {
