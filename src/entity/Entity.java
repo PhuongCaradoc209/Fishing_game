@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
@@ -34,6 +35,10 @@ public class Entity {
     //OBJ
     public BufferedImage image, image2, image3, image4, image5;
     public String name;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
+    public int price;
+    public String description = "";
     public boolean collision = false;
 
     public Entity(GamePanel gp) {

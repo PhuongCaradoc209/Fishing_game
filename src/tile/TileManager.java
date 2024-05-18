@@ -26,7 +26,7 @@ public class TileManager {
     }
 
     public void getTileImage() {
-        for (int i = 0; i <= 126; i++) {
+        for (int i = 0; i <= 130; i++) {
             setUp(i);
             if (i >= 41 && i <= 62 || i >= 65 && i <= 70) {
                 tile[i].collision = true;
