@@ -280,12 +280,12 @@ public class UI {
     }
 
     public void drawPlayerPhysical() {
-        int x = gp.tileSize / 2;
+        int x = gp.tileSize;
         int y = gp.tileSize / 2;
 
         //DRAW PHYSICAL FRAME
         image = setup("background/PhysicalFrame", 423, 107);
-        g2.drawImage(image, 0, y - 5, gp.tileSize * 5, gp.tileSize + 10, null);
+        g2.drawImage(image, gp.tileSize/2, y - 5, gp.tileSize * 5, gp.tileSize + 10, null);
 
         int i = 0;
 
@@ -296,7 +296,7 @@ public class UI {
             x += gp.tileSize;
         }
         //RESET
-        x = gp.tileSize / 2;
+        x = gp.tileSize;
         y = gp.tileSize / 2;
         i = 0;
         while (i < gp.player.physical) {
