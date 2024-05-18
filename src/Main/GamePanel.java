@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     boolean fullScreenOn = false;
 
     //SYSTEM
-    TileManager tileMgr = new TileManager(this);
+    public TileManager tileMgr = new TileManager(this);
     public InventoryManagement iManage = new InventoryManagement(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
