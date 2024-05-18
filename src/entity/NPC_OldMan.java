@@ -44,6 +44,10 @@ public class NPC_OldMan extends Entity {
         dialogues[2] = "If you want to sell your fishes,\nplease go to that man";
     }
 
+    public void setItem(){
+
+    }
+
     public void speak() {
         super.speak(0);
     }
