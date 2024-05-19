@@ -88,10 +88,10 @@ public class DayNight {
     }
 
     public void getImage(GamePanel gp) {
-        iDay = setup("environment/day", gp);
-        iDusk = setup("environment/night", gp);
-        iDawn = setup("environment/day", gp);
-        iNight = setup("environment/night", gp);
+        iDay = setup("Environment/day", gp);
+        iDusk = setup("Environment/night", gp);
+        iDawn = setup("Environment/day", gp);
+        iNight = setup("Environment/night", gp);
     }
 
     public void update() {
