@@ -6,7 +6,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, fPressed;
     //DEBUG
     boolean checkDrawTime = false;
     GamePanel gp;
@@ -91,6 +91,9 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_SPACE) {
             spacePressed = false;
         }
+        if (key == KeyEvent.VK_F) {
+            fPressed = false;
+        }
     }
 
     public void tittleState(int key) {
@@ -172,6 +175,9 @@ public class KeyHandler implements KeyListener {
             if (gp.cChecker.checkNearWater(gp.player)) {
                 spacePressed = true;
             }
+        }
+        if (key == KeyEvent.VK_F) {
+            fPressed = true;
         }
         if (key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.optionState;

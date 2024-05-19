@@ -3,6 +3,7 @@ package entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import tile.TileManager;
+import object.Fishing_Rod;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,11 +18,15 @@ public class Player extends Entity {
     private int objIndex;
     public int rod = 2;
 
+    public Fishing_Rod fishingRod;
+
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
         this.key = key;
         this.tileM = tileM;
         size = gp.tileSize + 10;
+
+        fishingRod = new Fishing_Rod(gp, this, key);
 
         screenX = (double) gp.screenWidth / 2 - ((double) gp.tileSize / 2); //set the player at then center of the screen
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
@@ -116,6 +121,11 @@ public class Player extends Entity {
             // STOP SOUND
             gp.stopMusic("grass");
         }
+        if(key.fPressed){
+            fishingRod.Fishing();
+            System.out.println("Fishing");
+            System.out.println(fishingRod.isFacingWater());
+        }
         //UPDATE the solidArea due to zoom in and out
         solidArea.x = (10 * gp.tileSize) / 48;
         solidArea.y = (20 * gp.tileSize) / 48;
@@ -143,7 +153,8 @@ public class Player extends Entity {
 
 //        //CHECK TO OPEN DOOR
 //        checkAtSpecifiedPst(0);
-
+        // update fishing rod
+        fishingRod.update();
         //CHECK EVENT
         gp.eHandler.checkEvent(1);
 
@@ -341,7 +352,11 @@ public class Player extends Entity {
             y = gp.screenHeight - (gp.worldHeight - worldY);
         }
         ////////////////////////
+        if(fishingRod.getFrame() != null){
+            image = fishingRod.getFrame();
+        }
 
         g.drawImage(image, (int) x, (int) y, size, size, null);
+
     }
 }
