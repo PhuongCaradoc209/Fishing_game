@@ -6,6 +6,7 @@ import tile.TileManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity {
@@ -15,7 +16,9 @@ public class Player extends Entity {
     public double screenX;
     public double screenY;
     private int objIndex;
+    private int interactEntity_Index;
     public int rod = 2;
+    private ArrayList<Entity> interactEntity;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
@@ -27,6 +30,7 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
+        interactEntity = new ArrayList<>();
 
         //AREA COLLISION
         solidArea = new Rectangle();
@@ -52,7 +56,7 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 10;
         worldY = gp.tileSize * 7;
-        speed = (double) gp.worldWidth / 500;
+        speed = (double) gp.worldWidth / 400;
         direction = "standDown";
 
         //PLAYER STATUS
@@ -123,9 +127,19 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
+        if (!interactEntity.contains(gp.npc[0]))
+        {
+            interactEntity.add(gp.npc[0]);
+        }
+//        if (!interactEntity.contains(gp.animal[4])) {
+//            interactEntity.add(gp.animal[4]);
+//        }
+        interactEntity_Index = checkNear(interactEntity);
 
-        checkNear(gp.npc[0]);
-        messageOn(gp.npc[0]);
+        if (interactEntity_Index <= interactEntity.size()){
+            messageOn(interactEntity.get(interactEntity_Index));
+        }
+
         //CHECK TILE COLLISION
         collisionOn = false;
         gp.cChecker.checkTile(this, false);
@@ -221,32 +235,39 @@ public class Player extends Entity {
                     }
                     break;
                 case "Cow":
-                    if (gp.keyHandler.enterPressed) {
                         gp.playSoundEffect("Cow", 8);
-                    }
                     break;
             }
         }
         gp.keyHandler.enterPressed = false;
     }
 
-    public void checkNear(Entity target) {
+    public int checkNear(ArrayList<Entity> target) {
         int playerCol = (int) ((worldX + gp.tileSize / 2) / gp.tileSize);
         int playerRow = (int) ((worldY + gp.tileSize / 2) / gp.tileSize);
-        int targetCol = (int) (target.worldX / gp.tileSize);
-        int targetRow = (int) (target.worldY / gp.tileSize);
+        int targetCol;
+        int targetRow;
+        for (int i = 0; i < target.size(); i++) {
+            targetCol = (int) (target.get(i).worldX / gp.tileSize);
+            targetRow = (int) (target.get(i).worldY / gp.tileSize);
 
-        if (playerCol == targetCol && playerRow - 1 == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol == targetCol && playerRow + 1 == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol + 1 == targetCol && playerRow == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol - 1 == targetCol && playerRow == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else {
-            gp.gameState = gp.playState;
+            if (playerCol == targetCol && playerRow - 1 == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol == targetCol && playerRow + 1 == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol + 1 == targetCol && playerRow == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol - 1 == targetCol && playerRow == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else {
+                gp.gameState = gp.playState;
+            }
         }
+        return 999;
     }
 
 //    public void checkAtSpecifiedPst(int i) {
