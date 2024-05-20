@@ -608,22 +608,27 @@ public class UI {
     public void drawDialogueInteract() {
         double worldX, worldY;
         double screenX, screenY;
+        int imageWidth, imageHeight;
         if (gp.player.interactEntity.get(gp.player.interactEntity_Index).name.equals("old man")) {
-            worldX = gp.tileSize * 19.5;
+            worldX = gp.tileSize * 19.7;
             worldY = gp.tileSize * 8;
+            imageWidth = gp.tileSize /2;
+            imageHeight = gp.tileSize/2;
             //Coordinate for the screen
             screenX = worldX - gp.player.worldX + gp.player.screenX;
             screenY = worldY - gp.player.worldY + gp.player.screenY;
 
             image = setup("Dialog/dialog", 28, 29);
         } else {
-            worldX = gp.tileSize * 16.5;
-            worldY = gp.tileSize * 2.5;
+            worldX = gp.tileSize * 16.8;
+            worldY = gp.tileSize * 1.5;
+            imageWidth =gp.tileSize;
+            imageHeight = gp.tileSize;
             //Coordinate for the screen
             screenX = worldX - gp.player.worldX + gp.player.screenX;
             screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-            image = setup("Dialog/dialog", 28, 29);
+            image = setup("Dialog/CowDialog", 100, 85);
         }
 
         //STOP MOVING THE CAMERA AT EDGE (DIALOG CAN NOT MOVE IF AT EDGE)
@@ -651,14 +656,14 @@ public class UI {
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-            g2.drawImage(image, (int) screenX, (int) screenY, null);
+            g2.drawImage(image, (int) screenX, (int) screenY, imageWidth, imageHeight,null);
         }
         //IF PLAYER AT THE EDGE
         else if (gp.player.screenX > gp.player.worldX ||
                 gp.player.screenY > gp.player.worldY ||
                 rightOffSet > gp.worldWidth - gp.player.worldX ||
                 bottomOffSet > gp.worldHeight - gp.player.worldY) {
-            g2.drawImage(image, (int) screenX, (int) screenY, null);
+            g2.drawImage(image, (int) screenX, (int) screenY, imageWidth, imageHeight,null);
         }
     }
 
