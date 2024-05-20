@@ -16,9 +16,9 @@ public class Player extends Entity {
     public double screenX;
     public double screenY;
     private int objIndex;
-    private int interactEntity_Index;
+    public int interactEntity_Index;
     public int rod = 2;
-    private ArrayList<Entity> interactEntity;
+    public ArrayList<Entity> interactEntity;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
@@ -131,9 +131,9 @@ public class Player extends Entity {
         {
             interactEntity.add(gp.npc[0]);
         }
-//        if (!interactEntity.contains(gp.animal[4])) {
-//            interactEntity.add(gp.animal[4]);
-//        }
+        if (!interactEntity.contains(gp.animal[4])) {
+            interactEntity.add(gp.animal[4]);
+        }
         interactEntity_Index = checkNear(interactEntity);
 
         if (interactEntity_Index <= interactEntity.size()){
@@ -235,7 +235,7 @@ public class Player extends Entity {
                     }
                     break;
                 case "Cow":
-                        gp.playSoundEffect("Cow", 8);
+//                        gp.playSoundEffect("Cow", 8);
                     break;
             }
         }
