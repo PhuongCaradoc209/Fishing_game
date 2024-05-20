@@ -13,7 +13,7 @@ public class Fish_Herring extends Entity {
         down1 = setup("Fish/Herring_1",gp.tileSize*5/2,gp.tileSize*5/2);
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
-//        fishFrame = setup("Fishingframe/Common");
+        fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
     }
 
 
