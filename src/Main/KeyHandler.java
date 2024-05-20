@@ -67,6 +67,10 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.inventoryState) {
             inventoryState(key);
         }
+        //TRADE STATE
+        else if (gp.gameState == gp.tradeState) {
+            tradeState(key);
+        }
     }
 
     @Override
@@ -194,7 +198,7 @@ public class KeyHandler implements KeyListener {
     public void dialogState(int key) {
         if (key == KeyEvent.VK_ENTER) {
             if (gp.npc[0].dialogueIndex < gp.npc[0].dialogues.length) {
-                gp.npc[0].speak(0);
+                gp.npc[0].speak();
             }
         }
     }
@@ -326,6 +330,93 @@ public class KeyHandler implements KeyListener {
 
         } else if (key == KeyEvent.VK_B) {
             gp.gameState = gp.playState;
+        }
+    }
+
+    public void tradeState(int key){
+        if(key == KeyEvent.VK_ENTER){
+            enterPressed = true;
+        }
+
+        if(gp.ui.subState == 0){
+            if(key == KeyEvent.VK_W){
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum < 0){
+                    gp.ui.commandNum = 2;
+                }
+                gp.playSoundEffect("select_sound", 6);
+            }
+            if(key == KeyEvent.VK_S){
+                gp.ui.commandNum++;
+                if(gp.ui.commandNum > 2){
+                    gp.ui.commandNum = 0;
+                }
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(gp.ui.subState == 1){
+            tradeNpcInventory(key);
+            if(key == KeyEvent.VK_ESCAPE){
+                gp.ui.subState = 0;
+            }
+        }
+        if(gp.ui.subState == 2){
+            tradePlayerInventory(key);
+            if(key == KeyEvent.VK_ESCAPE){
+                gp.ui.subState = 0;
+            }
+        }
+    }
+    public void tradePlayerInventory(int key){
+        if(key == KeyEvent.VK_W){
+            if(gp.ui.playerSlotRow != 0){
+                gp.ui.playerSlotRow--;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(key == KeyEvent.VK_S){
+            if(gp.ui.playerSlotRow != 3){
+                gp.ui.playerSlotRow++;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(key == KeyEvent.VK_A){
+            if(gp.ui.playerSlotCol != 0){
+                gp.ui.playerSlotCol--;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(key == KeyEvent.VK_D){
+            if(gp.ui.playerSlotCol != 4){
+                gp.ui.playerSlotCol++;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+    }
+    public void tradeNpcInventory(int key){
+        if(key == KeyEvent.VK_W){
+            if(gp.ui.npcSlotRow != 0){
+                gp.ui.npcSlotRow--;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(key == KeyEvent.VK_S){
+            if(gp.ui.npcSlotRow != 3){
+                gp.ui.npcSlotRow++;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(key == KeyEvent.VK_A){
+            if(gp.ui.npcSlotCol != 0){
+                gp.ui.npcSlotCol--;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if(key == KeyEvent.VK_D){
+            if(gp.ui.npcSlotCol != 4){
+                gp.ui.npcSlotCol++;
+                gp.playSoundEffect("select_sound", 6);
+            }
         }
     }
 

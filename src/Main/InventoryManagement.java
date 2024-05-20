@@ -46,30 +46,37 @@ public class InventoryManagement {
                     gp.iManage.inventory[0].caught = true;
                     gp.iManage.inventory[0].count++;
                     num = 0;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 36 && value <= 70) {
                     gp.iManage.inventory[1].caught = true;
                     gp.iManage.inventory[1].count++;
                     num = 1;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 70 && value <= 75) {
                     gp.iManage.inventory[15].caught = true;
                     gp.iManage.inventory[15].count++;
                     num = 15;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 76 && value <= 80) {
                     gp.iManage.inventory[16].caught = true;
                     gp.iManage.inventory[16].count++;
                     num = 16;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 81 && value <= 92) {
                     gp.iManage.inventory[2].caught = true;
                     gp.iManage.inventory[2].count++;
                     num = 2;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 93 && value <= 99) {
                     gp.iManage.inventory[3].caught = true;
                     gp.iManage.inventory[3].count++;
                     num = 3;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value == 100) {
                     gp.iManage.inventory[4].caught = true;
                     gp.iManage.inventory[4].count++;
                     num = 4;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 }
                 gp.gameState = gp.fishingState;
                 setDisplay(num);
@@ -81,30 +88,37 @@ public class InventoryManagement {
                     gp.iManage.inventory[0].caught = true;
                     gp.iManage.inventory[0].count++;
                     num = 0;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 17 && value <= 32) {
                     gp.iManage.inventory[1].caught = true;
                     gp.iManage.inventory[1].count++;
                     num = 1;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 33 && value <= 72) {
                     gp.iManage.inventory[15].caught = true;
                     gp.iManage.inventory[15].count++;
                     num = 15;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 73 && value <= 112) {
                     gp.iManage.inventory[16].caught = true;
                     gp.iManage.inventory[16].count++;
                     num = 16;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 113 && value <= 144) {
                     gp.iManage.inventory[2].caught = true;
                     gp.iManage.inventory[2].count++;
                     num = 2;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 145 && value <= 180) {
                     gp.iManage.inventory[3].caught = true;
                     gp.iManage.inventory[3].count++;
                     num = 3;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 181 && value <= 200) {
                     gp.iManage.inventory[4].caught = true;
                     gp.iManage.inventory[4].count++;
                     num = 4;
+                    gp.player.inventory.add(gp.iManage.inventory[num]);
                 } else if (value >= 201 && value <= 520) {
                     gp.iManage.inventory[5].caught = true;
                     gp.iManage.inventory[5].count++;

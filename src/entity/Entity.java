@@ -31,6 +31,7 @@ public class Entity {
     //CHARACTER PHYSICAL
     public int maxPhysical;
     public int physical;
+    public int coin;
 
     //OBJ
     public BufferedImage image, image2, image3, image4, image5;
@@ -40,6 +41,8 @@ public class Entity {
     public int price;
     public String description = "";
     public boolean collision = false;
+    public int amount = 1;
+    public boolean stackable = false;
 
     //Fish
     public int fishStar;
@@ -63,7 +66,7 @@ public class Entity {
     public void setAction() {
     }
 
-    public void speak(int index) {
+    public void speak() {
         if (dialogues[dialogueIndex] == null) {
             gp.gameState = gp.playState;
             dialogueIndex = 0;
