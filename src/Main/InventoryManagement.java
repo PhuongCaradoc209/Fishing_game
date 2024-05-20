@@ -75,8 +75,8 @@ public class InventoryManagement {
                 setDisplay(num);
                 break;
             case 2:
-                value = rd.nextInt(1000) + 1;
-                // value = 969;
+                   value = rd.nextInt(1000) + 1;
+                 //value = 74;
                 if (value >= 1 && value <= 16) {
                     gp.iManage.inventory[0].caught = true;
                     gp.iManage.inventory[0].count++;
@@ -155,6 +155,7 @@ public class InventoryManagement {
         gp.ui.fishPrice = gp.iManage.inventory[i].price+"";
         gp.ui.fishRarity = gp.iManage.inventory[i].fishRarity;
         gp.ui.fishImage = gp.iManage.inventory[i].down1;
+        gp.ui.fishFrame = gp.iManage.inventory[i].fishFrame;
 
     }
 

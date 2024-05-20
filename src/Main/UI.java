@@ -14,19 +14,19 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font pixel;
-    Font font,font1,font2,font3,font4;
+    Font font,font1,font2,font3,font4,font5;
     BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2,fishImage;
     public String currentDialogue = "";
     public String currentNotification = "";
     public String currentTittle = "";
     public int commandNum = 0;
     int subState = 0;
-    BufferedImage image;
+    BufferedImage image,fishFrame;
     final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect;
     public int inventorySlotCol = 0;
     public int inventorySlotRow = 0;
     public double completion;
-    public String fishName="", fishPrice="", fishRarity="";
+    public String fishName="", fishPrice="", fishRarity=" ";
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -54,9 +54,11 @@ public class UI {
         physical_2 = physical.image5;
         font  = pixel.deriveFont(Font.BOLD,60f);
         font1 = pixel.deriveFont(Font.BOLD,30f);
-        font2 = pixel.deriveFont(Font.BOLD,8f);
+        font2 = pixel.deriveFont(Font.BOLD,10f);
         font3 = pixel.deriveFont(Font.BOLD,20f);
         font4 = pixel.deriveFont(Font.BOLD,25f);
+        font5 = pixel.deriveFont(Font.BOLD,45f);
+
     }
 
     public void draw(Graphics2D g2) {
@@ -655,36 +657,6 @@ public class UI {
         }
     }
 
-    public void drawSubWindow(int x, int y, int width, int height) {
-        //BACKGROUND
-        Color c = new Color(0, 0, 0, 210); //OPACITY
-        g2.setColor(c);
-        g2.fillRoundRect(x, y, width, height, 35, 35);
-
-//        BORDER
-        g2.setColor(Color.WHITE);
-        g2.setStroke(new BasicStroke(7));
-        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
-    }
-
-    public int getXforCenteredText(String text) {
-        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        return gp.screenWidth / 2 - length / 2;
-    }
-
-    public void drawString(String s, int x, int y, Font f, Color c) {
-        g2.setColor(c);
-        g2.setFont(f);
-        g2.drawString(s, x, y);
-    }
-
-    public void drawSubWindow1(int x, int y, int width, int height, Color cbg, Color cs, int strokeSize, int arc) {
-        g2.setColor(cbg);
-        g2.fillRoundRect(x, y, width, height, 35, 35);
-        g2.setColor(cs);
-        g2.setStroke(new BasicStroke(strokeSize));
-        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, arc, arc);
-    }
     public void drawFishingScreen() {
         completion -= 0.5;
         drawSubWindow1(gp.tileSize * 7, gp.tileSize * 3, 2 * gp.tileSize, 5 * gp.tileSize, Color.GRAY, new Color(0, 0, 0, 0), 15, 5);
@@ -701,7 +673,8 @@ public class UI {
     }
     public void drawInventoryScreen() {
         drawInventoryBackground();
-        drawString("COLLECTION", gp.tileSize * 22 / 4, gp.tileSize * 4, font, new Color(0x74342E));
+        setFontAndColor(font,new Color(0x74342E));
+        g2.drawString("COLLECTION", gp.tileSize * 22 / 4, gp.tileSize * 4);
         drawInventoryItemImage_Border_Number();
         drawCursor();
         displayItemIsChosen();
@@ -806,19 +779,19 @@ public class UI {
             }
             else {
                 switch (text) {
-                    case "Common":
+                    case "COMMON":
                         g2.setColor(new Color(0x54A61C));
                         g2.drawString(text, centerX, y);
                         break;
-                    case "Uncommon":
+                    case "UNCOMMON":
                         g2.setColor(new Color(0x378CE7));
                         g2.drawString(text, centerX, y);
                         break;
-                    case "Rare":
+                    case "RARE":
                         g2.setColor(new Color(200, 50, 145));
                         g2.drawString(text, centerX, y);
                         break;
-                    case "Legendary":
+                    case "LEGENDARY":
                         g2.setColor(new Color(0xF98E04));
                         g2.drawString(text, centerX, y);
                         break;
@@ -834,40 +807,96 @@ public class UI {
         drawFishingBackGround();
         drawFishingCaughtAndInformation();
     }
-    public void drawFishingBackGround() {
-        int x = gp.tileSize * 3;
-        int y = gp.tileSize * 2;
-        int width = gp.tileSize * 10;
-        int height = gp.tileSize * 8;
-        Color cbg = new Color(190, 140, 99);
-        Color cs = new Color(54, 21, 0);
-        drawSubWindow1(x, y, width, height, cbg, cs, 25, 45);
+
+    public void drawFishingBackGround(){
+        g2.drawImage(fishFrame,gp.tileSize,-2*gp.tileSize,gp.tileSize*18,gp.tileSize*15,null);
+
     }
 
-    public void drawFishingCaughtAndInformation(){
-        //draw imageOfFish of fish caught
-        g2.drawImage(fishImage, 7 * gp.tileSize, gp.tileSize *3,gp.tileSize *2,gp.tileSize *2,null);
-
+    public void drawFishingCaughtAndInformation() {
+        //draw image of fish caught
+        g2.drawImage(fishImage, 6 * gp.tileSize, gp.tileSize * 9 / 2, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
+        drawSubWindow1(-10+6 * gp.tileSize, -10+gp.tileSize * 9 / 2, 15+gp.tileSize * 5/2, 15+gp.tileSize * 5/2,new Color(0,0,0,0),new Color(0xD69489),7,20);
         //display fish information
-        drawString("Name: "+fishName,gp.tileSize *4,gp.tileSize *6,font1,new Color(54,21,0));
-        drawString("Price: "+fishPrice,gp.tileSize *4,gp.tileSize *7,font1,new Color(54,21,0));
-        drawString("Rarity: ",gp.tileSize *4,gp.tileSize *8,font1,new Color(54,21,0));
-        switch (fishRarity){
-            case "Common":
-                drawString(fishRarity,gp.tileSize *6,gp.tileSize *8,font1,new Color(0x54A61C));
+        //Rarity
+        switch (fishRarity) {
+            case "LEGENDARY":
+                setFontAndColor(font, Color.BLACK);
+                g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
+                setFontAndColor(font, new Color(0xFF7F3E));
+                g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
-            case "Uncommon":
-                drawString(fishRarity,gp.tileSize *6,gp.tileSize *8,font1,new Color(0x378CE7));
+            case "RARE":
+                setFontAndColor(font, Color.WHITE);
+                g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
+                setFontAndColor(font, new Color(0x810081));
+                g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
-            case "Rare":
-                drawString(fishRarity,gp.tileSize *6,gp.tileSize *8,font1,new Color(200 ,50,145));
+            case "UNCOMMON":
+                setFontAndColor(font, new Color(0xEEbd00));
+                g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
+                setFontAndColor(font, new Color(0x0239BD));
+                g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
-            case "Legendary":
-                drawString(fishRarity,gp.tileSize *6,gp.tileSize *8,font1,new Color(0xF98E04));
+            case "COMMON":
+                setFontAndColor(font, new Color(0xFCD4CF));
+                g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
+                setFontAndColor(font, new Color(0x448713));
+                g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
-            default:
+            case "TRASH":
+                setFontAndColor(font, new Color(0xFFFFFF));
+                g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
+                setFontAndColor(font, new Color(0x434343));
+                g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
+
+
         }
+        //Name
+        setFontAndColor(font5, new Color(0x7B342E));
+        g2.drawString(fishName, center(fishName, gp.tileSize * 6, gp.tileSize * 5 / 2), gp.tileSize * 8);
+        int x = gp.tileSize * 23 / 2;
+        int y = gp.tileSize * 5;
+        //price
+        setFontAndColor(font1, new Color(0x361500));
+        g2.drawString("Price: " + fishPrice, x, y);
+    }
+
+
+    public int center(String s,int imageX, int imageWidth){
+        int textWidth = (int)g2.getFontMetrics().getStringBounds(s,g2).getWidth();
+        return imageX + (imageWidth - textWidth)/2;
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height) {
+        //BACKGROUND
+        Color c = new Color(0, 0, 0, 210); //OPACITY
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+
+        //BORDER
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(7));
+        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+    }
+
+    public int getXforCenteredText(String text) {
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        return gp.screenWidth / 2 - length / 2;
+    }
+
+    public void setFontAndColor(Font f, Color c) {
+        g2.setColor(c);
+        g2.setFont(f);
+    }
+
+    public void drawSubWindow1(int x, int y, int width, int height, Color cbg, Color cs, int strokeSize, int arc) {
+        g2.setColor(cbg);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+        g2.setColor(cs);
+        g2.setStroke(new BasicStroke(strokeSize));
+        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, arc, arc);
     }
 
     public BufferedImage setup(String imagePath, int width, int height) {
