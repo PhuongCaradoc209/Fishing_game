@@ -9,8 +9,10 @@ public class OBJ_Can extends Entity {
         name = "Can";
         price = 0;
         fishStar = 0;
-        down1 = setup("Item/Can",gp.tileSize,gp.tileSize);
+        down1 = setup("Item/Can",gp.tileSize*5/2,gp.tileSize*5/2);
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
+        fishRarity = "TRASH";
+        fishFrame= setup("Fishingframe/Trash",gp.tileSize*18,gp.tileSize*15);
     }
 }
