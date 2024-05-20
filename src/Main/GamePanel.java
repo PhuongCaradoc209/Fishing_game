@@ -1,7 +1,6 @@
 package Main;
 
 import Environment.EnvironmentManager;
-import Item.ItemManager;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -39,8 +38,8 @@ public class GamePanel extends JPanel implements Runnable {
     boolean fullScreenOn = false;
 
     //SYSTEM
-    TileManager tileMgr = new TileManager(this);
-    public ItemManager itemManager = new ItemManager(this);
+    public TileManager tileMgr = new TileManager(this);
+    public InventoryManagement iManage = new InventoryManagement(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
@@ -77,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int afterFishingState = 7;
     public final int inventoryState = 8;
     public final int fishingState = 9;
+    public final int selectPlayerState = 10;
 
     //FPS (Frame Per Second)
     int FPS = 60;
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
-        this.addMouseWheelListener(keyHandler);
+//        this.addMouseWheelListener(keyHandler);
         this.setVisible(true);
         this.setFocusable(true);
     }
@@ -105,28 +105,28 @@ public class GamePanel extends JPanel implements Runnable {
 //        setFullScreen();
     }
 
-    public void zoomInOut(int i) {
-        int oldWorldWidth = tileSize * maxWorldCol;
-        tileSize += i;
-        int newWorldWidth = tileSize * maxWorldCol;
-
-        double multiplier = (double) newWorldWidth / oldWorldWidth;
-
-        System.out.println("tileSize: " + tileSize);
-        System.out.println("worldWidth: " + newWorldWidth);
-        System.out.println("PlayerWordX: " + player.worldX);
-        System.out.println("PlayerScreenX: " + player.screenX);
-
-        player.speed = (double) newWorldWidth / 700;
-        double newPlayerWorldX = player.worldX * multiplier;
-        double newPlayerWorldY = player.worldY * multiplier;
-
-        player.screenX = (double) screenWidth / 2 - ((double) tileSize / 2); //set the player at the center of the screen
-        player.screenY = (double) screenHeight / 2 - ((double) tileSize / 2);
-
-        player.worldX = newPlayerWorldX;
-        player.worldY = newPlayerWorldY;
-    }
+//    public void zoomInOut(int i) {
+//        int oldWorldWidth = tileSize * maxWorldCol;
+//        tileSize += i;
+//        int newWorldWidth = tileSize * maxWorldCol;
+//
+//        double multiplier = (double) newWorldWidth / oldWorldWidth;
+//
+//        System.out.println("tileSize: " + tileSize);
+//        System.out.println("worldWidth: " + newWorldWidth);
+//        System.out.println("PlayerWordX: " + player.worldX);
+//        System.out.println("PlayerScreenX: " + player.screenX);
+//
+//        player.speed = (double) newWorldWidth / 700;
+//        double newPlayerWorldX = player.worldX * multiplier;
+//        double newPlayerWorldY = player.worldY * multiplier;
+//
+//        player.screenX = (double) screenWidth / 2 - ((double) tileSize / 2); //set the player at the center of the screen
+//        player.screenY = (double) screenHeight / 2 - ((double) tileSize / 2);
+//
+//        player.worldX = newPlayerWorldX;
+//        player.worldY = newPlayerWorldY;
+//    }
 
     public void setFullScreen() {
         //GET LOCAL SCREEN DEVICE

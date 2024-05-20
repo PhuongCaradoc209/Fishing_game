@@ -6,6 +6,7 @@ import tile.TileManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity {
@@ -15,7 +16,9 @@ public class Player extends Entity {
     public double screenX;
     public double screenY;
     private int objIndex;
+    public int interactEntity_Index;
     public int rod = 2;
+    public ArrayList<Entity> interactEntity;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
@@ -27,7 +30,7 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
-        getPlayerImage();
+        interactEntity = new ArrayList<>();
 
         //AREA COLLISION
         solidArea = new Rectangle();
@@ -42,10 +45,18 @@ public class Player extends Entity {
         direction = "down";
     }
 
+    public void setPlayerImage(String playerType){
+        if (playerType.equals("Human")){
+            getPlayerImage_HumanVer();
+        }
+        else
+            getPlayerImage_DinoVer();
+    }
+
     public void setDefaultValues() {
         worldX = gp.tileSize * 10;
         worldY = gp.tileSize * 7;
-        speed = (double) gp.worldWidth / 500;
+        speed = (double) gp.worldWidth / 400;
         direction = "standDown";
 
         //PLAYER STATUS
@@ -53,7 +64,22 @@ public class Player extends Entity {
         physical = maxPhysical;
     }
 
-    public void getPlayerImage() {
+    public void getPlayerImage_DinoVer(){
+        standUp = setup("player/dino_up_1", 16, 16);
+        standDown = setup("player/dino_down_1", 16, 16);
+        standRight = setup("player/dino_down_1", 16, 16);
+        standLeft = setup("player/dino_up_1", 16, 16);
+        up1 = setup("player/dino_up_1", 16, 16);
+        up2 = setup("player/dino_up_2", 16, 16);
+        down1 = setup("player/dino_down_1", 16, 16);
+        down2 = setup("player/dino_down_2", 16, 16);
+        left1 = setup("player/dino_left_1", 16, 16);
+        left2 = setup("player/dino_left_2", 16, 16);
+        right1 = setup("player/dino_right_1", 16, 16);
+        right2 = setup("player/dino_right_2", 16, 16);
+    }
+
+    public void getPlayerImage_HumanVer() {
         standUp = setup("player/standUp", gp.tileSize, gp.tileSize);
         standDown = setup("player/standDown", gp.tileSize, gp.tileSize);
         standRight = setup("player/right", gp.tileSize, gp.tileSize);
@@ -101,9 +127,19 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
+        if (!interactEntity.contains(gp.npc[0]))
+        {
+            interactEntity.add(gp.npc[0]);
+        }
+        if (!interactEntity.contains(gp.animal[4])) {
+            interactEntity.add(gp.animal[4]);
+        }
+        interactEntity_Index = checkNear(interactEntity);
 
-        checkNear(gp.npc[0]);
-        messageOn(gp.npc[0]);
+        if (interactEntity_Index <= interactEntity.size()){
+            messageOn(interactEntity.get(interactEntity_Index));
+        }
+
         //CHECK TILE COLLISION
         collisionOn = false;
         gp.cChecker.checkTile(this, false);
@@ -199,32 +235,39 @@ public class Player extends Entity {
                     }
                     break;
                 case "Cow":
-                    if (gp.keyHandler.enterPressed) {
-                        gp.playSoundEffect("Cow", 8);
-                    }
+//                        gp.playSoundEffect("Cow", 8);
                     break;
             }
         }
         gp.keyHandler.enterPressed = false;
     }
 
-    public void checkNear(Entity target) {
+    public int checkNear(ArrayList<Entity> target) {
         int playerCol = (int) ((worldX + gp.tileSize / 2) / gp.tileSize);
         int playerRow = (int) ((worldY + gp.tileSize / 2) / gp.tileSize);
-        int targetCol = (int) (target.worldX / gp.tileSize);
-        int targetRow = (int) (target.worldY / gp.tileSize);
+        int targetCol;
+        int targetRow;
+        for (int i = 0; i < target.size(); i++) {
+            targetCol = (int) (target.get(i).worldX / gp.tileSize);
+            targetRow = (int) (target.get(i).worldY / gp.tileSize);
 
-        if (playerCol == targetCol && playerRow - 1 == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol == targetCol && playerRow + 1 == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol + 1 == targetCol && playerRow == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol - 1 == targetCol && playerRow == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else {
-            gp.gameState = gp.playState;
+            if (playerCol == targetCol && playerRow - 1 == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol == targetCol && playerRow + 1 == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol + 1 == targetCol && playerRow == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol - 1 == targetCol && playerRow == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else {
+                gp.gameState = gp.playState;
+            }
         }
+        return 999;
     }
 
 //    public void checkAtSpecifiedPst(int i) {

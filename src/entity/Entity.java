@@ -41,6 +41,20 @@ public class Entity {
     public String description = "";
     public boolean collision = false;
 
+    //Fish
+    public int fishStar;
+    public String fishRarity;
+ //   public String fishName;
+    public BufferedImage fishFrame;
+    public int count;
+    public boolean caught = false;
+    //    public BufferedImage fishImage;
+    public BufferedImage fishFinalImage;
+
+//    public BufferedImage starFill = setup("/Item/Starfill");
+//    public BufferedImage starZero = setup("/Item/Starzero");
+
+
     public Entity(GamePanel gp) {
         this.gp = gp;
         solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);

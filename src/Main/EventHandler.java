@@ -38,6 +38,7 @@ public class EventHandler {
                 if (gp.player.physical >= level_Rod)
                 {
                     expendPhysical(level_Rod);
+                    gp.gameState = gp.fishingState;
                 }
                 else
                 {
