@@ -858,13 +858,13 @@ public class UI {
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
             case "UNCOMMON":
-                setFontAndColor(font, new Color(0xEEbd00));
+                setFontAndColor(font, new Color(0xFFFFFF));
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0x0239BD));
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
             case "COMMON":
-                setFontAndColor(font, new Color(0xFCD4CF));
+                setFontAndColor(font, new Color(0xFFFFFF));
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0x448713));
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);

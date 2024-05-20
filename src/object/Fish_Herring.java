@@ -16,7 +16,7 @@ public class Fish_Herring extends Entity {
         down2 = setup("Fish/Herring_1",gp.tileSize,gp.tileSize);
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
-//        fishFrame = setup("Fishingframe/Common");
+        fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
     }
 
 
