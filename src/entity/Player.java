@@ -62,6 +62,7 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
+        coin = 0;
     }
 
     public void getPlayerImage_DinoVer(){
@@ -150,7 +151,7 @@ public class Player extends Entity {
 
         //CHECK NPC COLLISION
         int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-        //interactNPC(npcIndex);
+        interactNPC(npcIndex);
 
         //CHECK ANIMAL COLLISION
         int animalIndex = gp.cChecker.checkEntity(this, gp.animal);
@@ -203,7 +204,7 @@ public class Player extends Entity {
         if (i != 999) {
             if (gp.keyHandler.enterPressed) {
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak(0);
+                gp.npc[i].speak();
             }
         }
         gp.keyHandler.enterPressed = false;
@@ -228,7 +229,7 @@ public class Player extends Entity {
                 case "old man":
                     if (gp.keyHandler.enterPressed) {
                         gp.gameState = gp.dialogueState;
-                        target.speak(0);
+                        target.speak();
                         gp.playSoundEffect("oldMan", 3);
                     } else {
                         gp.stopMusic("oldMan");
@@ -268,6 +269,45 @@ public class Player extends Entity {
             }
         }
         return 999;
+    }
+
+    public boolean canObtainItem(Entity item){
+        boolean canContain = false;
+
+        //Check if stackable
+        if(item.stackable == true){
+            int index = seachItemInInventory(item.name);
+
+            if(index != 999){
+                inventory.get(index).amount++;
+                canContain = true;
+            }else{
+                //New item so need to track vacancy
+                if(inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canContain = true;
+                }
+            }
+        }else{
+            //Not stackable so check vacancy
+            if(inventory.size() != maxInventorySize){
+                inventory.add(item);
+                canContain = true;
+            }
+        }
+        return canContain;
+    }
+
+    public int seachItemInInventory(String itemName){
+        int itemIndex = 999;
+
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i).name.equals(itemName)){
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
     }
 
 //    public void checkAtSpecifiedPst(int i) {

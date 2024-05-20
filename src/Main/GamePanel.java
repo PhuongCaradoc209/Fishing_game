@@ -77,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int inventoryState = 8;
     public final int fishingState = 9;
     public final int selectPlayerState = 10;
+    public final int tradeState = 11;
 
     //FPS (Frame Per Second)
     int FPS = 60;
