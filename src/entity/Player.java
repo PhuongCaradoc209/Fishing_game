@@ -121,11 +121,7 @@ public class Player extends Entity {
             // STOP SOUND
             gp.stopMusic("grass");
         }
-        if(key.fPressed){
-            fishingRod.Fishing();
-            System.out.println("Fishing");
-            System.out.println(fishingRod.isFacingWater());
-        }
+        
         //UPDATE the solidArea due to zoom in and out
         solidArea.x = (10 * gp.tileSize) / 48;
         solidArea.y = (20 * gp.tileSize) / 48;
@@ -153,8 +149,10 @@ public class Player extends Entity {
 
 //        //CHECK TO OPEN DOOR
 //        checkAtSpecifiedPst(0);
+
         // update fishing rod
         fishingRod.update();
+
         //CHECK EVENT
         gp.eHandler.checkEvent(1);
 
@@ -354,8 +352,9 @@ public class Player extends Entity {
         ////////////////////////
         if(fishingRod.getFrame() != null){
             image = fishingRod.getFrame();
+            g.drawImage(image, (int) (x - gp.tileSize), (int) y, null);
         }
-
+        else 
         g.drawImage(image, (int) x, (int) y, size, size, null);
 
     }
