@@ -55,6 +55,7 @@ public class UI {
             throw new RuntimeException(e);
         }
 
+        //SET UP COIN IMAGE
         coin = setup("objects/coin_bronze", gp.tileSize, gp.tileSize);
 
         //GET TYPE OF CHARACTER
