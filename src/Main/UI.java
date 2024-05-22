@@ -38,7 +38,7 @@ public class UI {
     Random random = new Random();
     int target_Y;
     private int speedOfTarget;
-    private int speedOfRange;
+    int speedOfRange;
     private final int bar_X;
     final int bar_Y;
     final int heightOfRange;
