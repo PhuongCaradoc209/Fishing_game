@@ -36,6 +36,7 @@ public class EventHandler {
                 {
                     expendPhysical(level_Rod);
                     gp.ui.range_Y = gp.ui.random.nextInt(gp.ui.bar_Y + 7*gp.tileSize - gp.ui.heightOfRange - 5 - gp.ui.bar_Y - 5 + 1) + gp.ui.bar_Y + 5;
+                    gp.ui.speedOfRange = -gp.ui.speedOfRange;
                     gp.gameState = gp.fishingState;
                 }
                 else
