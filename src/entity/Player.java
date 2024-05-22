@@ -289,6 +289,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = up2;
                 }
+                fishingRod.reset();
                 break;
             case "down":
                 if (spriteNum == 1) {
@@ -297,6 +298,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = down2;
                 }
+                fishingRod.reset();
                 break;
             case "left":
                 if (spriteNum == 1) {
@@ -305,6 +307,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = left2;
                 }
+                fishingRod.reset();
                 break;
             case "right":
                 if (spriteNum == 1) {
@@ -313,6 +316,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = right2;
                 }
+                fishingRod.reset();
                 break;
             case "standUp":
                 image = standUp;
@@ -352,7 +356,7 @@ public class Player extends Entity {
         ////////////////////////
         if(fishingRod.getFrame() != null){
             image = fishingRod.getFrame();
-            g.drawImage(image, (int) (x - gp.tileSize), (int) y, null);
+            g.drawImage(image, (int) (x - size), (int) y, null);
         }
         else 
         g.drawImage(image, (int) x, (int) y, size, size, null);

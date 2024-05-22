@@ -16,18 +16,18 @@ public class Fishing_Rod {
     Player player;
     KeyHandler key;
     private static final int duration = 120;
-    private static final int originalFrame = 10;
+    private static final int originalFrame = 12;
     private static final double delay = duration / originalFrame;
     private int timer = 0;
 
     private boolean isFishing = false;
 
     // animation
-    public BufferedImage[] cast = new BufferedImage[10];
-    public BufferedImage[] rod = new BufferedImage[5];
+    public BufferedImage[] cast = new BufferedImage[12];
+    public BufferedImage[] rod = new BufferedImage[10];
     // animation management
     private int castFrame = 0;
-    private int rodFrame = -1;
+    private int rodFrame = 0;
 
     public BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool uTool = new UtilityTool();
@@ -58,13 +58,15 @@ public class Fishing_Rod {
         cast[1] = setup("GoFishing/catchfish3", gp.tileSize, gp.tileSize);
         cast[2] = setup("GoFishing/catchfish4", gp.tileSize, gp.tileSize);
 
-        cast[4] = setup("GoFishing/catchfish5", gp.tileSize, gp.tileSize);
-        cast[5] = setup("GoFishing/catchfish7", gp.tileSize, gp.tileSize);
-        cast[6] = setup("GoFishing/catchfish9", gp.tileSize, gp.tileSize);
-        cast[7] = setup("GoFishing/catchfish11", gp.tileSize, gp.tileSize);
-        cast[8] = setup("GoFishing/catchfish13", gp.tileSize, gp.tileSize);
-        cast[9] = setup("GoFishing/catchfish15", gp.tileSize, gp.tileSize);
-        cast[10] = setup("GoFishing/catchfish17", gp.tileSize, gp.tileSize);
+        cast[3] = setup("GoFishing/catchfish5", gp.tileSize, gp.tileSize);
+        cast[4] = setup("GoFishing/catchfish7", gp.tileSize, gp.tileSize);
+        cast[5] = setup("GoFishing/catchfish9", gp.tileSize, gp.tileSize);
+        cast[6] = setup("GoFishing/catchfish11", gp.tileSize, gp.tileSize);
+        cast[7] = setup("GoFishing/catchfish13", gp.tileSize, gp.tileSize);
+        cast[8] = setup("GoFishing/catchfish15", gp.tileSize, gp.tileSize);
+        cast[9] = setup("GoFishing/catchfish17", gp.tileSize, gp.tileSize);
+        cast[10] = setup("GoFishing/catchfish19", gp.tileSize, gp.tileSize);
+        cast[11] = setup("GoFishing/catchfish21", gp.tileSize, gp.tileSize);
 
         rod[1] = setup("GoFishing/catchfish6", gp.tileSize, gp.tileSize);
         rod[2] = setup("GoFishing/catchfish8", gp.tileSize, gp.tileSize);
@@ -72,10 +74,11 @@ public class Fishing_Rod {
         rod[4] = setup("GoFishing/catchfish12", gp.tileSize, gp.tileSize);
         rod[5] = setup("GoFishing/catchfish14", gp.tileSize, gp.tileSize);
         rod[6] = setup("GoFishing/catchfish16", gp.tileSize, gp.tileSize);
+        rod[7] = setup("GoFishing/catchfish18", gp.tileSize, gp.tileSize);
+        rod[8] = setup("GoFishing/catchfish20", gp.tileSize, gp.tileSize);
+        rod[9] = setup("GoFishing/catchfish22", gp.tileSize, gp.tileSize);
 
     }
-    // ở vị trí bờ sông nhấn space mới chạy
-    // if nhấn space, chạy animation
 
     public boolean isFacingWater() {
         double yMap = player.worldX / gp.tileSize;
@@ -109,6 +112,12 @@ public class Fishing_Rod {
             return false;
     }
 
+    public void reset() {
+        isFishing = false;
+        castFrame = 0;
+        rodFrame = 0;
+    }
+
     public void update() {
         if (key.fPressed == true) {
             System.out.println(isFacingWater());
@@ -119,15 +128,15 @@ public class Fishing_Rod {
 
         if (isFishing) {
             if (castFrame >= 11) {
-                isFishing = false;
-                castFrame = 0;
-                rodFrame = -1;
+                reset();
             }
             if (timer == 0) {
-                if (castFrame >= 4) {
+                if (castFrame == 1 || castFrame == 2) {
+                    castFrame++;
+                } else {
                     rodFrame++;
+                    castFrame++;
                 }
-                castFrame++;
             }
             timer++;
             if (timer >= delay) {
@@ -137,14 +146,16 @@ public class Fishing_Rod {
     }
 
     public BufferedImage getFrame() {
-        if (isFishing && castFrame <= 9) {
+        if (isFishing && castFrame <= 11) {
             int size = gp.tileSize + 10;
             // combine cast and rod
             // make rod[rodFrame] next to cast[castFrame]
             BufferedImage combined = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = combined.createGraphics();
-            g.drawImage(cast[castFrame], size, 0, size, size, null);
-            if (castFrame >= 5) {
+            if (castFrame == 1 || castFrame == 2) {
+                g.drawImage(cast[castFrame], size, 0, size, size, null);
+            } else {
+                g.drawImage(cast[castFrame], size, 0, size, size, null);
                 g.drawImage(rod[rodFrame], 0, 0, size, size, null);
             }
             g.dispose();
