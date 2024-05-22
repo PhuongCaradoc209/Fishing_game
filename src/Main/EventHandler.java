@@ -1,8 +1,5 @@
 package Main;
 
-import java.awt.*;
-import java.util.IllegalFormatCodePointException;
-
 public class EventHandler {
     GamePanel gp;
     EventRect[][] eventRect;
@@ -38,6 +35,7 @@ public class EventHandler {
                 if (gp.player.physical >= level_Rod)
                 {
                     expendPhysical(level_Rod);
+                    gp.ui.range_Y = gp.ui.random.nextInt(gp.ui.bar_Y + 7*gp.tileSize - gp.ui.heightOfRange - 5 - gp.ui.bar_Y - 5 + 1) + gp.ui.bar_Y + 5;
                     gp.gameState = gp.fishingState;
                 }
                 else
