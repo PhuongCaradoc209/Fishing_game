@@ -300,6 +300,7 @@ public class KeyHandler implements KeyListener {
 //                gp.iManage.Fishing(gp.player.rod);
 //                gp.gameState = gp.afterFishingState;
 //            }
+            gp.player.fishingRod.reset();
             if (gp.ui.target_Y >= gp.ui.range_Y && gp.ui.target_Y <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
                 gp.iManage.Fishing(gp.player.rod);
                 gp.gameState = gp.afterFishingState;
