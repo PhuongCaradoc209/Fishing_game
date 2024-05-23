@@ -334,7 +334,7 @@ public class UI {
 
         g2.drawImage(image, 985, 90, gp.tileSize / 2 + gp.tileSize / 3, gp.tileSize / 2 + gp.tileSize / 3, null);
 
-        drawSubWindow1(1035, 95, gp.tileSize  + gp.tileSize/2, gp.tileSize - 20, new Color(0xf6d183), new Color(0x543a22), 2, 8);
+        drawSubWindow1(1035, 95, gp.tileSize  + gp.tileSize/2, gp.tileSize - 20, new Color(0xf6d183), new Color(0x543a22), 3, 8);
 
         //DRAW NUMBER OF COIN
         String coin = String.format("%03d", gp.player.coin);
