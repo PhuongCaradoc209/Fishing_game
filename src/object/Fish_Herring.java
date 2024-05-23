@@ -6,7 +6,7 @@ import Main.GamePanel;
 public class Fish_Herring extends Entity {
     public Fish_Herring(GamePanel gp){
         super(gp);
-        fishRarity = "Common";
+        fishRarity = "COMMON";
         name = "Herring";
         price = 1;
         fishStar = 1;

@@ -8,7 +8,7 @@ public class OBJ_Grass extends Entity{
             super(gp);
             caught = true;
             name = "Grass";
-            price = 0;
+            price = 2;
             count = 0;
             down1 = setup("Item/Grass",gp.tileSize,gp.tileSize);
             fishRarity = "";
