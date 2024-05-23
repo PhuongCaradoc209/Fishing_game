@@ -39,7 +39,6 @@ public class Entity {
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
     public int price;
-    public String description = "";
     public boolean collision = false;
     public int amount = 1;
     public boolean stackable = false;
@@ -47,15 +46,14 @@ public class Entity {
     //Fish
     public int fishStar;
     public String fishRarity;
- //   public String fishName;
     public BufferedImage fishFrame;
     public int count;
     public boolean caught = false;
     //    public BufferedImage fishImage;
     public BufferedImage fishFinalImage;
-
-//    public BufferedImage starFill = setup("/Item/Starfill");
-//    public BufferedImage starZero = setup("/Item/Starzero");
+    public String desCollections;
+    public String desFishing;
+    public String desTrading = "";
 
 
     public Entity(GamePanel gp) {

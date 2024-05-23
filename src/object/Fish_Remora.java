@@ -17,5 +17,10 @@ public class Fish_Remora extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A ray-finned fish and also known\nas a suckerfish or sharksucker";
+        desCollections = "A ray-finned fish and also known as\na suckerfish or sharksucker";
+        desTrading = "A ray-finned fish and also known as a\nsuckerfish or sharksucker";
+
+
     }
 }

@@ -17,5 +17,9 @@ public class Fish_Koicarp extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Legendary",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "Known as nishikigoi, these fishes\nare colorful varieties, originating\nfrom Japan";
+        desCollections = "Known as nishikigoi, these fishes\nare colorful varieties, originating\nfrom Japan";
+        desTrading = "Known as nishikigoi, these fishes are\ncolorful varieties, originating from Japan";
+
     }
 }
