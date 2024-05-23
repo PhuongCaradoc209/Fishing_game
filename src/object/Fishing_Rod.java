@@ -1,6 +1,7 @@
 package object;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -33,7 +34,8 @@ public class Fishing_Rod {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(imagePath + ".png")));
+            image = ImageIO
+                    .read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(imagePath + ".png")));
             image = uTool.scaleImage(image, width, height);
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,19 +117,19 @@ public class Fishing_Rod {
         isFishing = false;
         castFrame = 0;
         rodFrame = 0;
+        key.AnnouceCompleteAnimation = false;
     }
 
     public void update() {
-        if (key.fPressed == true) {
-            System.out.println(isFacingWater());
-        }
         if (isFacingWater() == true && key.fPressed == true) {
             isFishing = true;
         }
 
         if (isFishing) {
             if (castFrame >= 11) {
-                reset();
+                // reset();
+                key.AnnouceCompleteAnimation = true;
+                return;
             }
             if (timer == 0) {
                 if (castFrame == 1 || castFrame == 2) {
@@ -152,10 +154,10 @@ public class Fishing_Rod {
             BufferedImage combined = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = combined.createGraphics();
             if (castFrame == 1 || castFrame == 2) {
-                g.drawImage(cast[castFrame], size, 0, size, size, null);
+                g.drawImage(cast[castFrame], size + 2, 0, size, size, null);
             } else {
-                g.drawImage(cast[castFrame], size, 0, size, size, null);
-                g.drawImage(rod[rodFrame], 0, 0, size, size, null);
+                g.drawImage(cast[castFrame], size + 2, 0, size, size, null);
+                g.drawImage(rod[rodFrame], 0 + 2, 0, size, size, null);
             }
             g.dispose();
             return combined;

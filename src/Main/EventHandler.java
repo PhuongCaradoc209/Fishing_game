@@ -29,7 +29,7 @@ public class EventHandler {
     }
 
     public void checkEvent(int level_Rod) {
-        if (gp.keyHandler.spacePressed) {
+        if (gp.keyHandler.AnnouceCompleteAnimation) {
             count++;
             if (count == 1) {
                 if (gp.player.physical >= level_Rod)
@@ -45,7 +45,7 @@ public class EventHandler {
                 }
             }
         }
-        if (!gp.keyHandler.spacePressed) {
+        if (!gp.keyHandler.AnnouceCompleteAnimation) {
             count = 0;
         }
         if (hit(20, 12, "Up")){
