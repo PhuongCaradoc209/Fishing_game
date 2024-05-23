@@ -156,11 +156,7 @@ public class InventoryManagement {
         }
 
         //Adding fish to inventory
-        for(int i = 0; i <= 16; i++){
-            if(i == num){
-                gp.player.canObtainItem(gp.iManage.inventory[i]);
-            }
-        }
+        gp.player.canObtainItem(gp.iManage.inventory[num]);
     }
     public void setImage(Entity e){
         if(e.caught == true){
