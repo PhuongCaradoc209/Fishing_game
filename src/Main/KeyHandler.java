@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, fPressed;
     public boolean AnnouceCompleteAnimation;
-    //DEBUG
+    // DEBUG
     boolean checkDrawTime = false;
     GamePanel gp;
     public boolean isMove = false;
@@ -24,7 +24,7 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         isMove = true;
         int key = e.getKeyCode();
-        //TITTLE STATE
+        // TITTLE STATE
         if (gp.gameState == gp.tittleState) {
             tittleState(key);
         }
@@ -33,41 +33,41 @@ public class KeyHandler implements KeyListener {
             selectPlayerState(key);
         }
 
-        //PLAY STATE
+        // PLAY STATE
         else if (gp.gameState == gp.playState || gp.gameState == gp.autoDisplayState) {
             gameState(key);
         }
 
-        //DIALOG STATE
+        // DIALOG STATE
         else if (gp.gameState == gp.dialogueState) {
             dialogState(key);
         }
 
-        //NOTIFICATION STATE
+        // NOTIFICATION STATE
         else if (gp.gameState == gp.notificationState) {
             notificationState(key);
         }
 
-        //OPTIONS STATE
+        // OPTIONS STATE
         else if (gp.gameState == gp.optionState) {
             optionState(key);
         }
 
-        //FISHING STATE
+        // FISHING STATE
         else if (gp.gameState == gp.fishingState) {
             fishingState(key);
         }
 
-        //AFTER FISHING STATE
+        // AFTER FISHING STATE
         else if (gp.gameState == gp.afterFishingState) {
             afterFishingState(key);
         }
 
-        //INVENTORY STATE
+        // INVENTORY STATE
         else if (gp.gameState == gp.inventoryState) {
             inventoryState(key);
         }
-        //TRADE STATE
+        // TRADE STATE
         else if (gp.gameState == gp.tradeState) {
             tradeState(key);
         }
@@ -121,7 +121,7 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.selectPlayerState;
             }
             if (gp.ui.commandNum == 1) {
-                //add later
+                // add later
             }
             if (gp.ui.commandNum == 2) {
                 System.exit(0);
@@ -176,9 +176,7 @@ public class KeyHandler implements KeyListener {
             enterPressed = true;
         }
         if (key == KeyEvent.VK_SPACE) {
-            if (gp.cChecker.checkNearWater(gp.player)) {
-                spacePressed = true;
-            }
+            spacePressed = true;
         }
         if (key == KeyEvent.VK_F) {
             fPressed = true;
@@ -188,7 +186,7 @@ public class KeyHandler implements KeyListener {
             gp.music.stop("Bird");
             gp.music.stop("Background");
         }
-        //DEBUG
+        // DEBUG
         if (key == KeyEvent.VK_T) {
             checkDrawTime = (checkDrawTime == true) ? false : true;
         }
@@ -294,21 +292,20 @@ public class KeyHandler implements KeyListener {
 
     public void fishingState(int key) {
         if (key == KeyEvent.VK_SPACE) {
-//            gp.ui.completion += 10;
-//            if (gp.ui.completion >= 100) {
-//                gp.ui.completion = 0;
-//                gp.iManage.Fishing(gp.player.rod);
-//                gp.gameState = gp.afterFishingState;
-//            }
+            // gp.ui.completion += 10;
+            // if (gp.ui.completion >= 100) {
+            // gp.ui.completion = 0;
+            // gp.iManage.Fishing(gp.player.rod);
+            // gp.gameState = gp.afterFishingState;
+            // }
             gp.player.fishingRod.reset();
             if (gp.ui.target_Y >= gp.ui.range_Y && gp.ui.target_Y <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
                 gp.iManage.Fishing(gp.player.rod);
                 gp.gameState = gp.afterFishingState;
-            }
-            else {
-                    gp.gameState = gp.notificationState;
-                    gp.ui.currentTittle = "OOPS!";
-                    gp.ui.currentNotification = "The fish got away! :((";
+            } else {
+                gp.gameState = gp.notificationState;
+                gp.ui.currentTittle = "OOPS!";
+                gp.ui.currentNotification = "The fish got away! :((";
             }
         }
     }
@@ -438,13 +435,13 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-//    @Override
-//    public void mouseWheelMoved(MouseWheelEvent e) {
-//        int scroll = e.getWheelRotation();
-//        if (scroll < 0) {
-//            gp.zoomInOut(2);
-//        } else {
-//            gp.zoomInOut(-2);
-//        }
-//    }
+    // @Override
+    // public void mouseWheelMoved(MouseWheelEvent e) {
+    // int scroll = e.getWheelRotation();
+    // if (scroll < 0) {
+    // gp.zoomInOut(2);
+    // } else {
+    // gp.zoomInOut(-2);
+    // }
+    // }
 }
