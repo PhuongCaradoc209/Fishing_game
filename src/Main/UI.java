@@ -104,46 +104,47 @@ public class UI {
         }
         //PLAY STATE
         else if (gp.gameState == gp.playState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
         }
         //DIALOGUE STATE
         else if (gp.gameState == gp.dialogueState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
             drawDialogueScreen();
         }
         //AUTO DISPLAY STATE
         else if (gp.gameState == gp.autoDisplayState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
             drawDialogueInteract();
         }
         //NOTIFICATION STATE
         else if (gp.gameState == gp.notificationState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
             drawNotificationScreen();
         }
         //OPTION STATE
         if (gp.gameState == gp.optionState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
             drawOptionScreen();
         }
         //AFTER FISHING STATE
         if (gp.gameState == gp.afterFishingState) {
             drawAfterFishingScreen();
-            drawPlayerPhysical();
+            drawPlayerInformation();
         }
         //INVENTORY STATE
         else if (gp.gameState == gp.inventoryState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
             drawInventoryScreen();
         }
         //FISHING STATE
         else if (gp.gameState == gp.fishingState) {
-            drawPlayerPhysical();
+            drawPlayerInformation();
             drawFishingScreen();
         }
 
         //TRADE STATE
         if (gp.gameState == gp.tradeState) {
+            drawPlayerInformation();
             drawTradeScreen();
         }
     }
@@ -321,6 +322,24 @@ public class UI {
         //MAIN COLOR TEXT
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
+    }
+
+    public void drawPlayerInformation() {
+        drawPlayerCoin();
+        drawPlayerPhysical();
+    }
+
+    public void drawPlayerCoin() {
+        image = setup("background/coin_bag", 136, 151);
+
+        g2.drawImage(image, 985, 90, gp.tileSize / 2 + gp.tileSize / 3, gp.tileSize / 2 + gp.tileSize / 3, null);
+
+        drawSubWindow1(1035, 95, gp.tileSize  + gp.tileSize/2, gp.tileSize - 20, new Color(0xf6d183), new Color(0x543a22), 2, 8);
+
+        //DRAW NUMBER OF COIN
+        String coin = String.format("%03d", gp.player.coin);
+        setFontAndColor(g2.getFont().deriveFont(Font.PLAIN, 30f), new Color(0xB76B21));
+        g2.drawString(coin, center(coin, 1035, gp.tileSize + gp.tileSize/2), 125);
     }
 
     public void drawPlayerPhysical() {
@@ -949,10 +968,10 @@ public class UI {
 
     public void drawSubWindow1(int x, int y, int width, int height, Color cbg, Color cs, int strokeSize, int arc) {
         g2.setColor(cbg);
-        g2.fillRoundRect(x, y, width, height, 35, 35);
+        g2.fillRoundRect(x, y, width, height, arc, arc);
         g2.setColor(cs);
         g2.setStroke(new BasicStroke(strokeSize));
-        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, arc, arc);
+        g2.drawRoundRect(x, y, width, height, arc, arc);
     }
 
     //Trade UI

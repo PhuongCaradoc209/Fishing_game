@@ -274,9 +274,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             //ENVIRONMENT
             enviMgr.draw(g2);
-
-            //UI
         }
+        //UI
         ui.draw(g2);
 
         if (keyHandler.checkDrawTime == true) {
