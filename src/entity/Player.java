@@ -7,6 +7,7 @@ import object.Fishing_Rod;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity {
@@ -16,7 +17,9 @@ public class Player extends Entity {
     public double screenX;
     public double screenY;
     private int objIndex;
+    public int interactEntity_Index;
     public int rod = 2;
+    public ArrayList<Entity> interactEntity;
 
     public Fishing_Rod fishingRod;
 
@@ -32,6 +35,7 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
+        interactEntity = new ArrayList<>();
 
         //AREA COLLISION
         solidArea = new Rectangle();
@@ -57,12 +61,13 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 10;
         worldY = gp.tileSize * 7;
-        speed = (double) gp.worldWidth / 500;
+        speed = (double) gp.worldWidth / 400;
         direction = "standDown";
 
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
+        coin = 0;
     }
 
     public void getPlayerImage_DinoVer(){
@@ -81,18 +86,18 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage_HumanVer() {
-        standUp = setup("player/standUp", gp.tileSize, gp.tileSize);
-        standDown = setup("player/standDown", gp.tileSize, gp.tileSize);
-        standRight = setup("player/right", gp.tileSize, gp.tileSize);
-        standLeft = setup("player/left", gp.tileSize, gp.tileSize);
-        up1 = setup("player/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("player/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("player/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("player/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("player/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("player/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("player/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("player/right_2", gp.tileSize, gp.tileSize);
+        standUp = setup("player/standUp", 32, 32);
+        standDown = setup("player/standDown", 32, 32);
+        standRight = setup("player/right", 32, 32);
+        standLeft = setup("player/left", 32, 32);
+        up1 = setup("player/up_1", 32, 32);
+        up2 = setup("player/up_2", 32, 32);
+        down1 = setup("player/down_1", 32, 32);
+        down2 = setup("player/down_2", 32, 32);
+        left1 = setup("player/left_1", 32, 32);
+        left2 = setup("player/left_2", 32, 32);
+        right1 = setup("player/right_1", 32, 32);
+        right2 = setup("player/right_2", 32, 32);
     }
 
     public void update() {
@@ -129,9 +134,19 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
+        if (!interactEntity.contains(gp.npc[0]))
+        {
+            interactEntity.add(gp.npc[0]);
+        }
+        if (!interactEntity.contains(gp.animal[4])) {
+            interactEntity.add(gp.animal[4]);
+        }
+        interactEntity_Index = checkNear(interactEntity);
 
-        checkNear(gp.npc[0]);
-        messageOn(gp.npc[0]);
+        if (interactEntity_Index <= interactEntity.size()){
+            messageOn(interactEntity.get(interactEntity_Index));
+        }
+
         //CHECK TILE COLLISION
         collisionOn = false;
         gp.cChecker.checkTile(this, false);
@@ -142,7 +157,7 @@ public class Player extends Entity {
 
         //CHECK NPC COLLISION
         int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-        //interactNPC(npcIndex);
+        interactNPC(npcIndex);
 
         //CHECK ANIMAL COLLISION
         int animalIndex = gp.cChecker.checkEntity(this, gp.animal);
@@ -198,7 +213,7 @@ public class Player extends Entity {
         if (i != 999) {
             if (gp.keyHandler.enterPressed) {
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak(0);
+                gp.npc[i].speak();
             }
         }
         gp.keyHandler.enterPressed = false;
@@ -223,39 +238,85 @@ public class Player extends Entity {
                 case "old man":
                     if (gp.keyHandler.enterPressed) {
                         gp.gameState = gp.dialogueState;
-                        target.speak(0);
+                        target.speak();
                         gp.playSoundEffect("oldMan", 3);
                     } else {
                         gp.stopMusic("oldMan");
                     }
                     break;
                 case "Cow":
-                    if (gp.keyHandler.enterPressed) {
-                        gp.playSoundEffect("Cow", 8);
-                    }
+//                        gp.playSoundEffect("Cow", 8);
                     break;
             }
         }
         gp.keyHandler.enterPressed = false;
     }
 
-    public void checkNear(Entity target) {
+    public int checkNear(ArrayList<Entity> target) {
         int playerCol = (int) ((worldX + gp.tileSize / 2) / gp.tileSize);
         int playerRow = (int) ((worldY + gp.tileSize / 2) / gp.tileSize);
-        int targetCol = (int) (target.worldX / gp.tileSize);
-        int targetRow = (int) (target.worldY / gp.tileSize);
+        int targetCol;
+        int targetRow;
+        for (int i = 0; i < target.size(); i++) {
+            targetCol = (int) (target.get(i).worldX / gp.tileSize);
+            targetRow = (int) (target.get(i).worldY / gp.tileSize);
 
-        if (playerCol == targetCol && playerRow - 1 == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol == targetCol && playerRow + 1 == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol + 1 == targetCol && playerRow == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else if (playerCol - 1 == targetCol && playerRow == targetRow) {
-            gp.gameState = gp.autoDisplayState;
-        } else {
-            gp.gameState = gp.playState;
+            if (playerCol == targetCol && playerRow - 1 == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol == targetCol && playerRow + 1 == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol + 1 == targetCol && playerRow == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else if (playerCol - 1 == targetCol && playerRow == targetRow) {
+                gp.gameState = gp.autoDisplayState;
+                return i;
+            } else {
+                gp.gameState = gp.playState;
+            }
         }
+        return 999;
+    }
+
+    public boolean canObtainItem(Entity item){
+        boolean canContain = false;
+
+        //Check if stackable
+        if(item.stackable == true){
+            int index = seachItemInInventory(item.name);
+
+            if(index != 999){
+                inventory.get(index).amount++;
+                canContain = true;
+            }else{
+                //New item so need to track vacancy
+                if(inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canContain = true;
+                }
+            }
+        }else{
+            //Not stackable so check vacancy
+            if(inventory.size() != maxInventorySize){
+                inventory.add(item);
+                canContain = true;
+            }
+        }
+        return canContain;
+    }
+
+    public int seachItemInInventory(String itemName){
+        int itemIndex = 999;
+
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i).name.equals(itemName)){
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
     }
 
 //    public void checkAtSpecifiedPst(int i) {

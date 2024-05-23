@@ -6,12 +6,13 @@ import javax.swing.*;
 public class Main {
     public static JFrame window;
 
+
     public static void main(String[] args) {
         window = new JFrame();
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
-        window.setTitle("Fishing with Piece");
+        window.setTitle("Holly Fish");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setUndecorated(true);    //remove top bar
 

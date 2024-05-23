@@ -9,8 +9,11 @@ public class OBJ_Bottle extends Entity {
         name = "Bottle";
         price = 0;
         fishStar = 0;
-        down1 = setup("Item/Bottle",gp.tileSize,gp.tileSize);
+        down1 = setup("Item/Bottle",gp.tileSize*5/2,gp.tileSize*5/2);
+        down2 = setup("Item/Bottle",gp.tileSize,gp.tileSize);
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
+        fishRarity = "TRASH";
+        fishFrame = setup("Fishingframe/Trash",gp.tileSize*18,gp.tileSize*15);
     }
 }

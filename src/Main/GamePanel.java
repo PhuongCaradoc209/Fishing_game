@@ -77,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int inventoryState = 8;
     public final int fishingState = 9;
     public final int selectPlayerState = 10;
+    public final int tradeState = 11;
 
     //FPS (Frame Per Second)
     int FPS = 60;
@@ -242,7 +243,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            for (Entity value : obj) {
+            for (Entity value : obj)     {
                 if (value != null) {
                     entityList.add(value);
                 }

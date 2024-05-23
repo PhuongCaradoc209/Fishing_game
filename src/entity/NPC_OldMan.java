@@ -1,6 +1,7 @@
 package entity;
 
 import Main.GamePanel;
+import object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ public class NPC_OldMan extends Entity {
         speed = 0;
         getImage();
         setDialogue();
+        setItem();
         size = gp.tileSize + 10;
 
         solidArea.x = 0;
@@ -38,18 +40,18 @@ public class NPC_OldMan extends Entity {
 //        up2 = setup("NPC/oldman");
     }
 
-    public void setDialogue() {
-        dialogues[0] = "Hello, fisher!";
-        dialogues[1] = "What type of fishing-rod you want to buy?\nOr you want to buy a little items?";
-        dialogues[2] = "If you want to sell your fishes,\nplease go to that man";
+    public void setDialogue(){
+        dialogues[0] = "I have some good stuff. Do you want to trade huh!";
     }
 
     public void setItem(){
-
+        inventory.add(new OBJ_Grass(gp));
     }
 
     public void speak() {
-        super.speak(0);
+        super.speak();
+        gp.gameState = gp.tradeState;
+        gp.ui.npc = this;
     }
 
     public void update(boolean isDuck) {
