@@ -149,15 +149,16 @@ public class Fishing_Rod {
     public BufferedImage getFrame() {
         if (isFishing && castFrame <= 11) {
             int size = gp.tileSize + 10;
+            int marginRight = -1;
             // combine cast and rod
             // make rod[rodFrame] next to cast[castFrame]
             BufferedImage combined = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = combined.createGraphics();
             if (castFrame == 1 || castFrame == 2) {
-                g.drawImage(cast[castFrame], size + 2, 0, size, size, null);
+                g.drawImage(cast[castFrame], size + marginRight, 0, size, size, null);
             } else {
-                g.drawImage(cast[castFrame], size + 2, 0, size, size, null);
-                g.drawImage(rod[rodFrame], 0 + 2, 0, size, size, null);
+                g.drawImage(cast[castFrame], size + marginRight, 0, size, size, null);
+                g.drawImage(rod[rodFrame], 0, -1, size, size, null);
             }
             g.dispose();
             return combined;
