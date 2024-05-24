@@ -7,7 +7,7 @@ public class Fish_Coelacanths extends Entity {
     public Fish_Coelacanths(GamePanel gp){
         super(gp);
         fishRarity = "COMMON";
-        name = "Coelacanths";
+        name = "Coelacanth";
         price = 5;
         fishStar = 2;
         //Image for Collections
@@ -17,5 +17,10 @@ public class Fish_Coelacanths extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
+        desFishing ="An ancient, large, plump lobe-finned\nfish";
+        desCollections ="An ancient, large, plump lobe-finned\nfish";
+        desTrading ="An ancient, large, plump lobe-finned fish";
+
+
     }
 }

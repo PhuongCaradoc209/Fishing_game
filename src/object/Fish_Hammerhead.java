@@ -6,7 +6,7 @@ import Main.GamePanel;
 public class Fish_Hammerhead extends Entity {
     public Fish_Hammerhead(GamePanel gp){
         super(gp);
-        fishRarity = "Rare";
+        fishRarity = "RARE";
         name = "Big Head Carp";
         price = 13;
         fishStar = 3;
@@ -16,6 +16,10 @@ public class Fish_Hammerhead extends Entity {
         down2 = setup("Fish/Hammerhead_3",gp.tileSize,gp.tileSize);
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
-//        fishFrame = setup("Fishingframe/Rare");
+        fishFrame = setup("Fishingframe/Rare",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A unique species known for its\ndistinctive hammer-shaped head and\nfound in warm waters worldwide";
+        desCollections = "A unique species known for its\ndistinctive hammer-shaped head\nand found in warm waters\nworldwide";
+        desTrading = "A unique species known for its distinctive\nhammer-shaped head and found in warm\nwaters worldwide";
+
     }
 }

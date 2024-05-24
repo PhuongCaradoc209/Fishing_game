@@ -17,5 +17,10 @@ public class Fish_Sunfish extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A deep, rough-scaled bodies fish\nwith a single continuous dorsal fin.\nIt is native to tropical and temperate\nwaters worldwide";
+        desCollections = "A deep, rough-scaled bodies fish\nwith a single continuous dorsal fin.\nIt is native to tropical and temperate\nwaters worldwide";
+        desTrading = "A deep, rough-scaled bodies fish with a single\ncontinuous dorsal fin.It is native to tropical\nand temperate waters worldwide";
+
+
     }
 }

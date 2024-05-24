@@ -82,7 +82,7 @@ public class InventoryManagement {
                 break;
             case 2:
                    value = rd.nextInt(1000) + 1;
-                 //value = 74;
+                   // value = 202;
                 if (value >= 1 && value <= 16) {
                     gp.iManage.inventory[0].caught = true;
                     gp.iManage.inventory[0].count++;
@@ -94,13 +94,9 @@ public class InventoryManagement {
                     num = 1;
 
                 } else if (value >= 33 && value <= 72) {
-                    gp.iManage.inventory[15].caught = true;
-                    gp.iManage.inventory[15].count++;
                     num = 15;
 
                 } else if (value >= 73 && value <= 112) {
-                    gp.iManage.inventory[16].caught = true;
-                    gp.iManage.inventory[16].count++;
                     num = 16;
 
                 } else if (value >= 113 && value <= 144) {
@@ -147,6 +143,7 @@ public class InventoryManagement {
 
                 }
                 setDisplay(num);
+                gp.player.canObtainItem(gp.iManage.inventory[num]);
                 gp.gameState = gp.fishingState;
 
                 break;
@@ -171,7 +168,7 @@ public class InventoryManagement {
         gp.ui.fishRarity = gp.iManage.inventory[i].fishRarity;
         gp.ui.fishImage = gp.iManage.inventory[i].down1;
         gp.ui.fishFrame = gp.iManage.inventory[i].fishFrame;
-
+        gp.ui.desFishing = gp.iManage.inventory[i].desFishing;
     }
 
 

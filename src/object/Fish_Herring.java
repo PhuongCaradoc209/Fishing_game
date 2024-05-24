@@ -17,5 +17,9 @@ public class Fish_Herring extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A small-headed, streamlined fish,\nfound primarily in temperate waters\nof the North Pacific and North\nAtlantic Oceans";
+        desCollections = "A small-headed, streamlined fish,\nfound primarily in temperate waters\nof the North Pacific and North\nAtlantic Oceans";
+        desTrading = "A small-headed, streamlined fish, found\nprimarily in temperate waters of the North\nPacific and North Atlantic Oceans";
+
     }
 }

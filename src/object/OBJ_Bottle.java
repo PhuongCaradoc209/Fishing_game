@@ -15,5 +15,8 @@ public class OBJ_Bottle extends Entity {
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishRarity = "TRASH";
         fishFrame = setup("Fishingframe/Trash",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A narrow-necked container typically\nmade of glass, plastic, or aluminum\nthat is used to store and transport\nliquids";
+        desTrading = "A narrow-necked container typically made of\nglass, plastic, or aluminum that is used to\nstore and transport liquids";
+
     }
 }
