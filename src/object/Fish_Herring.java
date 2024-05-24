@@ -22,6 +22,4 @@ public class Fish_Herring extends Entity {
         desTrading = "A small-headed, streamlined fish, found\nprimarily in temperate waters of the North\nPacific and North Atlantic Oceans";
 
     }
-
-
 }

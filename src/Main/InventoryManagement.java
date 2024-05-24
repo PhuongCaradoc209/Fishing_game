@@ -76,7 +76,6 @@ public class InventoryManagement {
                     gp.iManage.inventory[4].caught = true;
                     gp.iManage.inventory[4].count++;
                     num = 4;
-
                 }
                 gp.gameState = gp.fishingState;
                 setDisplay(num);
@@ -142,7 +141,6 @@ public class InventoryManagement {
                     gp.iManage.inventory[9].count++;
                     num = 9;
 
-
                 }
                 setDisplay(num);
                 gp.player.canObtainItem(gp.iManage.inventory[num]);
@@ -153,6 +151,9 @@ public class InventoryManagement {
             case 3:
                 break;
         }
+
+        //Adding fish to inventory
+        gp.player.canObtainItem(gp.iManage.inventory[num]);
     }
     public void setImage(Entity e){
         if(e.caught == true){

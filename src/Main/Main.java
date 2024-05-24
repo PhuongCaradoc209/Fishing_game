@@ -12,7 +12,7 @@ public class Main {
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
-        window.setTitle("Fishing with Piece");
+        window.setTitle("Holly Fish");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setUndecorated(true);    //remove top bar
 

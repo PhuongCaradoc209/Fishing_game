@@ -81,18 +81,18 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage_HumanVer() {
-        standUp = setup("player/standUp", gp.tileSize, gp.tileSize);
-        standDown = setup("player/standDown", gp.tileSize, gp.tileSize);
-        standRight = setup("player/right", gp.tileSize, gp.tileSize);
-        standLeft = setup("player/left", gp.tileSize, gp.tileSize);
-        up1 = setup("player/up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("player/up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("player/down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("player/down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("player/left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("player/left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("player/right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("player/right_2", gp.tileSize, gp.tileSize);
+        standUp = setup("player/standUp", 32, 32);
+        standDown = setup("player/standDown", 32, 32);
+        standRight = setup("player/right", 32, 32);
+        standLeft = setup("player/left", 32, 32);
+        up1 = setup("player/up_1", 32, 32);
+        up2 = setup("player/up_2", 32, 32);
+        down1 = setup("player/down_1", 32, 32);
+        down2 = setup("player/down_2", 32, 32);
+        left1 = setup("player/left_1", 32, 32);
+        left2 = setup("player/left_2", 32, 32);
+        right1 = setup("player/right_1", 32, 32);
+        right2 = setup("player/right_2", 32, 32);
     }
 
     public void update() {
