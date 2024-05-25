@@ -1,6 +1,9 @@
 package Main;
 
 import entity.Entity;
+import object.OBJ_FishingRod1;
+import object.OBJ_FishingRod2;
+import object.OBJ_FishingRod3;
 import object.OBJ_PHYSICAL;
 
 import javax.imageio.ImageIO;
@@ -1020,6 +1023,12 @@ public class UI {
         //Draw Player's Items
         for (int i = 0; i < entity.inventory.size(); i++) {
 
+            //Equip Cursor // Chua lam dc
+            if(entity.inventory.get(i) == entity.currentFishingRod){
+                g2.setColor(Color.RED);
+                g2.drawRoundRect(slotX,slotY,gp.tileSize,gp.tileSize,10,10);
+            }
+
             g2.drawImage(entity.inventory.get(i).down2, slotX, slotY, null);
 
             //Display amount
@@ -1185,6 +1194,9 @@ public class UI {
                 } else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
+                        if(npc.inventory.get(itemIndex).name == "FishingRod1" || npc.inventory.get(itemIndex).name == "FishingRod2" || npc.inventory.get(itemIndex).name == "FishingRod3"){
+                            gp.player.currentFishingRod = npc.inventory.get(itemIndex);
+                        }
                     } else {
                         subState = 0;
                         gp.gameState = gp.dialogueState;
@@ -1246,12 +1258,20 @@ public class UI {
 
             //Sell an item
             if (gp.keyHandler.enterPressed) {
-                if (gp.player.inventory.get(itemIndex).amount > 1) {
-                    gp.player.inventory.get(itemIndex).amount--;
+
+                if (gp.player.inventory.get(itemIndex) == gp.player.currentFishingRod) {
+                    commandNum = 0;
+                    subState = 0;
+                    gp.gameState = gp.dialogueState;
+                    currentDialogue = "You cannot sell an equipped item!";
                 } else {
-                    gp.player.inventory.remove(itemIndex);
+                    if (gp.player.inventory.get(itemIndex).amount > 1) {
+                        gp.player.inventory.get(itemIndex).amount--;
+                    } else {
+                        gp.player.inventory.remove(itemIndex);
+                    }
+                    gp.player.coin += price;
                 }
-                gp.player.coin += price;
 
             }
         }

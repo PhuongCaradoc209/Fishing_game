@@ -32,6 +32,7 @@ public class Entity {
     public int maxPhysical;
     public int physical;
     public int coin;
+    public Entity currentFishingRod;
 
     //OBJ
     public BufferedImage image, image2, image3, image4, image5;

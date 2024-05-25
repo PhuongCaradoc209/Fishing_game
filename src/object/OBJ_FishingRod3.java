@@ -12,6 +12,7 @@ public class OBJ_FishingRod3 extends Entity{
             count = 0;
             down1 = setup("Item/fishingrod3",gp.tileSize,gp.tileSize);
             down2 = setup("Item/fishingrod3",gp.tileSize,gp.tileSize);
+            desTrading = "[Fishing Rod  LV3]";
         }
 
 
