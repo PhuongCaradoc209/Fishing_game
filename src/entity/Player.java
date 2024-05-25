@@ -278,7 +278,7 @@ public class Player extends Entity {
 
         //Check if stackable
         if(item.stackable == true){
-            int index = seachItemInInventory(item.name);
+            int index = searchItemInInventory(item.name);
 
             if(index != 999){
                 inventory.get(index).amount++;
@@ -300,7 +300,7 @@ public class Player extends Entity {
         return canContain;
     }
 
-    public int seachItemInInventory(String itemName){
+    public int searchItemInInventory(String itemName){
         int itemIndex = 999;
 
         for(int i = 0; i < inventory.size(); i++){
@@ -311,25 +311,6 @@ public class Player extends Entity {
         }
         return itemIndex;
     }
-
-//    public void checkAtSpecifiedPst(int i) {
-//        solidArea.x = (int) (worldX + solidArea.x);
-//        solidArea.y = (int) (worldY + solidArea.y);
-//        //get the object's solid area position within the game world
-//        gp.obj[i].solidArea.x = (int) (gp.obj[i].worldX + gp.obj[i].solidArea.x);
-//        gp.obj[i].solidArea.y = (int) (gp.obj[i].worldY + gp.obj[i].solidArea.y);
-//        if (gp.obj[i].name.equals("Door close") && solidArea.intersects(gp.obj[i].solidArea)) {
-//            gp.aSetter.setObject(false);
-//
-//        }
-//        if (gp.obj[i].name.equals("Door open") && !solidArea.intersects(gp.obj[i].solidArea)) {
-//            gp.aSetter.setObject(true);
-//        }
-//        solidArea.x = solidAreaDefaultX;
-//        solidArea.y = solidAreaDefaultY;
-//        gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
-//        gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
-//    }
 
     public void draw(Graphics2D g) {
 //        g.setColor(Color.white);
