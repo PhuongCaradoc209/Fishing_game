@@ -81,8 +81,8 @@ public class InventoryManagement {
                 setDisplay(num);
                 break;
             case 2:
-                   value = rd.nextInt(1000) + 1;
-                   // value = 202;
+                      value = rd.nextInt(1000) + 1;
+                   // value = 175;
                 if (value >= 1 && value <= 16) {
                     gp.iManage.inventory[0].caught = true;
                     gp.iManage.inventory[0].count++;
@@ -143,7 +143,6 @@ public class InventoryManagement {
 
                 }
                 setDisplay(num);
-                gp.player.canObtainItem(gp.iManage.inventory[num]);
                 gp.gameState = gp.fishingState;
 
                 break;
