@@ -866,50 +866,59 @@ public class UI {
     }
 
     public void drawAfterFishingScreen() {
-        drawFishingBackGround();
-        drawFishingCaughtAndInformation();
-    }
-
-    public void drawFishingBackGround() {
-        g2.drawImage(fishFrame, gp.tileSize, -2 * gp.tileSize, gp.tileSize * 18, gp.tileSize * 15, null);//0xFFBB5B FFAD7A
-    //    drawSubWindow1(-5+gp.tileSize*19/2,-5+gp.tileSize*21/4,10+gp.tileSize*11/2,10+gp.tileSize*5/2,new Color(0,0,0,0),new Color(0xFFFFFF),2,10); ed9b68
-    //    drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*15/2,new Color(0xe078ff),new Color(0x9D57A6),5,70);
-    //    drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*285/40,new Color(0xffd59b),new Color(0x9D57A6),5,70);
-        drawSubWindow1(gp.tileSize*19/2,gp.tileSize*21/4,gp.tileSize*11/2,gp.tileSize*3,new Color(0xFFBB5B),new Color(0xFFBB5B),0,0);
-    }
-
-    public void drawFishingCaughtAndInformation() {
-        //draw image of fish caught
-        g2.drawImage(fishImage, 6 * gp.tileSize, gp.tileSize * 9 / 2, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
-        drawSubWindow1 (-10 + 6 * gp.tileSize, -10 + gp.tileSize * 9 / 2, 15 + gp.tileSize * 5 / 2, 15 + gp.tileSize * 5 / 2, new Color(0, 0, 0, 0), new Color(0xD69489), 7, 20);
         //display fish information
         //Rarity
         switch (fishRarity) {
             case "LEGENDARY":
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*15/2,new Color(0xf8b347),new Color(0xe58b00),5,70);
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*285/40,new Color(0xffd99e),new Color(0xe58b00),5,70);
+                g2.drawImage(fishFrame, gp.tileSize, -2 * gp.tileSize, gp.tileSize * 18, gp.tileSize * 15, null);
+                drawSubWindow1(gp.tileSize*19/2,gp.tileSize*21/4,gp.tileSize*11/2,gp.tileSize*3,new Color(0xffcb81),new Color(0xffcb81),0,50);
+
                 setFontAndColor(font, Color.BLACK);
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0xFF7F3E));
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
             case "RARE":
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*15/2,new Color(0xb386ef),new Color(0x965fde),5,70);
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*285/40,new Color(0xddc3ff),new Color(0x965fde),5,70);
+                g2.drawImage(fishFrame, gp.tileSize, -2 * gp.tileSize, gp.tileSize * 18, gp.tileSize * 15, null);
+                drawSubWindow1(gp.tileSize*19/2,gp.tileSize*21/4,gp.tileSize*11/2,gp.tileSize*3,new Color(0xcea9ff),new Color(0xcea9ff),0,50);
+
                 setFontAndColor(font, Color.WHITE);
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0x810081));
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
             case "UNCOMMON":
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*15/2,new Color(0x5099f9),new Color(0x447dc8),5,70);
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*285/40,new Color(0xaee6ff),new Color(0x447dc8),5,70);
+                g2.drawImage(fishFrame, gp.tileSize, -2 * gp.tileSize, gp.tileSize * 18, gp.tileSize * 15, null);
+                drawSubWindow1(gp.tileSize*19/2,gp.tileSize*21/4,gp.tileSize*11/2,gp.tileSize*3,new Color(0x82d3f8),new Color(0x82d3f8),0,50);
+
                 setFontAndColor(font, new Color(0xFFFFFF));
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0x0239BD));
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
             case "COMMON":
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*15/2,new Color(0x7fba53),new Color(0x5e9c31),5,70);
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*285/40,new Color(0xd0fab3),new Color(0x5e9c31),5,70);
+                g2.drawImage(fishFrame, gp.tileSize, -2 * gp.tileSize, gp.tileSize * 18, gp.tileSize * 15, null);
+                drawSubWindow1(gp.tileSize*19/2,gp.tileSize*21/4,gp.tileSize*11/2,gp.tileSize*3,new Color(0xbaf88e),new Color(0xbaf88e),0,50);
+
                 setFontAndColor(font, new Color(0xFFFFFF));
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0x448713));
                 g2.drawString(fishRarity, -2 + getXforCenteredText(fishRarity), -2 + gp.tileSize * 5 / 2);
                 break;
             case "TRASH":
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*15/2,new Color(0xb9b7b7),new Color(0xe7d7d7d),5,70);
+                drawSubWindow1(-10+gp.tileSize*9/2,-10+gp.tileSize*5/2,20+gp.tileSize*11,gp.tileSize*285/40,new Color(0xe8e8e8),new Color(0x7d7d7d),5,70);
+                g2.drawImage(fishFrame, gp.tileSize, -2 * gp.tileSize, gp.tileSize * 18, gp.tileSize * 15, null);
+                drawSubWindow1(gp.tileSize*19/2,gp.tileSize*21/4,gp.tileSize*11/2,gp.tileSize*3,new Color(0xd7d5d5),new Color(0xd7d5d5),0,50);
+
                 setFontAndColor(font, new Color(0xFFFFFF));
                 g2.drawString(fishRarity, getXforCenteredText(fishRarity), gp.tileSize * 5 / 2);
                 setFontAndColor(font, new Color(0x434343));
@@ -929,12 +938,14 @@ public class UI {
         //Description
         y = gp.tileSize * 6;
         x =  gp.tileSize * 10;
-
         setFontAndColor(font4a,new Color(0x7B342E));
         for(String line: desFishing.split("\n")){
             g2.drawString(line, x, y);
             y += 32;
         }
+        //draw image of fish caught
+        g2.drawImage(fishImage, 6 * gp.tileSize, gp.tileSize * 9 / 2, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
+        drawSubWindow1 ( 6 * gp.tileSize,  gp.tileSize * 9 / 2, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, new Color(0, 0, 0, 0), new Color(0xD69489), 7, 20);
     }
 
 
@@ -1067,25 +1078,11 @@ public class UI {
 
 
             //Description Text
-            int textX = dFrameX + 20;
-            int textY = dFrameY + gp.tileSize * 3/4;
             g2.setFont(g2.getFont().deriveFont(28F));
-
             int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
-
 
             if(itemIndex < entity.inventory.size()){
                 drawSubWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
-                setFontAndColor(font4,Color.WHITE);
-                g2.drawString(fishName,textX,textY);
-                textY += 30;
-                setFontAndColor(font3a,Color.WHITE);
-                for(String line: entity.inventory.get(itemIndex).desTrading.split("\n")){
-
-                    g2.drawString(line, textX, textY);
-                    textY += 20;
-                }
-                g2.setFont(g2.getFont().deriveFont(28F));
             }
         }
     }
@@ -1185,6 +1182,7 @@ public class UI {
             String text = "" + price;
             x = getXforAlignToRightText(text, gp.tileSize * 8);
             g2.drawString(text, x - 28, y + 45);
+            //Description
 
             //Buy an item
             if (gp.keyHandler.enterPressed) {
@@ -1245,6 +1243,18 @@ public class UI {
             String text = "" + price;
             x = getXforAlignToRightText(text, gp.tileSize * 18);
             g2.drawString(text, x - 28, y + 45);
+            //Description
+            int textX = gp.tileSize*12 + 20;
+            int textY = gp.tileSize*6 + gp.tileSize * 3/4;
+            setFontAndColor(font4,Color.WHITE);
+            g2.drawString(gp.player.inventory.get(itemIndex).name,gp.tileSize*12 + 20,textY);
+            textY += 30;
+            setFontAndColor(font3a,Color.WHITE);
+            for(String line: gp.player.inventory.get(itemIndex).desTrading.split("\n")){
+
+                g2.drawString(line, textX, textY);
+                textY += 20;
+            }
 
             //Sell an item
             if (gp.keyHandler.enterPressed) {
@@ -1261,8 +1271,6 @@ public class UI {
                         gp.player.inventory.remove(itemIndex);
                     }
                     gp.player.coin += price;
-//                }
-
                 }
 
             }
