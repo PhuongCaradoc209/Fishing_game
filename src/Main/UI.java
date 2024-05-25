@@ -861,9 +861,6 @@ public class UI {
     }
 
     public void drawAfterFishingScreen() {
-        drawFishingCaughtAndInformation();
-    }
-    public void drawFishingCaughtAndInformation() {
         //display fish information
         //Rarity
         switch (fishRarity) {
