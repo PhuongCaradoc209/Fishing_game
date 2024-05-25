@@ -15,6 +15,10 @@ public class Player extends Entity {
 
     public double screenX;
     public double screenY;
+    public final double worldX_fishTank = 0;
+    public final double worldY_fishTank = 0;
+    public double temp_worldX;
+    public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
     public int rod = 2;
@@ -62,7 +66,7 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 0;
+        coin = 500;
     }
 
     public void getPlayerImage_DinoVer(){
@@ -128,12 +132,12 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
-        if (!interactEntity.contains(gp.npc[0]))
+        if (!interactEntity.contains(gp.npc[0].get(0)))
         {
-            interactEntity.add(gp.npc[0]);
+            interactEntity.add(gp.npc[0].get(0));
         }
-        if (!interactEntity.contains(gp.animal[4])) {
-            interactEntity.add(gp.animal[4]);
+        if (!interactEntity.contains(gp.animal[0].get(4))) {
+            interactEntity.add(gp.animal[0].get(4));
         }
         interactEntity_Index = checkNear(interactEntity);
 
@@ -204,7 +208,7 @@ public class Player extends Entity {
         if (i != 999) {
             if (gp.keyHandler.enterPressed) {
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
+                gp.npc[gp.currentMap].get(i).speak();
             }
         }
         gp.keyHandler.enterPressed = false;
@@ -214,7 +218,7 @@ public class Player extends Entity {
         //getPLayerCol and Row at the center point of player
         int playerCol = (int) ((worldX + gp.tileSize / 2) / gp.tileSize);
         int playerRow = (int) ((worldY + gp.tileSize / 2) / gp.tileSize);
-        int tileIndex = tileM.mapTileNum[playerRow][playerCol];
+        int tileIndex = tileM.mapTileNum[gp.currentMap][playerRow][playerCol];
 
         if (tileIndex > 0 && tileIndex < 27 && tileIndex != 16 && tileIndex != 17 && tileIndex != 18) {
             gp.playMusic("grass", 1);

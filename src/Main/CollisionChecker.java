@@ -2,6 +2,9 @@ package Main;
 
 import entity.Entity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class CollisionChecker {
     GamePanel gp;
 
@@ -11,31 +14,51 @@ public class CollisionChecker {
 
     public void checkAtEdge(Entity entity) {
         //IF PLAYER MOVING TO THE EDGE
-        switch (entity.direction) {
-            case "up":
-                if (entity.worldY <= 0) {
-                    entity.collisionOn = true;
-                }
-                break;
-
-            case "down":
-                if (gp.worldHeight - entity.worldY - gp.tileSize - 5 <= 0) {
-                    entity.collisionOn = true;
-                }
-                break;
-
-            case "left":
-                if (entity.worldX <= 0) {
-                    entity.collisionOn = true;
-                }
-                break;
-
-            case "right":
-                if (gp.worldWidth - entity.worldX - gp.tileSize - 5 <= 0) {
-                    entity.collisionOn = true;
-                }
-                break;
+        if (entity.direction.equals("up") || entity.direction.equals("diagonalUpLeft") || entity.direction.equals("diagonalUpRight")){
+            if (entity.worldY <= 0) {
+                entity.collisionOn = true;
+            }
         }
+        if (entity.direction.equals("down") || entity.direction.equals("diagonalDownLeft") || entity.direction.equals("diagonalDownRight")){
+            if (gp.worldHeight - entity.worldY - gp.tileSize - 5 <= 0) {
+                entity.collisionOn = true;
+            }
+        }
+        if (entity.direction.equals("left") || entity.direction.equals("diagonalUpLeft") || entity.direction.equals("diagonalDownLeft")) {
+            if (entity.worldX <= 0) {
+                entity.collisionOn = true;
+            }
+        }
+        if (entity.direction.equals("right") || entity.direction.equals("diagonalUpRight") || entity.direction.equals("diagonalDownRight")) {
+            if (gp.worldWidth - entity.worldX - gp.tileSize - 5 <= 0) {
+                entity.collisionOn = true;
+            }
+        }
+//
+//        switch (entity.direction) {
+//            case "up":
+//            case "diagonalUpLeft":
+//            case "diagonalUpRight":
+//
+//                break;
+//
+//            case "down":
+//            case "diagonalDownLeft":
+//            case "diagonalDownRight":
+//
+//                break;
+//
+//            case "left":
+//                if (entity.worldX <= 0) {
+//                    entity.collisionOn = true;
+//                }
+//                break;
+//
+//            case "right":
+//                if (gp.worldWidth - entity.worldX - gp.tileSize - 5 <= 0) {
+//                    entity.collisionOn = true;
+//                }
+//                break;
     }
 
     public void checkTile(Entity entity, boolean isDuck) {
@@ -64,47 +87,84 @@ public class CollisionChecker {
 
         //CHECK WHICH ARE TWO TILES FOR TWO SIDES OF ENTITY
         int tileNum1, tileNum2;
-        switch (entity.direction) {
-            case "up":
-                //because when Entity go up, the first one that interacts with tiles is Top Edge,
-                entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
-                //so we find out what tile the player is trying to step in
-                //tileNum1 is the point at the left-top conner of the entity
-                tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityLeftCol];
-                //tileNum1 is the point at the right-top conner of the entity
-                tileNum2 = gp.tileMgr.mapTileNum[entityTopRow][entityRightCol];
-                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                    entity.collisionOn = !isDuck;
-                }
-                break;
-
-            case "down":
-                entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
-                tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
-                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                    entity.collisionOn = !isDuck;
-                }
-                break;
-
-            case "right":
-                entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityRightCol];
-                tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
-                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                    entity.collisionOn = !isDuck;
-                }
-                break;
-
-            case "left":
-                entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
-                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                    entity.collisionOn = !isDuck;
-                }
-                break;
+        if (entity.direction.equals("up") || entity.direction.equals("diagonalUpLeft") || entity.direction.equals("diagonalUpRight")){
+            //because when Entity go up, the first one that interacts with tiles is Top Edge,
+            entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
+            //so we find out what tile the player is trying to step in
+            //tileNum1 is the point at the left-top conner of the entity
+            tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
+            //tileNum1 is the point at the right-top conner of the entity
+            tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
+            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+                entity.collisionOn = !isDuck;
+            }
         }
+        if (entity.direction.equals("down") || entity.direction.equals("diagonalDownLeft") || entity.direction.equals("diagonalDownRight")){
+            entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
+            tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
+            tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
+            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+                entity.collisionOn = !isDuck;
+            }
+        }
+        if (entity.direction.equals("left") || entity.direction.equals("diagonalUpLeft") || entity.direction.equals("diagonalDownLeft")) {
+            entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
+            tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
+            tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
+            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+                entity.collisionOn = !isDuck;
+            }
+        }
+        if (entity.direction.equals("right") || entity.direction.equals("diagonalUpRight") || entity.direction.equals("diagonalDownRight")) {
+            entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
+            tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
+            tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
+            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+                entity.collisionOn = !isDuck;
+            }
+        }
+
+//        switch (entity.direction) {
+//            case "up":
+//                //because when Entity go up, the first one that interacts with tiles is Top Edge,
+//                entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
+//                //so we find out what tile the player is trying to step in
+//                //tileNum1 is the point at the left-top conner of the entity
+//                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
+//                //tileNum1 is the point at the right-top conner of the entity
+//                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
+//                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+//                    entity.collisionOn = !isDuck;
+//                }
+//                break;
+//
+//            case "down":
+//                entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
+//                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
+//                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
+//                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+//                    entity.collisionOn = !isDuck;
+//                }
+//                break;
+//
+//            case "right":
+//                entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
+//                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
+//                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
+//                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+//                    entity.collisionOn = !isDuck;
+//                }
+//                break;
+//
+//            case "left":
+//                entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
+//                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
+//                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
+//                if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+//                    entity.collisionOn = !isDuck;
+//                }
+//                break;
+//        }
     }
 
     public boolean checkNearWater(Entity entity){
@@ -129,9 +189,9 @@ public class CollisionChecker {
                 entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
                 //so we find out what tile the player is trying to step in
                 //tileNum1 is the point at the left-top conner of the entity
-                tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityLeftCol];
+                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
                 //tileNum1 is the point at the right-top conner of the entity
-                tileNum2 = gp.tileMgr.mapTileNum[entityTopRow][entityRightCol];
+                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
                 //CHECK NEAR WATER
                 for (int i = 27; i <= 40; i++) {
                     if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
@@ -144,8 +204,8 @@ public class CollisionChecker {
             case "down":
             case "standDown":
                 entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
-                tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
+                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
+                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
                 //CHECK NEAR WATER
                 for (int i = 27; i <= 40; i++) {
                     if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
@@ -157,8 +217,8 @@ public class CollisionChecker {
             case "right":
             case "standRight":
                 entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityRightCol];
-                tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
+                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
+                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
                 //CHECK NEAR WATER
                 for (int i = 27; i <= 40; i++) {
                     if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
@@ -170,8 +230,8 @@ public class CollisionChecker {
             case "left":
             case "standLeft":
                 entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
+                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
+                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
                 //CHECK NEAR WATER
                 for (int i = 27; i <= 40; i++) {
                     if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
@@ -185,14 +245,14 @@ public class CollisionChecker {
 
     public int checkObj(Entity entity, boolean isPlayer) {
         int index = 999;
-        for (int i = 0; i < gp.obj.length; i++) {
-            if (gp.obj[i] != null) {
+        for (int i = 0; i < gp.obj[gp.currentMap].size(); i++) {
+            if (gp.obj[gp.currentMap].get(i) != null) {
                 //get the entity's solid area position within the game world
                 entity.solidArea.x = (int) (entity.worldX + entity.solidArea.x);
                 entity.solidArea.y = (int) (entity.worldY + entity.solidArea.y);
                 //get the object's solid area position within the game world
-                gp.obj[i].solidArea.x = (int) (gp.obj[i].worldX + gp.obj[i].solidArea.x);
-                gp.obj[i].solidArea.y = (int) (gp.obj[i].worldY + gp.obj[i].solidArea.y);
+                gp.obj[gp.currentMap].get(i).solidArea.x = (int) (gp.obj[gp.currentMap].get(i).worldX + gp.obj[gp.currentMap].get(i).solidArea.x);
+                gp.obj[gp.currentMap].get(i).solidArea.y = (int) (gp.obj[gp.currentMap].get(i).worldY + gp.obj[gp.currentMap].get(i).solidArea.y);
 
                 switch (entity.direction) {
                     //SIMULATING ENTITY'S MOVEMENT AND CHECK WHERE IT WILL BE AFTER IT MOVED
@@ -212,8 +272,8 @@ public class CollisionChecker {
                         entity.solidArea.x -= entity.speed;
                         break;
                 }
-                if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                    if (gp.obj[i].collision == true) {
+                if (entity.solidArea.intersects(gp.obj[gp.currentMap].get(i).solidArea)) {
+                    if (gp.obj[gp.currentMap].get(i).collision == true) {
                         entity.collisionOn = true;
                     }
                     if (isPlayer) {
@@ -222,23 +282,23 @@ public class CollisionChecker {
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
-                gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
-                gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
+                gp.obj[gp.currentMap].get(i).solidArea.x = gp.obj[gp.currentMap].get(i).solidAreaDefaultX;
+                gp.obj[gp.currentMap].get(i).solidArea.y = gp.obj[gp.currentMap].get(i).solidAreaDefaultY;
             }
         }
         return index;
     }
 
-    public int checkEntity(Entity entity, Entity[] target) {
+    public int checkEntity(Entity entity, ArrayList<Entity>[] target) {
         int index = 999;
-        for (int i = 0; i < target.length; i++) {
-            if (target[i] != null) {
+        for (int i = 0; i < target[gp.currentMap].size(); i++) {
+            if (target[gp.currentMap].get(i) != null) {
                 //get the entity's solid area position within the game world
                 entity.solidArea.x = (int) (entity.worldX + entity.solidArea.x);
                 entity.solidArea.y = (int) (entity.worldY + entity.solidArea.y);
                 //get the npc's solid area position within the game world
-                target[i].solidArea.x = (int) (target[i].worldX + target[i].solidArea.x);
-                target[i].solidArea.y = (int) (target[i].worldY + target[i].solidArea.y);
+                target[gp.currentMap].get(i).solidArea.x = (int) (target[gp.currentMap].get(i).worldX + target[gp.currentMap].get(i).solidArea.x);
+                target[gp.currentMap].get(i).solidArea.y = (int) (target[gp.currentMap].get(i).worldY + target[gp.currentMap].get(i).solidArea.y);
 
                 switch (entity.direction) {
                     //SIMULATING ENTITY'S MOVEMENT AND CHECK WHERE IT WILL BE AFTER IT MOVED
@@ -258,16 +318,16 @@ public class CollisionChecker {
                         entity.solidArea.x -= entity.speed;
                         break;
                 }
-                if (entity.solidArea.intersects(target[i].solidArea)) {
-                    if (target[i] != entity) {
+                if (entity.solidArea.intersects(target[gp.currentMap].get(i).solidArea)) {
+                    if (target[gp.currentMap].get(i) != entity) {
                         entity.collisionOn = true;
                         index = i;
                     }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
-                target[i].solidArea.x = target[i].solidAreaDefaultX;
-                target[i].solidArea.y = target[i].solidAreaDefaultY;
+                target[gp.currentMap].get(i).solidArea.x = target[gp.currentMap].get(i).solidAreaDefaultX;
+                target[gp.currentMap].get(i).solidArea.y = target[gp.currentMap].get(i).solidAreaDefaultY;
             }
         }
         return index;

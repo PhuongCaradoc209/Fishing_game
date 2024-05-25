@@ -11,8 +11,7 @@ public class OBJ_Milk extends Entity {
         price = 1;
         fishStar = 1;
         count = 0;
-        down1 = setup("Item/Milk",gp.tileSize,gp.tileSize);
+        collection_image = setup("Item/Milk",gp.tileSize,gp.tileSize);
         fishRarity = "";
-
     }
 }

@@ -10,9 +10,7 @@ public class OBJ_Grass extends Entity{
             name = "Grass";
             price = 0;
             count = 0;
-            down1 = setup("Item/Grass",gp.tileSize,gp.tileSize);
+            collection_image = setup("Item/Grass",gp.tileSize,gp.tileSize);
             fishRarity = "";
         }
-
-
 }

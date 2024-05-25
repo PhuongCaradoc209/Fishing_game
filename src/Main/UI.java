@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.IllegalFormatCodePointException;
 import java.util.Objects;
 import java.util.Random;
 
@@ -33,6 +34,7 @@ public class UI {
     public double completion;
     public String fishName = "", fishPrice = "", fishRarity = " ";
     public Entity npc;
+    private int counter = 0;
 
     //FISHING GAMEPLAY
     Random random = new Random();
@@ -147,6 +149,15 @@ public class UI {
             drawPlayerInformation();
             drawTradeScreen();
         }
+
+        //TRANSITION STATE
+        if (gp.gameState == gp.transitionState){
+            drawTransition();
+        }
+
+//        if (gp.gameState == gp.fishTankState){
+//            drawFishTank();
+//        }
     }
 
     public void drawTittleScreen() {
@@ -322,6 +333,30 @@ public class UI {
         //MAIN COLOR TEXT
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
+    }
+
+    public void drawTransition(){
+        counter++;
+        g2.setColor(new Color(0,0,0,counter*5));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        if (counter == 50){
+            counter = 0;
+            if (gp.keyHandler.temp_map == 0){
+                gp.gameState = gp.playState;
+            }
+            else {
+                gp.gameState = gp.fishTankState;
+            }
+
+            gp.currentMap = gp.keyHandler.temp_map;
+
+            gp.player.worldX = gp.keyHandler.temp_woldX;
+            gp.player.worldY = gp.keyHandler.temp_woldY;
+
+            if (gp.keyHandler.temp_map == 1){
+                gp.aSetter.setAnimal(gp.currentMap);
+            }
+        }
     }
 
     public void drawPlayerInformation() {
@@ -775,10 +810,10 @@ public class UI {
         int amountY = gp.tileSize * 43 / 8;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-                if (gp.iManage.inventory[count] != null) {
+                if (gp.inventoryMng.inventory[count] != null) {
                     //draw imageOfFish
-                    gp.iManage.setImage(gp.iManage.inventory[count]);
-                    g2.drawImage(gp.iManage.inventory[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
+                    gp.inventoryMng.setImage(gp.inventoryMng.inventory[count]);
+                    g2.drawImage(gp.inventoryMng.inventory[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
 
                     //draw border
                     g2.setColor(new Color(0xA26D48));
@@ -788,7 +823,7 @@ public class UI {
                     //display amount
                     g2.setFont(font2);
                     g2.setColor(Color.BLACK);
-                    g2.drawString(String.valueOf(gp.iManage.inventory[count].count), amountX, amountY);
+                    g2.drawString(String.valueOf(gp.inventoryMng.inventory[count].count), amountX, amountY);
 
                     imageAndBorderX += gp.tileSize * 3 / 2;
                     amountX += gp.tileSize * 3 / 2;
@@ -816,40 +851,40 @@ public class UI {
     public void displayItemIsChosen() {
 
         int choose = 6 * inventorySlotRow + inventorySlotCol;
-        if (gp.iManage.inventory[choose] != null) {
+        if (gp.inventoryMng.inventory[choose] != null) {
             // display fish chosen image
-            g2.drawImage(gp.iManage.inventory[choose].fishFinalImage, gp.tileSize * 29 / 2, gp.tileSize * 3, gp.tileSize * 2, gp.tileSize * 2, null);
+            g2.drawImage(gp.inventoryMng.inventory[choose].fishFinalImage, gp.tileSize * 29 / 2, gp.tileSize * 3, gp.tileSize * 2, gp.tileSize * 2, null);
             g2.setFont(font4);
             FontMetrics fm = g2.getFontMetrics(g2.getFont());
             g2.setColor(new Color(0x7B342E));
 
             String text;
 
-            if (!gp.iManage.inventory[choose].caught) {
+            if (!gp.inventoryMng.inventory[choose].caught) {
                 text = "?";
             } else {
-                text = gp.iManage.inventory[choose].name;
+                text = gp.inventoryMng.inventory[choose].name;
             }
 
             int textWidth = fm.stringWidth(text);
             int centerX = gp.tileSize * 55 / 4 + (gp.tileSize * 7 / 2 - textWidth) / 2;
             g2.drawString(text, centerX, gp.tileSize * 23 / 4); // draw name
 
-            textWidth = fm.stringWidth("Count: " + gp.iManage.inventory[choose].count);
+            textWidth = fm.stringWidth("Count: " + gp.inventoryMng.inventory[choose].count);
             centerX = gp.tileSize * 55 / 4 + (gp.tileSize * 7 / 2 - textWidth) / 2;
-            g2.drawString("Count: " + gp.iManage.inventory[choose].count, centerX, gp.tileSize * 25 / 4); // draw amount
+            g2.drawString("Count: " + gp.inventoryMng.inventory[choose].count, centerX, gp.tileSize * 25 / 4); // draw amount
 
 
-            if (!gp.iManage.inventory[choose].caught) {
+            if (!gp.inventoryMng.inventory[choose].caught) {
                 text = "?";
             } else {
-                text = gp.iManage.inventory[choose].fishRarity;
+                text = gp.inventoryMng.inventory[choose].fishRarity;
             }
             textWidth = fm.stringWidth(text);
             centerX = gp.tileSize * 55 / 4 + (gp.tileSize * 7 / 2 - textWidth) / 2;
             int y = gp.tileSize * 27 / 4;
             // draw rarity
-            if (!gp.iManage.inventory[choose].caught) {
+            if (!gp.inventoryMng.inventory[choose].caught) {
                 g2.setColor(new Color(0x7B342E));
                 g2.drawString(text, centerX, y);
             } else {
@@ -1013,7 +1048,7 @@ public class UI {
         //Draw Player's Items
         for (int i = 0; i < entity.inventory.size(); i++) {
 
-            g2.drawImage(entity.inventory.get(i).down2, slotX, slotY, null);
+            g2.drawImage(entity.inventory.get(i).tradeState_image, slotX, slotY, null);
 
             //Display amount
             if (entity == gp.player && entity.inventory.get(i).amount > 1) {
