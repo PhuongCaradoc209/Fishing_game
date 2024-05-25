@@ -142,7 +142,7 @@ public class UI {
             drawInventoryScreen();
         }
         //FISHING STATE
-        else if (gp.gameState == gp.fishingState) {
+        else if (gp.gameState == gp.fishingState){
             drawPlayerInformation();
             drawFishingScreen();
         }
@@ -734,22 +734,24 @@ public class UI {
     }
 
     public void drawFishingScreen() {
-        drawSubWindow1(bar_X, bar_Y, gp.tileSize, 7 * gp.tileSize, new Color(0xC7B7A3), new Color(0, 0, 0, 0), 15, 5);
 
-        //FISHING RANGE
-        g2.setColor(new Color(0x4CC844));
-        if (range_Y <= bar_Y) speedOfRange = -speedOfRange;
-        if (range_Y >= (bar_Y + 7 * gp.tileSize - heightOfRange)) speedOfRange = -speedOfRange;
-        g2.fillRect(bar_X, range_Y, gp.tileSize, gp.tileSize);
-        range_Y += speedOfRange / 2;
+            drawSubWindow1(bar_X, bar_Y, gp.tileSize, 7 * gp.tileSize, new Color(0xC7B7A3), new Color(0, 0, 0, 0), 15, 5);
 
-        drawSubWindow1(bar_X, bar_Y, gp.tileSize, 7 * gp.tileSize, new Color(255, 255, 255, 0), new Color(0x543310), 10, 3);
+            //FISHING RANGE
+            g2.setColor(new Color(0x4CC844));
+            if (range_Y <= bar_Y) speedOfRange = -speedOfRange;
+            if (range_Y >= (bar_Y + 7 * gp.tileSize - heightOfRange)) speedOfRange = -speedOfRange;
+            g2.fillRect(bar_X, range_Y, gp.tileSize, gp.tileSize);
+            range_Y += speedOfRange / 2;
 
-        //FISHING TARGET
-        target_Y += speedOfTarget;
-        if (target_Y <= bar_Y) speedOfTarget = -speedOfTarget;
-        if (target_Y >= (bar_Y + 7 * gp.tileSize)) speedOfTarget = -speedOfTarget;
-        g2.fillRect(bar_X - gp.tileSize - gp.tileSize / 2, target_Y, gp.tileSize, gp.tileSize / 5);
+            drawSubWindow1(bar_X, bar_Y, gp.tileSize, 7 * gp.tileSize, new Color(255, 255, 255, 0), new Color(0x543310), 10, 3);
+
+            //FISHING TARGET
+            target_Y += speedOfTarget;
+            if (target_Y <= bar_Y) speedOfTarget = -speedOfTarget;
+            if (target_Y >= (bar_Y + 7 * gp.tileSize)) speedOfTarget = -speedOfTarget;
+            g2.fillRect(bar_X - gp.tileSize - gp.tileSize / 2, target_Y, gp.tileSize, gp.tileSize / 5);
+
     }
 
     public void drawInventoryScreen() {

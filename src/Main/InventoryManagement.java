@@ -9,6 +9,7 @@ public class InventoryManagement {
     public Entity[] inventory;
     GamePanel gp;
 
+
     public InventoryManagement(GamePanel gp){
         this.gp = gp;
         inventory = new Entity[24];

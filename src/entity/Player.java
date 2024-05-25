@@ -2,6 +2,7 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import object.OBJ_FishingRod1;
 import tile.TileManager;
 
 import java.awt.*;
@@ -62,7 +63,8 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 0;
+        coin = 500;
+        inventory.add(new OBJ_FishingRod1(gp));
     }
 
     public void getPlayerImage_DinoVer(){
