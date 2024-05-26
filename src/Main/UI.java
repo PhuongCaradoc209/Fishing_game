@@ -1059,13 +1059,14 @@ public class UI {
         //Draw Player's Items
         for (int i = 0; i < entity.inventory.size(); i++) {
 
-            //Equip Cursor // Chua lam dc
+            g2.drawImage(entity.inventory.get(i).down2, slotX, slotY, null);
+
+            //Equip Cursor // Chua lam dc // Moi sua thu roi ne
             if(entity.inventory.get(i) == entity.currentFishingRod){
                 g2.setColor(Color.RED);
-                g2.drawRoundRect(slotX,slotY,gp.tileSize,gp.tileSize,10,10);
+                drawSubWindow1(slotX,slotY,gp.tileSize,gp.tileSize,new Color(0,0,0,0),new Color(0xD46352),3,10);
+                // g2.drawRoundRect(slotX,slotY,gp.tileSize,gp.tileSize,10,10);
             }
-
-            g2.drawImage(entity.inventory.get(i).down2, slotX, slotY, null);
 
             //Display amount
             if (entity == gp.player && entity.inventory.get(i).amount > 1) {
@@ -1241,7 +1242,7 @@ public class UI {
                 } else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
-                        if(npc.inventory.get(itemIndex).name == "FishingRod1" || npc.inventory.get(itemIndex).name == "FishingRod2" || npc.inventory.get(itemIndex).name == "FishingRod3"){
+                        if(npc.inventory.get(itemIndex).name == "Fishing Rod 1" || npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3"){
                             gp.player.currentFishingRod = npc.inventory.get(itemIndex);
                         }
                     } else {

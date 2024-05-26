@@ -167,7 +167,8 @@ public class InventoryManagement {
                     num = 14;
 
                 }
-
+                setCollectionAndDisplay(num);
+                gp.gameState = gp.fishingState;
                 break;
         }
         //Adding fish to inventory
