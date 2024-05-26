@@ -18,7 +18,7 @@ public class Fish_Swordfish extends Entity {
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Uncommon",gp.tileSize*18,gp.tileSize*15);
         desFishing ="A long, flat, pointed bill fish and can\nbe found in tropical and temperate\nparts of the Atlantic, Pacific, and\nIndian Oceans";
-        desCollections ="A long, flat, pointed bill fish and can\nbe found in tropical and temperate\nparts of the Atlantic, Pacific, and\nIndian Oceans";
+        desCollections ="A long, flat, pointed bill fish and can be\nfound in tropical and temperate parts of\nthe Atlantic, Pacific, and Indian Oceans";
         desTrading ="A long, flat, pointed bill fish and can be found in\ntropical and temperate parts of the Atlantic,\nPacific, and Indian Oceans";
 
 

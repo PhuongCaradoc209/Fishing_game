@@ -19,7 +19,7 @@ public class Fish_Grasscarp extends Entity {
         fishFrame = setup("Fishingframe/Uncommon",gp.tileSize*18,gp.tileSize*15);
 
         desFishing = "A large herbivorous with torpedo-\nshaped bodies and dark olive\ncoloration fish, native to the Pacific\nFar East";
-        desCollections = "A large herbivorous with torpedo-\nshaped bodies and dark olive\ncoloration fish, native to the Pacific\nFar East";
+        desCollections = "A large herbivorous with torpedo-shaped\nbodies and dark olive coloration fish,\nnative to the Pacific Far East";
         desTrading = "A large herbivorous with torpedo-shaped\nbodies and dark olive coloration fish, native\nto the Pacific Far East";
 
     }
