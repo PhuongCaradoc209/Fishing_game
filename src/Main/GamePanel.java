@@ -295,9 +295,9 @@ public class GamePanel extends JPanel implements Runnable {
             tileMgr.draw(g2);
 
             //DRAW FISH
-            for (Entity entity : animal[currentMap]) {
-                entity.draw(g2);
-            }
+           for (int i =0; i < animal[1].size(); i++){
+               animal[1].get(i).draw(g2);
+           }
         }
 
         //UI

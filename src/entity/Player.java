@@ -21,7 +21,7 @@ public class Player extends Entity {
     public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
-    public int rod = 2;
+    public int rod = 1;
     public ArrayList<Entity> interactEntity;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
@@ -66,7 +66,7 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 500;
+        coin = 0;
     }
 
     public void getPlayerImage_DinoVer(){
