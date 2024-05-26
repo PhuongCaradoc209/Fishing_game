@@ -41,85 +41,67 @@ public class InventoryManagement {
         Random rd = new Random();
         switch (rod) {
             case 1:
-//                int value = rd.nextInt(100) + 1;
-                int value = 35;
-                if (value >= 1 && value <= 35) {
-                    gp.iManage.inventory[0].caught = true;
-                    gp.iManage.inventory[0].count++;
+                int value = rd.nextInt(100) + 1;
+                if ( value <= 35) {
                     num = 0;
 
-                } else if (value >= 36 && value <= 70) {
-                    gp.iManage.inventory[1].caught = true;
-                    gp.iManage.inventory[1].count++;
+                } else if ( value <= 70) {
                     num = 1;
 
-                } else if (value >= 70 && value <= 75) {
-                    gp.iManage.inventory[15].caught = true;
-                    gp.iManage.inventory[15].count++;
+                } else if (value <= 75) {
                     num = 15;
 
-                } else if (value >= 76 && value <= 80) {
-                    gp.iManage.inventory[16].caught = true;
-                    gp.iManage.inventory[16].count++;
+                } else if ( value <= 80) {
                     num = 16;
 
-                } else if (value >= 81 && value <= 92) {
-                    gp.iManage.inventory[2].caught = true;
-                    gp.iManage.inventory[2].count++;
+                } else if (value <= 92) {
                     num = 2;
 
-                } else if (value >= 93 && value <= 99) {
-                    gp.iManage.inventory[3].caught = true;
-                    gp.iManage.inventory[3].count++;
+                } else if (value <= 99) {
                     num = 3;
 
-                } else if (value == 100) {
-                    gp.iManage.inventory[4].caught = true;
-                    gp.iManage.inventory[4].count++;
+                } else  {
                     num = 4;
                 }
-                gp.gameState = gp.fishingState;
                 setCollectionAndDisplay(num);
+                gp.gameState = gp.fishingState;
                 break;
             case 2:
                 value = rd.nextInt(1000) + 1;
-                  //  value = 998;
-                if (value >= 1 && value <= 16) {
+                if ( value <= 16) {
                     num = 0;
 
-                } else if (value >= 17 && value <= 32) {
+                } else if (value <= 32) {
                     num = 1;
 
-                } else if (value >= 33 && value <= 72) {
+                } else if (value <= 72) {
                     num = 15;
 
-                } else if (value >= 73 && value <= 112) {
+                } else if (value <= 112) {
                     num = 16;
 
-                } else if (value >= 113 && value <= 144) {
+                } else if ( value <= 144) {
                     num = 2;
 
-                } else if (value >= 145 && value <= 180) {
+                } else if (value <= 180) {
                     num = 3;
 
-                } else if (value >= 181 && value <= 200) {
+                } else if (value <= 200) {
                     num = 4;
 
-                } else if (value >= 201 && value <= 520) {
+                } else if (value <= 520) {
                     num = 5;
 
-                } else if (value >= 521 && value <= 840) {
+                } else if (value <= 840) {
                     num = 6;
 
-                } else if (value >= 841 && value <= 920) {
+                } else if (value <= 920) {
                     num = 7;
 
-
-                } else if (value >= 921 && value <= 970) {
+                } else if (value <= 970) {
                     num = 8;
 
-
-                } else if (value >= 971 && value <= 1000) {
+                } else {
                     num = 9;
 
                 }
@@ -128,6 +110,64 @@ public class InventoryManagement {
                 break;
 
             case 3:
+                value = rd.nextInt(1000) + 1;
+                if ( value <= 9) {
+                    num = 0;
+
+                } else if (value <= 18) {
+                    num = 1;
+
+                } else if (value <= 58) {
+                    num = 15;
+
+                } else if (value <= 98) {
+                    num = 16;
+
+                } else if ( value <= 123) {
+                    num = 2;
+
+                } else if (value <= 150) {
+                    num = 3;
+
+                } else if (value <= 180) {
+                    num = 4;
+
+                } else if (value <= 196) {
+                    num = 5;
+
+                } else if (value <= 212) {
+                    num = 6;
+
+                } else if (value <= 244) {
+                    num = 7;
+
+                } else if (value <= 280) {
+                    num = 8;
+
+                } else if( value <= 310){
+                    num = 9;
+
+                }
+                else if( value <= 590){
+                    num = 10;
+
+                }
+                else if( value <= 870){
+                    num = 11;
+
+                }
+                else if( value <= 940){
+                    num = 12;
+
+                }
+                else if( value <= 980){
+                    num = 13;
+
+                }else {
+                    num = 14;
+
+                }
+
                 break;
         }
         //Adding fish to inventory
