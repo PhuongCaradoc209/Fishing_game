@@ -19,7 +19,7 @@ public class Fish_Bigheadcarp extends Entity {
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
         desFishing = "A large, deep-bodied fish native to\nEast Asia, known for their scaleless\nhead and filter-feeding behavior" ;
         desTrading = "A large, deep-bodied fish native to East Asia,\nknown for their scaleless head and\nfilter-feeding behavior" ;
-        desCollections = "A large, deep-bodied fish native to\nEast Asia, known for their scaleless\nhead and filter-feeding behavior";
+        desCollections = "A large, deep-bodied fish native to East\nAsia, known for their scaleless head\nand filter-feeding behavior";
     }
 
 

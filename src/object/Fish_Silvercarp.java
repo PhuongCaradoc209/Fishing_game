@@ -19,7 +19,7 @@ public class Fish_Silvercarp extends Entity {
         fishFrame = setup("Fishingframe/Rare",gp.tileSize*18,gp.tileSize*15);
 
         desFishing = "A deep, laterally compressed bodies\nwith large, toothless mouths and\nupturned lower jaws";
-        desCollections = "A deep, laterally compressed\nbodies with large, toothless mouths\nand upturned lower jaws";
+        desCollections = "A deep, laterally compressed bodies\nwith large, toothless mouths and\nupturned lower jaws";
         desTrading = "A deep, laterally compressed bodies with\nlarge, toothless mouths and upturned lower\njaws";
 
     }

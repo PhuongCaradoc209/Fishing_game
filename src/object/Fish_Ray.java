@@ -18,7 +18,7 @@ public class Fish_Ray extends Entity {
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
         desFishing = "A cartilaginous fish with flattened\nbodies, enlarged pectoral fins fused\nwith the head, and venomous spines" ;
-        desCollections = "A cartilaginous fish with\nflattened bodies, enlarged pectoral\nfins fused with the head, and\nvenomous spines" ;
+        desCollections = "A cartilaginous fish with flattened bodies,\nenlarged pectoral fins fused with the\nhead, and venomous spines" ;
         desTrading = "A cartilaginous fish with flattened bodies,\nenlarged pectoral fins fused with the head,\nand venomous spines" ;
 
 

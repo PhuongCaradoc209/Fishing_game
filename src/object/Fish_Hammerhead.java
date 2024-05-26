@@ -7,7 +7,7 @@ public class Fish_Hammerhead extends Entity {
     public Fish_Hammerhead(GamePanel gp){
         super(gp);
         fishRarity = "RARE";
-        name = "Big Head Carp";
+        name = "Hammer Head";
         price = 13;
         fishStar = 3;
         //Image for Collections
@@ -18,7 +18,7 @@ public class Fish_Hammerhead extends Entity {
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Rare",gp.tileSize*18,gp.tileSize*15);
         desFishing = "A unique species known for its\ndistinctive hammer-shaped head and\nfound in warm waters worldwide";
-        desCollections = "A unique species known for its\ndistinctive hammer-shaped head\nand found in warm waters\nworldwide";
+        desCollections = "A unique species known for its distinctive\nhammer-shaped head and found in warm\nwaters worldwide";
         desTrading = "A unique species known for its distinctive\nhammer-shaped head and found in warm\nwaters worldwide";
 
     }

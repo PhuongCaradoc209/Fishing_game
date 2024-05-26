@@ -79,19 +79,15 @@ public class InventoryManagement {
                     num = 4;
                 }
                 gp.gameState = gp.fishingState;
-                setDisplay(num);
+                setCollectionAndDisplay(num);
                 break;
             case 2:
-                      value = rd.nextInt(1000) + 1;
-                   // value = 175;
+                value = rd.nextInt(1000) + 1;
+                  //  value = 998;
                 if (value >= 1 && value <= 16) {
-                    gp.iManage.inventory[0].caught = true;
-                    gp.iManage.inventory[0].count++;
                     num = 0;
 
                 } else if (value >= 17 && value <= 32) {
-                    gp.iManage.inventory[1].caught = true;
-                    gp.iManage.inventory[1].count++;
                     num = 1;
 
                 } else if (value >= 33 && value <= 72) {
@@ -101,57 +97,39 @@ public class InventoryManagement {
                     num = 16;
 
                 } else if (value >= 113 && value <= 144) {
-                    gp.iManage.inventory[2].caught = true;
-                    gp.iManage.inventory[2].count++;
                     num = 2;
 
                 } else if (value >= 145 && value <= 180) {
-                    gp.iManage.inventory[3].caught = true;
-                    gp.iManage.inventory[3].count++;
                     num = 3;
 
                 } else if (value >= 181 && value <= 200) {
-                    gp.iManage.inventory[4].caught = true;
-                    gp.iManage.inventory[4].count++;
                     num = 4;
 
                 } else if (value >= 201 && value <= 520) {
-                    gp.iManage.inventory[5].caught = true;
-                    gp.iManage.inventory[5].count++;
                     num = 5;
 
                 } else if (value >= 521 && value <= 840) {
-                    gp.iManage.inventory[6].caught = true;
-                    gp.iManage.inventory[6].count++;
                     num = 6;
 
                 } else if (value >= 841 && value <= 920) {
-                    gp.iManage.inventory[7].caught = true;
-                    gp.iManage.inventory[7].count++;
                     num = 7;
 
 
                 } else if (value >= 921 && value <= 970) {
-                    gp.iManage.inventory[8].caught = true;
-                    gp.iManage.inventory[8].count++;
                     num = 8;
 
 
                 } else if (value >= 971 && value <= 1000) {
-                    gp.iManage.inventory[9].caught = true;
-                    gp.iManage.inventory[9].count++;
                     num = 9;
 
                 }
-                setDisplay(num);
+                setCollectionAndDisplay(num);
                 gp.gameState = gp.fishingState;
-
                 break;
 
             case 3:
                 break;
         }
-
         //Adding fish to inventory
         gp.player.canObtainItem(gp.iManage.inventory[num]);
     }
@@ -162,13 +140,36 @@ public class InventoryManagement {
 
     }
 
-    public void setDisplay(int i){
+    public void setCollectionAndDisplay(int i){
+        gp.iManage.inventory[i].count ++;
+        gp.iManage.inventory[i].caught = true;
         gp.ui.fishName = gp.iManage.inventory[i].name;
         gp.ui.fishPrice = gp.iManage.inventory[i].price+"";
         gp.ui.fishRarity = gp.iManage.inventory[i].fishRarity;
         gp.ui.fishImage = gp.iManage.inventory[i].down1;
         gp.ui.fishFrame = gp.iManage.inventory[i].fishFrame;
         gp.ui.desFishing = gp.iManage.inventory[i].desFishing;
+        statistic(i);
+    }
+
+    public void statistic(int i){
+            gp.ui.total ++;
+            if(i == 4 || i == 9 || i == 14){
+                gp.ui.legendaryFish ++;
+            }
+            else if(i == 3 || i == 8 || i == 13){
+                gp.ui.rareFish ++;
+            }
+            else if(i == 2 || i == 7 || i == 12){
+                gp.ui.uncommonFish ++;
+            }
+            else if(i == 15 || i == 16){
+                gp.ui.total --;
+            }
+            else{
+                gp.ui.commonFish ++;
+            }
+
     }
 
 
