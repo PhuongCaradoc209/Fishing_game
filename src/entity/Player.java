@@ -31,6 +31,7 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
+        setItems();
         interactEntity = new ArrayList<>();
 
         //AREA COLLISION
@@ -64,7 +65,12 @@ public class Player extends Entity {
         maxPhysical = 16;
         physical = maxPhysical;
         coin = 500;
-        inventory.add(new OBJ_FishingRod1(gp));
+        currentFishingRod = new OBJ_FishingRod1(gp);
+    }
+
+    public void setItems(){
+        inventory.add(currentFishingRod);
+
     }
 
     public void getPlayerImage_DinoVer(){

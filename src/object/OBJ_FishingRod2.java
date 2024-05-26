@@ -13,6 +13,7 @@ public class OBJ_FishingRod2 extends Entity{
             down1 = setup("Item/fishingrod2",gp.tileSize,gp.tileSize);
             down2 = setup("Item/fishingrod2",gp.tileSize,gp.tileSize);
             desTrading = "A long, thin, and flexible tool to catch level 2\nfishes";
+
         }
 
 
