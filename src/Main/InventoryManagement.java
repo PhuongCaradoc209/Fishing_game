@@ -9,6 +9,7 @@ public class InventoryManagement {
     public Entity[] inventory;
     GamePanel gp;
 
+
     public InventoryManagement(GamePanel gp){
         this.gp = gp;
         inventory = new Entity[24];
@@ -41,120 +42,136 @@ public class InventoryManagement {
         switch (rod) {
             case 1:
                 int value = rd.nextInt(100) + 1;
-                if (value >= 1 && value <= 35) {
-                    gp.inventoryMng.inventory[0].caught = true;
-                    gp.inventoryMng.inventory[0].count++;
+                if ( value <= 35) {
                     num = 0;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[0]);
-                } else if (value >= 36 && value <= 70) {
-                    gp.inventoryMng.inventory[1].caught = true;
-                    gp.inventoryMng.inventory[1].count++;
+
+                } else if ( value <= 70) {
                     num = 1;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[1]);
-                } else if (value >= 70 && value <= 75) {
-                    gp.inventoryMng.inventory[15].caught = true;
-                    gp.inventoryMng.inventory[15].count++;
+
+                } else if (value <= 75) {
                     num = 15;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[15]);
-                } else if (value >= 76 && value <= 80) {
-                    gp.inventoryMng.inventory[16].caught = true;
-                    gp.inventoryMng.inventory[16].count++;
+
+                } else if ( value <= 80) {
                     num = 16;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[16]);
-                } else if (value >= 81 && value <= 92) {
-                    gp.inventoryMng.inventory[2].caught = true;
-                    gp.inventoryMng.inventory[2].count++;
+
+                } else if (value <= 92) {
                     num = 2;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[2]);
-                } else if (value >= 93 && value <= 99) {
-                    gp.inventoryMng.inventory[3].caught = true;
-                    gp.inventoryMng.inventory[3].count++;
+
+                } else if (value <= 99) {
                     num = 3;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[3]);
-                } else if (value == 100) {
-                    gp.inventoryMng.inventory[4].caught = true;
-                    gp.inventoryMng.inventory[4].count++;
+
+                } else  {
                     num = 4;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[4]);
                 }
+                setCollectionAndDisplay(num);
                 gp.gameState = gp.fishingState;
-                setDisplay(num);
                 break;
             case 2:
-                   value = rd.nextInt(1000) + 1;
-                 //value = 74;
-                if (value >= 1 && value <= 16) {
-                    gp.inventoryMng.inventory[0].caught = true;
-                    gp.inventoryMng.inventory[0].count++;
+                value = rd.nextInt(1000) + 1;
+                if ( value <= 16) {
                     num = 0;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[0]);
-                } else if (value >= 17 && value <= 32) {
-                    gp.inventoryMng.inventory[1].caught = true;
-                    gp.inventoryMng.inventory[1].count++;
+
+                } else if (value <= 32) {
                     num = 1;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[1]);
-                } else if (value >= 33 && value <= 72) {
-                    gp.inventoryMng.inventory[15].caught = true;
-                    gp.inventoryMng.inventory[15].count++;
+
+                } else if (value <= 72) {
                     num = 15;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[15]);
-                } else if (value >= 73 && value <= 112) {
-                    gp.inventoryMng.inventory[16].caught = true;
-                    gp.inventoryMng.inventory[16].count++;
+
+                } else if (value <= 112) {
                     num = 16;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[16]);
-                } else if (value >= 113 && value <= 144) {
-                    gp.inventoryMng.inventory[2].caught = true;
-                    gp.inventoryMng.inventory[2].count++;
+
+                } else if ( value <= 144) {
                     num = 2;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[2]);
-                } else if (value >= 145 && value <= 180) {
-                    gp.inventoryMng.inventory[3].caught = true;
-                    gp.inventoryMng.inventory[3].count++;
+
+                } else if (value <= 180) {
                     num = 3;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[3]);
-                } else if (value >= 181 && value <= 200) {
-                    gp.inventoryMng.inventory[4].caught = true;
-                    gp.inventoryMng.inventory[4].count++;
+
+                } else if (value <= 200) {
                     num = 4;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[4]);
-                } else if (value >= 201 && value <= 520) {
-                    gp.inventoryMng.inventory[5].caught = true;
-                    gp.inventoryMng.inventory[5].count++;
+
+                } else if (value <= 520) {
                     num = 5;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[5]);
-                } else if (value >= 521 && value <= 840) {
-                    gp.inventoryMng.inventory[6].caught = true;
-                    gp.inventoryMng.inventory[6].count++;
+
+                } else if (value <= 840) {
                     num = 6;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[6]);
-                } else if (value >= 841 && value <= 920) {
-                    gp.inventoryMng.inventory[7].caught = true;
-                    gp.inventoryMng.inventory[7].count++;
+
+                } else if (value <= 920) {
                     num = 7;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[7]);
 
-                } else if (value >= 921 && value <= 970) {
-                    gp.inventoryMng.inventory[8].caught = true;
-                    gp.inventoryMng.inventory[8].count++;
+                } else if (value <= 970) {
                     num = 8;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[8]);
 
-                } else if (value >= 971 && value <= 1000) {
-                    gp.inventoryMng.inventory[9].caught = true;
-                    gp.inventoryMng.inventory[9].count++;
+                } else {
                     num = 9;
-                    gp.player.canObtainItem(gp.inventoryMng.inventory[9]);
-
                 }
-                setDisplay(num);
+                setCollectionAndDisplay(num);
                 gp.gameState = gp.fishingState;
-
                 break;
 
             case 3:
+                value = rd.nextInt(1000) + 1;
+                if ( value <= 9) {
+                    num = 0;
+
+                } else if (value <= 18) {
+                    num = 1;
+
+                } else if (value <= 58) {
+                    num = 15;
+
+                } else if (value <= 98) {
+                    num = 16;
+
+                } else if ( value <= 123) {
+                    num = 2;
+
+                } else if (value <= 150) {
+                    num = 3;
+
+                } else if (value <= 180) {
+                    num = 4;
+
+                } else if (value <= 196) {
+                    num = 5;
+
+                } else if (value <= 212) {
+                    num = 6;
+
+                } else if (value <= 244) {
+                    num = 7;
+
+                } else if (value <= 280) {
+                    num = 8;
+
+                } else if( value <= 310){
+                    num = 9;
+
+                }
+                else if( value <= 590){
+                    num = 10;
+
+                }
+                else if( value <= 870){
+                    num = 11;
+
+                }
+                else if( value <= 940){
+                    num = 12;
+
+                }
+                else if( value <= 980){
+                    num = 13;
+
+                }else {
+                    num = 14;
+
+                }
+                setCollectionAndDisplay(num);
+                gp.gameState = gp.fishingState;
                 break;
         }
+        //Adding fish to inventory
+        gp.player.canObtainItem(gp.iManage.inventory[num]);
     }
     public void setImage(Entity e){
         if(e.caught == true){
@@ -162,11 +179,34 @@ public class InventoryManagement {
         }
     }
 
-    public void setDisplay(int i){
-        gp.ui.fishName = gp.inventoryMng.inventory[i].name;
-        gp.ui.fishPrice = gp.inventoryMng.inventory[i].price+"";
-        gp.ui.fishRarity = gp.inventoryMng.inventory[i].fishRarity;
-        gp.ui.fishImage = gp.inventoryMng.inventory[i].collection_image;
-        gp.ui.fishFrame = gp.inventoryMng.inventory[i].fishFrame;
+    public void setCollectionAndDisplay(int i){
+        gp.iManage.inventory[i].count ++;
+        gp.iManage.inventory[i].caught = true;
+        gp.ui.fishName = gp.iManage.inventory[i].name;
+        gp.ui.fishPrice = gp.iManage.inventory[i].price+"";
+        gp.ui.fishRarity = gp.iManage.inventory[i].fishRarity;
+        gp.ui.fishImage = gp.iManage.inventory[i].down1;
+        gp.ui.fishFrame = gp.iManage.inventory[i].fishFrame;
+        gp.ui.desFishing = gp.iManage.inventory[i].desFishing;
+        statistic(i);
+    }
+
+    public void statistic(int i){
+            gp.ui.total ++;
+            if(i == 4 || i == 9 || i == 14){
+                gp.ui.legendaryFish ++;
+            }
+            else if(i == 3 || i == 8 || i == 13){
+                gp.ui.rareFish ++;
+            }
+            else if(i == 2 || i == 7 || i == 12){
+                gp.ui.uncommonFish ++;
+            }
+            else if(i == 15 || i == 16){
+                gp.ui.total --;
+            }
+            else{
+                gp.ui.commonFish ++;
+            }
     }
 }

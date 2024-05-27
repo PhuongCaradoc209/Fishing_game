@@ -338,7 +338,7 @@ public class KeyHandler implements KeyListener {
 
     public void inventoryState(int key) {
         if (key == KeyEvent.VK_D) {
-            if (gp.ui.inventorySlotCol != 5) {
+            if (gp.ui.inventorySlotCol != 3) {
                 gp.ui.inventorySlotCol++;
                 gp.playSoundEffect("select_sound", 6);
             }
@@ -356,7 +356,7 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_S) {
-            if (gp.ui.inventorySlotRow != 2) {
+            if (gp.ui.inventorySlotRow != 3) {
                 gp.ui.inventorySlotRow++;
                 gp.playSoundEffect("select_sound", 6);
             }

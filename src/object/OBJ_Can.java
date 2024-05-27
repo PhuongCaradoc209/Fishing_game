@@ -15,5 +15,9 @@ public class OBJ_Can extends Entity {
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishRarity = "TRASH";
         fishFrame= setup("Fishingframe/Trash",gp.tileSize*18,gp.tileSize*15);
+        desFishing ="A container made of thin metal,\ntypically steel or aluminum, used\nfor storing various goods";
+        desTrading ="A container made of thin metal, typically steel\nor aluminum, used for storing various goods";
+
+
     }
 }

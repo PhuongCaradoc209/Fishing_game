@@ -2,6 +2,7 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import object.OBJ_FishingRod1;
 import tile.TileManager;
 
 import java.awt.*;
@@ -21,7 +22,7 @@ public class Player extends Entity {
     public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
-    public int rod = 1;
+    public int rod = 3;
     public ArrayList<Entity> interactEntity;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
@@ -34,6 +35,7 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
+        setItems();
         interactEntity = new ArrayList<>();
 
         //AREA COLLISION
@@ -66,7 +68,13 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 0;
+        coin = 500;
+        currentFishingRod = new OBJ_FishingRod1(gp);
+    }
+
+    public void setItems(){
+        inventory.add(currentFishingRod);
+
     }
 
     public void getPlayerImage_DinoVer(){
@@ -280,7 +288,7 @@ public class Player extends Entity {
 
         //Check if stackable
         if(item.stackable == true){
-            int index = seachItemInInventory(item.name);
+            int index = searchItemInInventory(item.name);
 
             if(index != 999){
                 inventory.get(index).amount++;
@@ -302,7 +310,7 @@ public class Player extends Entity {
         return canContain;
     }
 
-    public int seachItemInInventory(String itemName){
+    public int searchItemInInventory(String itemName){
         int itemIndex = 999;
 
         for(int i = 0; i < inventory.size(); i++){
@@ -313,25 +321,6 @@ public class Player extends Entity {
         }
         return itemIndex;
     }
-
-//    public void checkAtSpecifiedPst(int i) {
-//        solidArea.x = (int) (worldX + solidArea.x);
-//        solidArea.y = (int) (worldY + solidArea.y);
-//        //get the object's solid area position within the game world
-//        gp.obj[i].solidArea.x = (int) (gp.obj[i].worldX + gp.obj[i].solidArea.x);
-//        gp.obj[i].solidArea.y = (int) (gp.obj[i].worldY + gp.obj[i].solidArea.y);
-//        if (gp.obj[i].name.equals("Door close") && solidArea.intersects(gp.obj[i].solidArea)) {
-//            gp.aSetter.setObject(false);
-//
-//        }
-//        if (gp.obj[i].name.equals("Door open") && !solidArea.intersects(gp.obj[i].solidArea)) {
-//            gp.aSetter.setObject(true);
-//        }
-//        solidArea.x = solidAreaDefaultX;
-//        solidArea.y = solidAreaDefaultY;
-//        gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
-//        gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
-//    }
 
     public void draw(Graphics2D g) {
 //        g.setColor(Color.white);

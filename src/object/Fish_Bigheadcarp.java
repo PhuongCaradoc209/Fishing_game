@@ -9,7 +9,7 @@ public class Fish_Bigheadcarp extends Entity {
     public Fish_Bigheadcarp(GamePanel gp) {
         super(gp);
         fishRarity = "COMMON";
-        name = "Big Head Carp";
+        name = "Bighead Carp";
         price = 1;
         fishStar = 1;
 
@@ -18,8 +18,11 @@ public class Fish_Bigheadcarp extends Entity {
         speed = 2;
 
         count = 0;
-        fishFinalImage = setup("Item/Qm", gp.tileSize, gp.tileSize);
-        fishFrame = setup("Fishingframe/Common", gp.tileSize * 18, gp.tileSize * 15);
+        fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
+        fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A large, deep-bodied fish native to\nEast Asia, known for their scaleless\nhead and filter-feeding behavior" ;
+        desTrading = "A large, deep-bodied fish native to East Asia,\nknown for their scaleless head and\nfilter-feeding behavior" ;
+        desCollections = "A large, deep-bodied fish native to East\nAsia, known for their scaleless head\nand filter-feeding behavior";
     }
 
     public void getImage(GamePanel gp) {

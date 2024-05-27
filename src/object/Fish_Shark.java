@@ -19,7 +19,11 @@ public class Fish_Shark extends Entity {
 
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
-        fishFrame= setup("Fish/Shark_3",gp.tileSize*18,gp.tileSize*15);
+        fishFrame= setup("Fishingframe/Legendary",gp.tileSize*18,gp.tileSize*15);
+        desFishing ="A cold-blooded fish have fins, breath\nwith gills and inhabit various\nenvironments worldwide, from\nfreshwater lakes to polar seas.";
+        desCollections ="A cold-blooded fish have fins, breath with\ngills and inhabit various environments\nworldwide, from freshwater lakes to\npolar seas.";
+        desTrading ="A cold-blooded fish have fins, breath with gills\nand inhabit various environments worldwide,\nfrom freshwater lakes to polar seas.";
+
     }
 
 

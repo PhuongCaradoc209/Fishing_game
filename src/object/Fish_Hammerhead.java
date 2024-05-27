@@ -8,7 +8,7 @@ import java.util.Random;
 public class Fish_Hammerhead extends Entity {
     public Fish_Hammerhead(GamePanel gp){
         super(gp);
-        fishRarity = "Rare";
+        fishRarity = "RARE";
         name = "Hammer Head";
         price = 13;
         fishStar = 3;
@@ -20,6 +20,9 @@ public class Fish_Hammerhead extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Rare",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A unique species known for its\ndistinctive hammer-shaped head and\nfound in warm waters worldwide";
+        desCollections = "A unique species known for its distinctive\nhammer-shaped head and found in warm\nwaters worldwide";
+        desTrading = "A unique species known for its distinctive\nhammer-shaped head and found in warm\nwaters worldwide";
     }
 
 

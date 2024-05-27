@@ -21,6 +21,10 @@ public class Fish_Clownfish extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Legendary",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A small, colorful fish found in\ntropical oceans, known for its\nsymbiotic relationship with sea\nanemones";
+        desCollections = "A small, colorful fish found in tropical\noceans,known for its symbiotic\nrelationship with sea anemones";
+        desTrading = "A small, colorful fish found in tropical oceans,\nknown for its symbiotic relationship with\nsea anemones";
+
     }
     public void getImage(GamePanel gp) {
         //Image for Collections

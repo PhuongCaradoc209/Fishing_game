@@ -20,6 +20,9 @@ public class Fish_Silvercarp extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm", gp.tileSize, gp.tileSize);
         fishFrame = setup("Fishingframe/Rare", gp.tileSize * 18, gp.tileSize * 15);
+        desFishing = "A deep, laterally compressed bodies\nwith large, toothless mouths and\nupturned lower jaws";
+        desCollections = "A deep, laterally compressed bodies\nwith large, toothless mouths and\nupturned lower jaws";
+        desTrading = "A deep, laterally compressed bodies with\nlarge, toothless mouths and upturned lower\njaws";
     }
 
 

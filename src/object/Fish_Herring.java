@@ -8,7 +8,7 @@ import java.util.Random;
 public class Fish_Herring extends Entity {
     public Fish_Herring(GamePanel gp){
         super(gp);
-        fishRarity = "Common";
+        fishRarity = "COMMON";
         name = "Herring";
         price = 1;
         fishStar = 1;
@@ -20,6 +20,10 @@ public class Fish_Herring extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Common",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A small-headed, streamlined fish,\nfound primarily in temperate waters\nof the North Pacific and North\nAtlantic Oceans";
+        desCollections = "A small-headed, streamlined fish, found\nprimarily in temperate waters of the\nNorth Pacific and North Atlantic Oceans";
+        desTrading = "A small-headed, streamlined fish, found\nprimarily in temperate waters of the North\nPacific and North Atlantic Oceans";
+
     }
 
 

@@ -20,6 +20,10 @@ public class Fish_Pomfret extends Entity {
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Rare",gp.tileSize*18,gp.tileSize*15);
+        desFishing = "A diamond-shaped body fish, are\nfound globally in the Atlantic, Indian,\nand Pacific Oceans";
+        desCollections = "A diamond-shaped body fish, are found\nglobally in the Atlantic, Indian, and\nPacific Oceans";
+        desTrading = "A diamond-shaped body fish, are found\nglobally in the Atlantic, Indian, and Pacific\nOceans";
+
     }
 
 
