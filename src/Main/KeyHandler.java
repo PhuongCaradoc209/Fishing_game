@@ -238,6 +238,7 @@ public class KeyHandler implements KeyListener {
 
     public void notificationState(int key) {
         if (key == KeyEvent.VK_SPACE) {
+            gp.player.fishingRod.reset();
             gp.gameState = gp.playState;
         }
     }
@@ -341,6 +342,7 @@ public class KeyHandler implements KeyListener {
 
     public void afterFishingState(int key) {
         if (key == KeyEvent.VK_ENTER) {
+            gp.player.fishingRod.reset();
             gp.gameState = gp.playState;
         }
     }
