@@ -9,7 +9,7 @@ public class Fish_Bigheadcarp extends Entity {
     public Fish_Bigheadcarp(GamePanel gp) {
         super(gp);
         fishRarity = "COMMON";
-        name = "Bighead Carp";
+        name = "Big Head Carp";
         price = 1;
         fishStar = 1;
 
