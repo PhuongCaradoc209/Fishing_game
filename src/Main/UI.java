@@ -1281,8 +1281,10 @@ public class UI {
                 } else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
-                        if (npc.inventory.get(itemIndex).name == "Fishing Rod 1" || npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3") {
+                        if (npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3") {
                             gp.player.currentFishingRod = npc.inventory.get(itemIndex);
+                            //remove item in npc inventory
+                            npc.inventory.remove(itemIndex);
                         }
                     } else {
                         subState = 0;
