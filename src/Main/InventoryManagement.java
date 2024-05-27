@@ -103,7 +103,6 @@ public class InventoryManagement {
 
                 } else {
                     num = 9;
-
                 }
                 setCollectionAndDisplay(num);
                 gp.gameState = gp.fishingState;
@@ -176,9 +175,8 @@ public class InventoryManagement {
     }
     public void setImage(Entity e){
         if(e.caught == true){
-            e.fishFinalImage = e.down1;
+            e.fishFinalImage = e.collection_image;
         }
-
     }
 
     public void setCollectionAndDisplay(int i){
@@ -210,8 +208,5 @@ public class InventoryManagement {
             else{
                 gp.ui.commonFish ++;
             }
-
     }
-
-
 }

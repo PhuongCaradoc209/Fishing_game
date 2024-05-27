@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.IllegalFormatCodePointException;
 import java.util.Objects;
 import java.util.Random;
 
@@ -36,6 +37,7 @@ public class UI {
     public int commonFish = 0,uncommonFish = 0,rareFish = 0, legendaryFish = 0, total = 0;
     public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
     public Entity npc;
+    private int counter = 0;
 
     //FISHING GAMEPLAY
     Random random = new Random();
@@ -155,6 +157,15 @@ public class UI {
             drawPlayerInformation();
             drawTradeScreen();
         }
+
+        //TRANSITION STATE
+        if (gp.gameState == gp.transitionState){
+            drawTransition();
+        }
+
+//        if (gp.gameState == gp.fishTankState){
+//            drawFishTank();
+//        }
     }
 
     public void drawTittleScreen() {
@@ -330,6 +341,30 @@ public class UI {
         //MAIN COLOR TEXT
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
+    }
+
+    public void drawTransition(){
+        counter++;
+        g2.setColor(new Color(0,0,0,counter*5));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+        if (counter == 50){
+            counter = 0;
+            if (gp.keyHandler.temp_map == 0){
+                gp.gameState = gp.playState;
+            }
+            else {
+                gp.gameState = gp.fishTankState;
+            }
+
+            gp.currentMap = gp.keyHandler.temp_map;
+
+            gp.player.worldX = gp.keyHandler.temp_woldX;
+            gp.player.worldY = gp.keyHandler.temp_woldY;
+
+            if (gp.keyHandler.temp_map == 1){
+                gp.aSetter.setAnimal(gp.currentMap);
+            }
+        }
     }
 
     public void drawPlayerInformation() {
@@ -790,8 +825,8 @@ public class UI {
             for (int j = 0; j < 4; j++) {
                 if (count <= 14 ) {
                     //draw imageOfFish
-                    gp.iManage.setImage(gp.iManage.inventory[count]);
-                    g2.drawImage(gp.iManage.inventory[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
+                    gp.inventoryMng.setImage(gp.inventoryMng.inventory[count]);
+                    g2.drawImage(gp.inventoryMng.inventory[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
 
                     //draw border
                     g2.setColor(new Color(0xA26D48));
@@ -801,7 +836,7 @@ public class UI {
                     //display amount
                     g2.setFont(font2);
                     g2.setColor(Color.BLACK);
-                    g2.drawString(String.valueOf(gp.iManage.inventory[count].count), amountX, amountY);
+                    g2.drawString(String.valueOf(gp.inventoryMng.inventory[count].count), amountX, amountY);
 
                     imageAndBorderX += gp.tileSize * 3/2;
                     amountX += gp.tileSize * 3 / 2;
@@ -1059,7 +1094,7 @@ public class UI {
         //Draw Player's Items
         for (int i = 0; i < entity.inventory.size(); i++) {
 
-            g2.drawImage(entity.inventory.get(i).down2, slotX, slotY, null);
+            g2.drawImage(entity.inventory.get(i).tradeState_image, slotX, slotY, null);
 
             //Equip Cursor // Chua lam dc // Moi sua thu roi ne
             if(entity.inventory.get(i) == entity.currentFishingRod){

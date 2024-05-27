@@ -9,70 +9,109 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
     GamePanel gp;
     public Tile[] tile;
-    public int[][] mapTileNum;
+    public int[][][] mapTileNum;
+    ArrayList<String> fileNames = new ArrayList<>();
+    ArrayList<String> collisionStatus = new ArrayList<>();
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[150];
-        mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
+
+
+        //READ TILE DATA FILE
+        InputStream is = getClass().getResourceAsStream("/tiles/tile.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+        //GETTING THE TILE NAMES AND COLLISION INFO FROM THE FILE
+        String line;
+        try {
+            while ((line = br.readLine()) != null) {
+                fileNames.add(line);
+                collisionStatus.add(br.readLine());
+            }
+            br.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        tile = new Tile[fileNames.size()];
+        mapTileNum = new int[gp.maxMap][gp.maxWorldRow][gp.maxWorldCol];
 
         getTileImage();
-        loadMap();
+        loadMap("/maps/map2.txt", 0);
+        loadMap("/maps/map.txt", 1);
     }
 
     public void getTileImage() {
-        for (int i = 0; i <= 130; i++) {
-            setUp(i);
-            if (i >= 41 && i <= 62 || i >= 65 && i <= 70) {
-                tile[i].collision = true;
-            } else {
-                switch (i) {
-                    case 71:
-                    case 74:
-                    case 75:
-                    case 78:
-                    case 79:
-                    case 82:
-                    case 83:
-                    case 86:
-                    case 87:
-                    case 91:
-                    case 95:
-                    case 99:
-                    case 100:
-                    case 101:
-                    case 102:
-                    case 111:
-                    case 112:
-                    case 113:
-                    case 114:
-                        tile[i].collision = true;
-                        break;
-                }
+        String fileName;
+        boolean collision;
+        for (int i = 0; i< fileNames.size(); i++){
+            //Get a file name
+            fileName = fileNames.get(i);
+
+            //Get a collision status
+            if (collisionStatus.get(i).equals("true")){
+                collision = true;
+            }else{
+                collision = false;
             }
+
+            setup(i, fileName, collision);
         }
+//        for (int i = 0; i <= 370; i++) {
+//            setUp(i);
+//            if (i >= 41 && i <= 62 || i >= 65 && i <= 70 || i >= 131) {
+//                tile[i].collision = true;
+//            } else {
+//                switch (i) {
+//                    case 71:
+//                    case 74:
+//                    case 75:
+//                    case 78:
+//                    case 79:
+//                    case 82:
+//                    case 83:
+//                    case 86:
+//                    case 87:
+//                    case 91:
+//                    case 95:
+//                    case 99:
+//                    case 100:
+//                    case 101:
+//                    case 102:
+//                    case 111:
+//                    case 112:
+//                    case 113:
+//                    case 114:
+//                        tile[i].collision = true;
+//                        break;
+//                }
+//            }
+//        }
     }
 
-    private void setUp(int index) {
+    private void setup(int index, String fileName, boolean collision) {
         UtilityTool uTool = new UtilityTool();
         try {
             tile[index] = new Tile();
             String img = String.format("tiles/" + "%03d" + ".png", index);
             tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(img)));
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+            tile[index].collision = collision;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void loadMap() {
+    private void loadMap(String filePath, int map) {
         try {
-            InputStream is = getClass().getResourceAsStream("/maps/map2.txt");
+            InputStream is = getClass().getResourceAsStream(filePath);
             assert is != null;
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -81,7 +120,7 @@ public class TileManager {
             while ((line = br.readLine()) != null && row < gp.maxWorldRow) {
                 String[] numbers = line.split(" ");
                 for (int col = 0; col < gp.maxWorldCol && col < numbers.length; col++) {
-                    mapTileNum[row][col] = Integer.parseInt(numbers[col]);
+                    mapTileNum[map][row][col] = Integer.parseInt(numbers[col]);
                 }
                 row++;
             }
@@ -95,7 +134,7 @@ public class TileManager {
         int worldRow = 0, worldCol = 0;
         int tileNum;
         while (worldRow < gp.maxWorldRow && worldCol < gp.maxWorldCol) {
-            tileNum = mapTileNum[worldRow][worldCol];
+            tileNum = mapTileNum[gp.currentMap][worldRow][worldCol];
             //Coordinate for the world game
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
