@@ -417,7 +417,7 @@ public class Player extends Entity {
         ////////////////////////
         if(fishingRod.getFrame() != null){
             image = fishingRod.getFrame();
-            g.drawImage(image, (int) (x - size), (int) y, null);
+            g.drawImage(image, (int) (x - ( this.direction=="standLeft" ? (size) : 0)), (int) y, null);
         }
         else 
         g.drawImage(image, (int) x, (int) y, size, size, null);
