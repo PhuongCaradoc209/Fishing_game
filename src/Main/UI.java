@@ -356,13 +356,13 @@ public class UI {
             } else {
                 gp.gameState = gp.fishTankState;
             }
-
             gp.currentMap = gp.keyHandler.temp_map;
 
             gp.player.worldX = gp.keyHandler.temp_woldX;
             gp.player.worldY = gp.keyHandler.temp_woldY;
 
             if (gp.keyHandler.temp_map == 1) {
+                gp.playSoundEffect("start_FishTank", 9);
                 gp.aSetter.setAnimal(gp.currentMap);
             }
         }
