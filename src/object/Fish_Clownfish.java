@@ -18,7 +18,6 @@ public class Fish_Clownfish extends Entity {
         speed = 2;
 
         count = 0;
-        count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
         fishFrame = setup("Fishingframe/Legendary",gp.tileSize*18,gp.tileSize*15);
         desFishing = "A small, colorful fish found in\ntropical oceans, known for its\nsymbiotic relationship with sea\nanemones";

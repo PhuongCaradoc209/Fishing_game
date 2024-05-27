@@ -864,19 +864,19 @@ public class UI {
         int choose = 4*inventorySlotRow + inventorySlotCol;
         //display fish chosen image
         if(choose <= 14) {
-            g2.drawImage(gp.iManage.inventory[choose].fishFinalImage, gp.tileSize * 81 / 8, gp.tileSize * 9 / 4, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
-            String name = gp.iManage.inventory[choose].name;
-            String rarity = gp.iManage.inventory[choose].fishRarity;
-            int count = gp.iManage.inventory[choose].count;
+            g2.drawImage(gp.inventoryMng.inventory[choose].fishFinalImage, gp.tileSize * 81 / 8, gp.tileSize * 9 / 4, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
+            String name = gp.inventoryMng.inventory[choose].name;
+            String rarity = gp.inventoryMng.inventory[choose].fishRarity;
+            int count = gp.inventoryMng.inventory[choose].count;
             setFontAndColor(font4, new Color(0x7B322E));
             int y = gp.tileSize * 11 / 2;
-            if (gp.iManage.inventory[choose].caught == false) {
+            if (gp.inventoryMng.inventory[choose].caught == false) {
                 g2.drawString("?", center("?", gp.tileSize * 81 / 8, gp.tileSize * 5 / 2), y);
                 int x = gp.tileSize * 29 / 2;
                 y = gp.tileSize * 3;
                 g2.drawString("Rarity: ?", x, y);
                 y += 40;
-                g2.drawString("Count: " + gp.iManage.inventory[choose].count, x, y);
+                g2.drawString("Count: " + gp.inventoryMng.inventory[choose].count, x, y);
             } else {
                 setFontAndColor(font5, new Color(0x7B342E));
                 g2.drawString(name, center(name, gp.tileSize * 81 / 8, gp.tileSize * 5 / 2), y);
@@ -904,7 +904,7 @@ public class UI {
                 g2.drawString("Count: " + count, x, y);
                 y += 40;
 
-                desCollections = gp.iManage.inventory[choose].desCollections;
+                desCollections = gp.inventoryMng.inventory[choose].desCollections;
                 setFontAndColor(font4a, new Color(0x7B342E));
                 for (String line : desCollections.split("\n")) {
                     g2.drawString(line, gp.tileSize * 547 / 40, y);
