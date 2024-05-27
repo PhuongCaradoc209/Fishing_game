@@ -110,7 +110,6 @@ public class InventoryManagement {
 
             case 3:
                 value = rd.nextInt(1000) + 1;
-//                value = 999;
                 if ( value <= 9) {
                     num = 0;
 

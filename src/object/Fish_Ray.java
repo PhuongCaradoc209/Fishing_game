@@ -15,7 +15,7 @@ public class Fish_Ray extends Entity {
 
         getImage(gp);
         size = gp.tileSize * 3;
-        speed = 2;
+        speed = 0.5;
         
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);
