@@ -5,35 +5,35 @@ import entity.Entity;
 import java.util.Random;
 import object.*;
 
-public class InventoryManagement {
-    public Entity[] inventory;
+public class CollectionManagement {
+    public Entity[] collection;
     GamePanel gp;
 
 
-    public InventoryManagement(GamePanel gp){
+    public CollectionManagement(GamePanel gp){
         this.gp = gp;
-        inventory = new Entity[24];
+        collection = new Entity[24];
         getInformation();
     }
 
     public void getInformation(){
-        inventory[0] = new Fish_Bigheadcarp(gp);
-        inventory[1] = new Fish_Herring(gp);
-        inventory[2] = new Fish_Grasscarp(gp);
-        inventory[3] = new Fish_Silvercarp(gp);
-        inventory[4] = new Fish_Clownfish(gp);
-        inventory[5] = new Fish_Remora(gp);
-        inventory[6] = new Fish_Coelacanths(gp);
-        inventory[7] = new Fish_Redarowna(gp);
-        inventory[8] = new Fish_Pomfret(gp);
-        inventory[9] = new Fish_Koicarp(gp);
-        inventory[10] = new Fish_Sunfish(gp);
-        inventory[11] = new Fish_Ray(gp);
-        inventory[12] = new Fish_Swordfish(gp);
-        inventory[13] = new Fish_Hammerhead(gp);
-        inventory[14] = new Fish_Shark(gp);
-        inventory[15] = new OBJ_Can(gp);
-        inventory[16] = new OBJ_Bottle(gp);
+        collection[0] = new Fish_Bigheadcarp(gp);
+        collection[1] = new Fish_Herring(gp);
+        collection[2] = new Fish_Grasscarp(gp);
+        collection[3] = new Fish_Silvercarp(gp);
+        collection[4] = new Fish_Clownfish(gp);
+        collection[5] = new Fish_Remora(gp);
+        collection[6] = new Fish_Coelacanths(gp);
+        collection[7] = new Fish_Redarowna(gp);
+        collection[8] = new Fish_Pomfret(gp);
+        collection[9] = new Fish_Koicarp(gp);
+        collection[10] = new Fish_Sunfish(gp);
+        collection[11] = new Fish_Ray(gp);
+        collection[12] = new Fish_Swordfish(gp);
+        collection[13] = new Fish_Hammerhead(gp);
+        collection[14] = new Fish_Shark(gp);
+        collection[15] = new OBJ_Can(gp);
+        collection[16] = new OBJ_Bottle(gp);
     }
 
     public void Fishing(int rod) {
@@ -172,7 +172,7 @@ public class InventoryManagement {
                 break;
         }
         //Adding fish to inventory
-        gp.player.canObtainItem(gp.inventoryMng.inventory[num]);
+        gp.player.canObtainItem(gp.collectionM.collection[num]);
     }
     public void setImage(Entity e){
         if(e.caught == true){
@@ -181,14 +181,14 @@ public class InventoryManagement {
     }
 
     public void setCollectionAndDisplay(int i){
-        gp.inventoryMng.inventory[i].count ++;
-        gp.inventoryMng.inventory[i].caught = true;
-        gp.ui.fishName = gp.inventoryMng.inventory[i].name;
-        gp.ui.fishPrice = gp.inventoryMng.inventory[i].price+"";
-        gp.ui.fishRarity = gp.inventoryMng.inventory[i].fishRarity;
-        gp.ui.fishImage = gp.inventoryMng.inventory[i].collection_image;
-        gp.ui.fishFrame = gp.inventoryMng.inventory[i].fishFrame;
-        gp.ui.desFishing = gp.inventoryMng.inventory[i].desFishing;
+        gp.collectionM.collection[i].count ++;
+        gp.collectionM.collection[i].caught = true;
+        gp.ui.fishName = gp.collectionM.collection[i].name;
+        gp.ui.fishPrice = gp.collectionM.collection[i].price+"";
+        gp.ui.fishRarity = gp.collectionM.collection[i].fishRarity;
+        gp.ui.fishImage = gp.collectionM.collection[i].collection_image;
+        gp.ui.fishFrame = gp.collectionM.collection[i].fishFrame;
+        gp.ui.desFishing = gp.collectionM.collection[i].desFishing;
         statistic(i);
     }
 
