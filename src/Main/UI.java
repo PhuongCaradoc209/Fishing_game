@@ -757,7 +757,7 @@ public class UI {
         int width = gp.screenWidth - (gp.tileSize * 4);
         int height = gp.tileSize * 3;
 
-        drawSubWindow(x, y, width, height);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
 
         //TEXT
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
@@ -1081,7 +1081,7 @@ public class UI {
         }
 
         //Frame
-        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+        drawSubWindow1(frameX, frameY, frameWidth, frameHeight,new Color(0xF4CE98), new Color(0x5e3622),10,30);
 
         //Slot
         final int slotXstart = frameX + 20;
@@ -1095,7 +1095,7 @@ public class UI {
 
             g2.drawImage(entity.inventory.get(i).tradeState_image, slotX, slotY, null);
 
-            //Equip Cursor // Chua lam dc // Moi sua thu roi ne
+            //Equip Cursor
             if(entity.inventory.get(i) == entity.currentFishingRod){
                 g2.setColor(Color.RED);
                 drawSubWindow1(slotX,slotY,gp.tileSize,gp.tileSize,new Color(0,0,0,0),new Color(0xD46352),3,10);
@@ -1117,7 +1117,7 @@ public class UI {
                 g2.setColor(new Color(60, 60, 60));
                 g2.drawString(s, amountX + 10, amountY);
                 //Number
-                g2.setColor(Color.WHITE);
+                g2.setColor(new Color(0xF5e3622));
                 g2.drawString(s, amountX + 7, amountY - 3);
             }
 
@@ -1137,7 +1137,7 @@ public class UI {
             int cursorHeight = gp.tileSize;
 
             //Draw Cursor
-            g2.setColor(Color.WHITE);
+            g2.setColor(new Color(0xF5e3622));
             g2.setStroke(new BasicStroke(3));
             g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
@@ -1153,7 +1153,7 @@ public class UI {
             int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
 
             if(itemIndex < entity.inventory.size()){
-                drawSubWindow(dFrameX,dFrameY,dFrameWidth,dFrameHeight);
+                drawSubWindow1(dFrameX, dFrameY, dFrameWidth, dFrameHeight,new Color(0xF4CE98), new Color(0x5e3622),10,30);
             }
         }
     }
@@ -1182,7 +1182,8 @@ public class UI {
         int y = gp.tileSize * 4;
         int width = gp.tileSize * 3;
         int height = (int) (gp.tileSize * 3.5);
-        drawSubWindow(x, y, width, height);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
+
 
         //DrawText
         x += gp.tileSize;
@@ -1228,14 +1229,14 @@ public class UI {
         int y = gp.tileSize * 9;
         int width = gp.tileSize * 6;
         int height = gp.tileSize * 2;
-        drawSubWindow(x, y, width, height);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
         g2.drawString("[ESC] Back", x + 24, y + 60);
         //Player Coin Window
         x = gp.tileSize * 12;
         y = gp.tileSize * 9;
         width = gp.tileSize * 6;
         height = gp.tileSize * 2;
-        drawSubWindow(x, y, width, height);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
         g2.drawString("Your coin: " + gp.player.coin, x + 24, y + 60);
         //Price Window
         int itemIndex = getItemIndexOnSlot(npcSlotCol, npcSlotRow);
@@ -1246,7 +1247,7 @@ public class UI {
             y = (int) (gp.tileSize * 5.5);
             width = (int) (gp.tileSize * 2.5);
             height = gp.tileSize;
-            drawSubWindow(x, y, width, height);
+            drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
             g2.drawImage(coin, x + 10, y + 10, 40, 40, null);
 
             int price = npc.inventory.get(itemIndex).price;
@@ -1256,10 +1257,10 @@ public class UI {
             //Description
             int textX = gp.tileSize*2 + 20;
             int textY = gp.tileSize*6 + gp.tileSize * 3/4;
-            setFontAndColor(font4,Color.WHITE);
+            setFontAndColor(font4, new Color(0xF5e3622));
             g2.drawString(npc.inventory.get(itemIndex).name,textX,textY);
             textY += 30;
-            setFontAndColor(font3a,Color.WHITE);
+            setFontAndColor(font3a, new Color(0xF5e3622));
             for(String line: npc.inventory.get(itemIndex).desTrading.split("\n")){
 
                 g2.drawString(line, textX, textY);
@@ -1300,14 +1301,14 @@ public class UI {
         int y = gp.tileSize * 9;
         int width = gp.tileSize * 6;
         int height = gp.tileSize * 2;
-        drawSubWindow(x, y, width, height);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
         g2.drawString("[ESC] Back", x + 24, y + 60);
         //Player Coin Window
         x = gp.tileSize * 12;
         y = gp.tileSize * 9;
         width = gp.tileSize * 6;
         height = gp.tileSize * 2;
-        drawSubWindow(x, y, width, height);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
         g2.drawString("Your coin: " + gp.player.coin, x + 24, y + 60);
         //Price Window
         int itemIndex = getItemIndexOnSlot(playerSlotCol, playerSlotRow);
@@ -1318,7 +1319,7 @@ public class UI {
             y = (int) (gp.tileSize * 5.5);
             width = (int) (gp.tileSize * 2.5);
             height = gp.tileSize;
-            drawSubWindow(x, y, width, height);
+            drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
             g2.drawImage(coin, x + 10, y + 10, 40, 40, null);
 
             int price = gp.player.inventory.get(itemIndex).price;
@@ -1328,10 +1329,10 @@ public class UI {
             //Description
             int textX = gp.tileSize*12 + 20;
             int textY = gp.tileSize*6 + gp.tileSize * 3/4;
-            setFontAndColor(font4,Color.WHITE);
+            setFontAndColor(font4,new Color(0xF5e3622));
             g2.drawString(gp.player.inventory.get(itemIndex).name,gp.tileSize*12 + 20,textY);
             textY += 30;
-            setFontAndColor(font3a,Color.WHITE);
+            setFontAndColor(font3a,new Color(0xF5e3622));
             for(String line: gp.player.inventory.get(itemIndex).desTrading.split("\n")){
 
                 g2.drawString(line, textX, textY);
