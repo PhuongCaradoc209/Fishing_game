@@ -32,8 +32,8 @@ public class UI {
     public int npcSlotRow = 0;
     BufferedImage image, fishFrame;
     final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin;
-    public int inventorySlotCol = 0;
-    public int inventorySlotRow = 0;
+    public int collectionSlotCol = 0;
+    public int collectionSlotRow = 0;
     public int commonFish = 0,uncommonFish = 0,rareFish = 0, legendaryFish = 0, total = 0;
     public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
     public Entity npc;
@@ -142,7 +142,7 @@ public class UI {
             drawPlayerInformation();
         }
         //INVENTORY STATE
-        else if (gp.gameState == gp.inventoryState) {
+        else if (gp.gameState == gp.collectionState) {
             drawPlayerInformation();
             drawInventoryScreen();
         }
@@ -825,8 +825,8 @@ public class UI {
             for (int j = 0; j < 4; j++) {
                 if (count <= 14 ) {
                     //draw imageOfFish
-                    gp.inventoryMng.setImage(gp.inventoryMng.inventory[count]);
-                    g2.drawImage(gp.inventoryMng.inventory[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
+                    gp.collectionManagement.setImage(gp.collectionManagement.collection[count]);
+                    g2.drawImage(gp.collectionManagement.collection[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
 
                     //draw border
                     g2.setColor(new Color(0xA26D48));
@@ -836,7 +836,7 @@ public class UI {
                     //display amount
                     g2.setFont(font2);
                     g2.setColor(Color.BLACK);
-                    g2.drawString(String.valueOf(gp.inventoryMng.inventory[count].count), amountX, amountY);
+                    g2.drawString(String.valueOf(gp.collectionManagement.collection[count].count), amountX, amountY);
 
                     imageAndBorderX += gp.tileSize * 3/2;
                     amountX += gp.tileSize * 3 / 2;
@@ -853,30 +853,30 @@ public class UI {
         final int xStart = gp.tileSize * 2;
         final int yStart = gp.tileSize * 4;
 
-        int cursorX = xStart + (gp.tileSize * 3 / 2 * inventorySlotCol);
-        int cursorY = yStart + (gp.tileSize * 3 / 2 * inventorySlotRow);
+        int cursorX = xStart + (gp.tileSize * 3 / 2 * collectionSlotCol);
+        int cursorY = yStart + (gp.tileSize * 3 / 2 * collectionSlotRow);
 
         g2.setColor(new Color(0xD46352));
         g2.drawRoundRect(cursorX, cursorY, gp.tileSize + 1, gp.tileSize + 1, 15, 15);
     }
 
     public void displayItemIsChosen(){
-        int choose = 4*inventorySlotRow + inventorySlotCol;
+        int choose = 4*collectionSlotRow + collectionSlotCol;
         //display fish chosen image
         if(choose <= 14) {
-            g2.drawImage(gp.inventoryMng.inventory[choose].fishFinalImage, gp.tileSize * 81 / 8, gp.tileSize * 9 / 4, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
-            String name = gp.inventoryMng.inventory[choose].name;
-            String rarity = gp.inventoryMng.inventory[choose].fishRarity;
-            int count = gp.inventoryMng.inventory[choose].count;
+            g2.drawImage(gp.collectionManagement.collection[choose].fishFinalImage, gp.tileSize * 81 / 8, gp.tileSize * 9 / 4, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
+            String name = gp.collectionManagement.collection[choose].name;
+            String rarity = gp.collectionManagement.collection[choose].fishRarity;
+            int count = gp.collectionManagement.collection[choose].count;
             setFontAndColor(font4, new Color(0x7B322E));
             int y = gp.tileSize * 11 / 2;
-            if (gp.inventoryMng.inventory[choose].caught == false) {
+            if (gp.collectionManagement.collection[choose].caught == false) {
                 g2.drawString("?", center("?", gp.tileSize * 81 / 8, gp.tileSize * 5 / 2), y);
                 int x = gp.tileSize * 29 / 2;
                 y = gp.tileSize * 3;
                 g2.drawString("Rarity: ?", x, y);
                 y += 40;
-                g2.drawString("Count: " + gp.inventoryMng.inventory[choose].count, x, y);
+                g2.drawString("Count: " + gp.collectionManagement.collection[choose].count, x, y);
             } else {
                 setFontAndColor(font5, new Color(0x7B342E));
                 g2.drawString(name, center(name, gp.tileSize * 81 / 8, gp.tileSize * 5 / 2), y);
@@ -904,7 +904,7 @@ public class UI {
                 g2.drawString("Count: " + count, x, y);
                 y += 40;
 
-                desCollections = gp.inventoryMng.inventory[choose].desCollections;
+                desCollections = gp.collectionManagement.collection[choose].desCollections;
                 setFontAndColor(font4a, new Color(0x7B342E));
                 for (String line : desCollections.split("\n")) {
                     g2.drawString(line, gp.tileSize * 547 / 40, y);

@@ -65,8 +65,8 @@ public class KeyHandler implements KeyListener {
             }
 
             //INVENTORY STATE
-            else if (gp.gameState == gp.inventoryState) {
-                inventoryState(key);
+            else if (gp.gameState == gp.collectionState) {
+                collectionState(key);
             }
             //TRADE STATE
             else if (gp.gameState == gp.tradeState) {
@@ -189,8 +189,8 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_H) {
             gp.player.physical = gp.player.maxPhysical;
         }
-        if (key == KeyEvent.VK_B) {
-            gp.gameState = gp.inventoryState;
+        if (key == KeyEvent.VK_C) {
+            gp.gameState = gp.collectionState;
         }
         if (key == KeyEvent.VK_L) {
             gp.gameState = gp.transitionState;
@@ -313,14 +313,9 @@ public class KeyHandler implements KeyListener {
 
     public void fishingState(int key) {
         if (key == KeyEvent.VK_SPACE) {
-//            gp.ui.completion += 10;
-//            if (gp.ui.completion >= 100) {
-//                gp.ui.completion = 0;
-//                gp.inventoryMng.Fishing(gp.player.rod);
-//                gp.gameState = gp.afterFishingState;
-//            }w
+
             if (gp.ui.target_Y >= gp.ui.range_Y && gp.ui.target_Y <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
-                gp.inventoryMng.Fishing(gp.player.rod);
+                gp.collectionManagement.Fishing(gp.player.rod);
                 gp.gameState = gp.afterFishingState;
             } else {
                 gp.gameState = gp.notificationState;
@@ -336,32 +331,32 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    public void inventoryState(int key) {
+    public void collectionState(int key) {
         if (key == KeyEvent.VK_D) {
-            if (gp.ui.inventorySlotCol != 3) {
-                gp.ui.inventorySlotCol++;
+            if (gp.ui.collectionSlotCol != 3) {
+                gp.ui.collectionSlotCol++;
                 gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_A) {
-            if (gp.ui.inventorySlotCol != 0) {
-                gp.ui.inventorySlotCol--;
+            if (gp.ui.collectionSlotCol != 0) {
+                gp.ui.collectionSlotCol--;
                 gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_W) {
-            if (gp.ui.inventorySlotRow != 0) {
-                gp.ui.inventorySlotRow--;
+            if (gp.ui.collectionSlotRow != 0) {
+                gp.ui.collectionSlotRow--;
                 gp.playSoundEffect("select_sound", 6);
             }
         }
         if (key == KeyEvent.VK_S) {
-            if (gp.ui.inventorySlotRow != 3) {
-                gp.ui.inventorySlotRow++;
+            if (gp.ui.collectionSlotRow != 3) {
+                gp.ui.collectionSlotRow++;
                 gp.playSoundEffect("select_sound", 6);
             }
 
-        } else if (key == KeyEvent.VK_B) {
+        } else if (key == KeyEvent.VK_C) {
             gp.gameState = gp.playState;
         }
     }
