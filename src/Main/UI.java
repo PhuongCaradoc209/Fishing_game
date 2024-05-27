@@ -781,7 +781,7 @@ public class UI {
         g2.setColor(new Color(0x4CC844));
         if (range_Y <= bar_Y + 10) speedOfRange = -speedOfRange;
         if (range_Y >= (bar_Y + 7 * gp.tileSize - heightOfRange - 10)) speedOfRange = -speedOfRange;
-        g2.fillRoundRect(bar_X + 20, range_Y, gp.tileSize/2 + 5, gp.tileSize, 20, 20);
+        g2.fillRoundRect(bar_X + 20, range_Y, gp.tileSize/2 + 5, gp.tileSize, 30, 30);
         range_Y += speedOfRange / 2;
 
 //        drawSubWindow1(bar_X, bar_Y, gp.tileSize, 7 * gp.tileSize, new Color(255, 255, 255, 0), new Color(0x543310), 10, 3);
