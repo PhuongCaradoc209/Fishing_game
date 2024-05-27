@@ -209,7 +209,7 @@ public class AssetSetter {
                             gp.animal[mapNum].get(i).worldY = gp.tileSize * random.nextInt(7) + 2;
                             i++;
                             break;
-                        case "Coelacanths":
+                        case "Coelacanth":
                             gp.animal[mapNum].add(new Fish_Coelacanths(gp));
                             gp.animal[mapNum].get(i).worldX = gp.tileSize * random.nextInt(11) + 3;
                             gp.animal[mapNum].get(i).worldY = gp.tileSize * random.nextInt(7) + 2;
@@ -251,7 +251,7 @@ public class AssetSetter {
                             gp.animal[mapNum].get(i).worldY = gp.tileSize * random.nextInt(7) + 2;
                             i++;
                             break;
-                        case "Redarowna":
+                        case "Red Arowana":
                             gp.animal[mapNum].add(new Fish_Redarowna(gp));
                             gp.animal[mapNum].get(i).worldX = gp.tileSize * random.nextInt(11) + 3;
                             gp.animal[mapNum].get(i).worldY = gp.tileSize * random.nextInt(7) + 2;
