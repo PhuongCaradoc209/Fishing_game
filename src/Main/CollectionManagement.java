@@ -172,7 +172,7 @@ public class CollectionManagement {
                 break;
         }
         //Adding fish to inventory
-        gp.player.canObtainItem(gp.collectionManagement.collection[num]);
+        gp.player.canObtainItem(gp.collectionM.collection[num]);
     }
     public void setImage(Entity e){
         if(e.caught == true){
@@ -181,14 +181,14 @@ public class CollectionManagement {
     }
 
     public void setCollectionAndDisplay(int i){
-        gp.collectionManagement.collection[i].count ++;
-        gp.collectionManagement.collection[i].caught = true;
-        gp.ui.fishName = gp.collectionManagement.collection[i].name;
-        gp.ui.fishPrice = gp.collectionManagement.collection[i].price+"";
-        gp.ui.fishRarity = gp.collectionManagement.collection[i].fishRarity;
-        gp.ui.fishImage = gp.collectionManagement.collection[i].collection_image;
-        gp.ui.fishFrame = gp.collectionManagement.collection[i].fishFrame;
-        gp.ui.desFishing = gp.collectionManagement.collection[i].desFishing;
+        gp.collectionM.collection[i].count ++;
+        gp.collectionM.collection[i].caught = true;
+        gp.ui.fishName = gp.collectionM.collection[i].name;
+        gp.ui.fishPrice = gp.collectionM.collection[i].price+"";
+        gp.ui.fishRarity = gp.collectionM.collection[i].fishRarity;
+        gp.ui.fishImage = gp.collectionM.collection[i].collection_image;
+        gp.ui.fishFrame = gp.collectionM.collection[i].fishFrame;
+        gp.ui.desFishing = gp.collectionM.collection[i].desFishing;
         statistic(i);
     }
 

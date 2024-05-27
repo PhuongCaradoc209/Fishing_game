@@ -14,7 +14,7 @@ public class Fish_Herring extends Entity {
         fishStar = 1;
 
         getImage(gp);
-        size = gp.tileSize * 3;
+        size = gp.tileSize;
         speed = 2;
         
         count = 0;

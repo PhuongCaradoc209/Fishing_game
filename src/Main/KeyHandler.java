@@ -313,9 +313,14 @@ public class KeyHandler implements KeyListener {
 
     public void fishingState(int key) {
         if (key == KeyEvent.VK_SPACE) {
-
+//            gp.ui.completion += 10;
+//            if (gp.ui.completion >= 100) {
+//                gp.ui.completion = 0;
+//                gp.inventoryMng.Fishing(gp.player.rod);
+//                gp.gameState = gp.afterFishingState;
+//            }w
             if (gp.ui.target_Y >= gp.ui.range_Y && gp.ui.target_Y <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
-                gp.collectionManagement.Fishing(gp.player.rod);
+                gp.collectionM.Fishing(gp.player.rod);
                 gp.gameState = gp.afterFishingState;
             } else {
                 gp.gameState = gp.notificationState;

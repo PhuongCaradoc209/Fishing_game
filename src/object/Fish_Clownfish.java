@@ -14,8 +14,8 @@ public class Fish_Clownfish extends Entity {
         fishStar = 1;
       
         getImage(gp);
-        size = gp.tileSize * 3;
-        speed = 2;
+        size = gp.tileSize;
+        speed = 1;
 
         count = 0;
         fishFinalImage = setup("Item/Qm",gp.tileSize,gp.tileSize);

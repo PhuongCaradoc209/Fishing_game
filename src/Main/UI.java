@@ -144,7 +144,7 @@ public class UI {
         //INVENTORY STATE
         else if (gp.gameState == gp.collectionState) {
             drawPlayerInformation();
-            drawInventoryScreen();
+            drawCollectionScreen();
         }
         //FISHING STATE
         else if (gp.gameState == gp.fishingState){
@@ -792,7 +792,7 @@ public class UI {
 
     }
 
-    public void drawInventoryScreen() {
+    public void drawCollectionScreen() {
         drawInventoryBackground();
         setFontAndColor(font, new Color(0x74342E));
         g2.drawString("COLLECTIONS", center("COLLECTIONS",gp.tileSize ,gp.tileSize * 15 / 2), gp.tileSize * 13/4);
@@ -825,8 +825,8 @@ public class UI {
             for (int j = 0; j < 4; j++) {
                 if (count <= 14 ) {
                     //draw imageOfFish
-                    gp.collectionManagement.setImage(gp.collectionManagement.collection[count]);
-                    g2.drawImage(gp.collectionManagement.collection[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
+                    gp.collectionM.setImage(gp.collectionM.collection[count]);
+                    g2.drawImage(gp.collectionM.collection[count].fishFinalImage, imageAndBorderX, imageAndBorderY, gp.tileSize, gp.tileSize, null);
 
                     //draw border
                     g2.setColor(new Color(0xA26D48));
@@ -836,7 +836,7 @@ public class UI {
                     //display amount
                     g2.setFont(font2);
                     g2.setColor(Color.BLACK);
-                    g2.drawString(String.valueOf(gp.collectionManagement.collection[count].count), amountX, amountY);
+                    g2.drawString(String.valueOf(gp.collectionM.collection[count].count), amountX, amountY);
 
                     imageAndBorderX += gp.tileSize * 3/2;
                     amountX += gp.tileSize * 3 / 2;
@@ -864,19 +864,19 @@ public class UI {
         int choose = 4*collectionSlotRow + collectionSlotCol;
         //display fish chosen image
         if(choose <= 14) {
-            g2.drawImage(gp.collectionManagement.collection[choose].fishFinalImage, gp.tileSize * 81 / 8, gp.tileSize * 9 / 4, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
-            String name = gp.collectionManagement.collection[choose].name;
-            String rarity = gp.collectionManagement.collection[choose].fishRarity;
-            int count = gp.collectionManagement.collection[choose].count;
+            g2.drawImage(gp.collectionM.collection[choose].fishFinalImage, gp.tileSize * 81 / 8, gp.tileSize * 9 / 4, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
+            String name = gp.collectionM.collection[choose].name;
+            String rarity = gp.collectionM.collection[choose].fishRarity;
+            int count = gp.collectionM.collection[choose].count;
             setFontAndColor(font4, new Color(0x7B322E));
             int y = gp.tileSize * 11 / 2;
-            if (gp.collectionManagement.collection[choose].caught == false) {
+            if (gp.collectionM.collection[choose].caught == false) {
                 g2.drawString("?", center("?", gp.tileSize * 81 / 8, gp.tileSize * 5 / 2), y);
                 int x = gp.tileSize * 29 / 2;
                 y = gp.tileSize * 3;
                 g2.drawString("Rarity: ?", x, y);
                 y += 40;
-                g2.drawString("Count: " + gp.collectionManagement.collection[choose].count, x, y);
+                g2.drawString("Count: " + gp.collectionM.collection[choose].count, x, y);
             } else {
                 setFontAndColor(font5, new Color(0x7B342E));
                 g2.drawString(name, center(name, gp.tileSize * 81 / 8, gp.tileSize * 5 / 2), y);
@@ -904,7 +904,7 @@ public class UI {
                 g2.drawString("Count: " + count, x, y);
                 y += 40;
 
-                desCollections = gp.collectionManagement.collection[choose].desCollections;
+                desCollections = gp.collectionM.collection[choose].desCollections;
                 setFontAndColor(font4a, new Color(0x7B342E));
                 for (String line : desCollections.split("\n")) {
                     g2.drawString(line, gp.tileSize * 547 / 40, y);
