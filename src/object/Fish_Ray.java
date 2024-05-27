@@ -14,7 +14,7 @@ public class Fish_Ray extends Entity {
         fishStar = 3;
 
         getImage(gp);
-        size = gp.tileSize * 3;
+        size = gp.tileSize * 3 + gp.tileSize/2;
         speed = 0.5;
         
         count = 0;
