@@ -2,6 +2,8 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import object.OBJ_FishingRod1;
+import object.OBJ_FishingRod2;
 import tile.TileManager;
 import object.Fishing_Rod;
 
@@ -16,9 +18,13 @@ public class Player extends Entity {
 
     public double screenX;
     public double screenY;
+    public final double worldX_fishTank = 0;
+    public final double worldY_fishTank = 0;
+    public double temp_worldX;
+    public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
-    public int rod = 2;
+    public int rod = 3;
     public ArrayList<Entity> interactEntity;
 
     public Fishing_Rod fishingRod;
@@ -35,6 +41,7 @@ public class Player extends Entity {
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
         setDefaultValues();
+        setItems();
         interactEntity = new ArrayList<>();
 
         //AREA COLLISION
@@ -67,7 +74,13 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 0;
+        coin = 500;
+        currentFishingRod = new OBJ_FishingRod1(gp);
+    }
+
+    public void setItems(){
+        inventory.add(currentFishingRod);
+
     }
 
     public void getPlayerImage_DinoVer(){
@@ -134,12 +147,12 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
-        if (!interactEntity.contains(gp.npc[0]))
+        if (!interactEntity.contains(gp.npc[0].get(0)))
         {
-            interactEntity.add(gp.npc[0]);
+            interactEntity.add(gp.npc[0].get(0));
         }
-        if (!interactEntity.contains(gp.animal[4])) {
-            interactEntity.add(gp.animal[4]);
+        if (!interactEntity.contains(gp.animal[0].get(4))) {
+            interactEntity.add(gp.animal[0].get(4));
         }
         interactEntity_Index = checkNear(interactEntity);
 
@@ -213,7 +226,7 @@ public class Player extends Entity {
         if (i != 999) {
             if (gp.keyHandler.enterPressed) {
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
+                gp.npc[gp.currentMap].get(i).speak();
             }
         }
         gp.keyHandler.enterPressed = false;
@@ -223,7 +236,7 @@ public class Player extends Entity {
         //getPLayerCol and Row at the center point of player
         int playerCol = (int) ((worldX + gp.tileSize / 2) / gp.tileSize);
         int playerRow = (int) ((worldY + gp.tileSize / 2) / gp.tileSize);
-        int tileIndex = tileM.mapTileNum[playerRow][playerCol];
+        int tileIndex = tileM.mapTileNum[gp.currentMap][playerRow][playerCol];
 
         if (tileIndex > 0 && tileIndex < 27 && tileIndex != 16 && tileIndex != 17 && tileIndex != 18) {
             gp.playMusic("grass", 1);
@@ -285,7 +298,7 @@ public class Player extends Entity {
 
         //Check if stackable
         if(item.stackable == true){
-            int index = seachItemInInventory(item.name);
+            int index = searchItemInInventory(item.name);
 
             if(index != 999){
                 inventory.get(index).amount++;
@@ -307,7 +320,7 @@ public class Player extends Entity {
         return canContain;
     }
 
-    public int seachItemInInventory(String itemName){
+    public int searchItemInInventory(String itemName){
         int itemIndex = 999;
 
         for(int i = 0; i < inventory.size(); i++){
@@ -318,25 +331,6 @@ public class Player extends Entity {
         }
         return itemIndex;
     }
-
-//    public void checkAtSpecifiedPst(int i) {
-//        solidArea.x = (int) (worldX + solidArea.x);
-//        solidArea.y = (int) (worldY + solidArea.y);
-//        //get the object's solid area position within the game world
-//        gp.obj[i].solidArea.x = (int) (gp.obj[i].worldX + gp.obj[i].solidArea.x);
-//        gp.obj[i].solidArea.y = (int) (gp.obj[i].worldY + gp.obj[i].solidArea.y);
-//        if (gp.obj[i].name.equals("Door close") && solidArea.intersects(gp.obj[i].solidArea)) {
-//            gp.aSetter.setObject(false);
-//
-//        }
-//        if (gp.obj[i].name.equals("Door open") && !solidArea.intersects(gp.obj[i].solidArea)) {
-//            gp.aSetter.setObject(true);
-//        }
-//        solidArea.x = solidAreaDefaultX;
-//        solidArea.y = solidAreaDefaultY;
-//        gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
-//        gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
-//    }
 
     public void draw(Graphics2D g) {
 //        g.setColor(Color.white);

@@ -25,6 +25,8 @@ public class GamePanel extends JPanel implements Runnable {
     public int screenHeight = maxScreenRow * tileSize;//696px
 
     //WORLD SETTINGS
+    public final int maxMap = 2;
+    public int currentMap = 0;
     public final int maxWorldCol = 25;
     public final int maxWorldRow = 25;
     public final int worldWidth = maxWorldCol * tileSize;//2400
@@ -39,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     public TileManager tileMgr = new TileManager(this);
-    public InventoryManagement iManage = new InventoryManagement(this);
+    public CollectionManagement collectionM = new CollectionManagement(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
@@ -54,19 +56,20 @@ public class GamePanel extends JPanel implements Runnable {
     //PLAYER
     public Player player = new Player(this, keyHandler, tileMgr);
     //OBJECT
-    public Entity[] obj = new Entity[50];
+    public ArrayList<Entity>[] obj = new ArrayList[maxMap];
     //ENTITY
-    public Entity[] npc = new Entity[10];
+    public ArrayList<Entity>[] npc = new ArrayList[maxMap];
     //ANIMAL
-    public Entity[] animal = new Entity[10];
+    public ArrayList<Entity>[] animal = new ArrayList[maxMap];
     //INTERACT TILE
-    public InteractiveTile[] iTile = new InteractiveTile[10];
+    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][10];
     ArrayList<Entity> entityList = new ArrayList<>();
 
 
     //GAME STATE
     public int gameState;
     public final int tittleState = 0;
+    //PLAYER STATE
     public final int playState = 1;
     public final int pauseState = 2;
     public final int autoDisplayState = 3;
@@ -74,10 +77,12 @@ public class GamePanel extends JPanel implements Runnable {
     public final int notificationState = 5;
     public final int optionState = 6;
     public final int afterFishingState = 7;
-    public final int inventoryState = 8;
+    public final int collectionState = 8;
     public final int fishingState = 9;
     public final int selectPlayerState = 10;
     public final int tradeState = 11;
+    public final int transitionState = 12;
+    public final int fishTankState = 13;
 
     //FPS (Frame Per Second)
     int FPS = 60;
@@ -93,15 +98,21 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setUpGame() {
+        for (int i = 0; i < maxMap; i++) {
+            obj[i] = new ArrayList<>();
+            npc[i] = new ArrayList<>();
+            animal[i] = new ArrayList<>();
+        }
         aSetter.setObject();
         aSetter.setNPC();
-        aSetter.setAnimal();
+        aSetter.setAnimal(currentMap);
         aSetter.setInteractiveTile();
         enviMgr.setUp();
         gameState = tittleState;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D) tempScreen.getGraphics();
+
 
 //        setFullScreen();
     }
@@ -188,30 +199,37 @@ public class GamePanel extends JPanel implements Runnable {
                 playMusic("Background", 2);
             }
             player.update();
-            // System.out.println("X " + player.worldX/48 + "Y = " + player.worldY/48);
-            for (int i = 0; i < npc.length; i++) {
-                if (npc[i] != null) {
-                    npc[i].update(false);
+            for (int i = 0; i < npc[0].size(); i++) {
+                if (npc[0].get(i) != null) {
+                    npc[0].get(i).update(false);
                 }
             }
-            for (int i = 0; i < animal.length; i++) {
-                if (animal[i] != null) {
+            for (int i = 0; i < animal[0].size(); i++) {
+                if (animal[0].get(i) != null) {
                     if (i < 4) {
-                        animal[i].update(true);
-                    } else animal[i].update(false);
+                        animal[0].get(i).update(true);
+                    } else animal[0].get(i).update(false);
                 }
             }
-            for (int i = 0; i < iTile.length; i++) {
-                if (iTile[i] != null) {
-                    iTile[i].update();
+            for (int i = 0; i < iTile[0].length; i++) {
+                if (iTile[0][i] != null) {
+                    iTile[0][i].update();
                 }
             }
 
             //ENVIRONMENT
             enviMgr.update();
         }
-        if (gameState == pauseState) {
-            //nothing
+        if (gameState == fishTankState) {
+            stopMusic("Bird");
+            playMusic("Background", 2);
+
+            //FISH
+            for (int i = 0; i < animal[1].size(); i++) {
+                if (animal[1].get(i) != null) {
+                    animal[1].get(i).update(true);
+                }
+            }
         }
     }
 
@@ -221,14 +239,13 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.checkDrawTime == true) {
             drawStart = System.nanoTime();
         }
-
         //TITTLE SCREEN
-        if (gameState != tittleState) {
+        if (gameState != tittleState && currentMap == 0) {
             //TILE
             tileMgr.draw(g2);
 
             //INTERACTIVE TILE
-            for (InteractiveTile interactiveTile : iTile) {
+            for (InteractiveTile interactiveTile : iTile[currentMap]) {
                 if (interactiveTile != null) {
                     interactiveTile.draw(g2);
                 }
@@ -237,19 +254,19 @@ public class GamePanel extends JPanel implements Runnable {
             //ADD ENTITIES TO THE LIST
             entityList.add(player);
 
-            for (Entity entity : npc) {
+            for (Entity entity : npc[currentMap]) {
                 if (entity != null) {
                     entityList.add(entity);
                 }
             }
 
-            for (Entity value : obj)     {
+            for (Entity value : obj[currentMap]) {
                 if (value != null) {
                     entityList.add(value);
                 }
             }
 
-            for (Entity value : animal) {
+            for (Entity value : animal[currentMap]) {
                 if (value != null) {
                     entityList.add(value);
                 }
@@ -269,15 +286,21 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             //REMOVE ENTITIES TO THE LIST (otherwise, the list become larger after every loop)
-            for (int i = 0; i < entityList.size(); i++) {
-                entityList.remove(i);
-            }
+            entityList.clear();
 
             //ENVIRONMENT
             enviMgr.draw(g2);
+        } else if (gameState == fishTankState) {
+            //TILE
+            tileMgr.draw(g2);
 
-            //UI
+            //DRAW FISH
+           for (int i =0; i < animal[1].size(); i++){
+               animal[1].get(i).draw(g2);
+           }
         }
+
+        //UI
         ui.draw(g2);
 
         if (keyHandler.checkDrawTime == true) {
@@ -287,6 +310,7 @@ public class GamePanel extends JPanel implements Runnable {
             g2.drawString("Draw Time: " + passed, 10, 400);
             System.out.println("Draw Time: " + passed);
         }
+
     }
 
     public void drawToScreen() {

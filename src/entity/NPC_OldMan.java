@@ -46,6 +46,8 @@ public class NPC_OldMan extends Entity {
 
     public void setItem(){
         inventory.add(new OBJ_Grass(gp));
+        inventory.add(new OBJ_FishingRod2(gp));
+        inventory.add(new OBJ_FishingRod3(gp));
     }
 
     public void speak() {

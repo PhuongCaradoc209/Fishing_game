@@ -15,7 +15,10 @@ public class Entity {
     protected int size;   
     public double worldX, worldY;
     public double speed;
-    public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2, standUp, standDown, standRight, standLeft;
+    public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
+            diagonal_up_left1, diagonal_up_left2, diagonal_up_right1, diagonal_up_right2,
+            diagonal_down_left1, diagonal_down_left2, diagonal_down_right1, diagonal_down_right2,
+            standUp, standDown, standRight, standLeft;
     public String direction = "down";
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -32,6 +35,7 @@ public class Entity {
     public int maxPhysical;
     public int physical;
     public int coin;
+    public Entity currentFishingRod;
 
     //OBJ
     public BufferedImage image, image2, image3, image4, image5;
@@ -39,23 +43,22 @@ public class Entity {
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
     public int price;
-    public String description = "";
     public boolean collision = false;
     public int amount = 1;
     public boolean stackable = false;
 
     //Fish
+    public BufferedImage collection_image, tradeState_image;
     public int fishStar;
     public String fishRarity;
- //   public String fishName;
     public BufferedImage fishFrame;
     public int count;
     public boolean caught = false;
     //    public BufferedImage fishImage;
     public BufferedImage fishFinalImage;
-
-//    public BufferedImage starFill = setup("/Item/Starfill");
-//    public BufferedImage starZero = setup("/Item/Starzero");
+    public String desCollections;
+    public String desFishing;
+    public String desTrading = "";
 
 
     public Entity(GamePanel gp) {
@@ -94,14 +97,18 @@ public class Entity {
         setAction();
         collisionOn = isDuck;
 
+        if (gp.currentMap == 0){
+            gp.cChecker.checkObj(this, false);
+            gp.cChecker.checkEntity(this, gp.npc);
+            gp.cChecker.checkEntity(this, gp.animal);
+            gp.cChecker.checkPlayer(this);
+        }
         gp.cChecker.checkTile(this, isDuck);
-        gp.cChecker.checkObj(this, false);
-        gp.cChecker.checkEntity(this, gp.npc);
-        gp.cChecker.checkEntity(this, gp.animal);
-        gp.cChecker.checkPlayer(this);
         gp.cChecker.checkAtEdge(this);
+
         //IF COLLISION IS FALSE, PLAYER CAN MOVE
         if (!collisionOn) {
+//            System.out.println(direction);
             switch (direction) {
                 case "up":
                     worldY -= speed;
@@ -114,6 +121,22 @@ public class Entity {
                     break;
                 case "left":
                     worldX -= speed;
+                    break;
+                case "diagonalUpLeft":
+                    worldX -= speed;
+                    worldY -= speed;
+                    break;
+                case "diagonalUpRight":
+                    worldX += speed;
+                    worldY -= speed;
+                    break;
+                case "diagonalDownLeft":
+                    worldX -= speed;
+                    worldY += speed;
+                    break;
+                case "diagonalDownRight":
+                    worldX += speed;
+                    worldY += speed;
                     break;
             }
         }
@@ -181,6 +204,38 @@ public class Entity {
                 }
                 if (spriteNum == 2) {
                     image = right2;
+                }
+                break;
+            case "diagonalUpLeft":
+                if (spriteNum == 1) {
+                    image = diagonal_up_left1;
+                }
+                if (spriteNum == 2) {
+                    image = diagonal_up_left2;
+                }
+                break;
+            case "diagonalUpRight":
+                if (spriteNum == 1) {
+                    image = diagonal_up_right1;
+                }
+                if (spriteNum == 2) {
+                    image = diagonal_up_right2;
+                }
+                break;
+            case "diagonalDownLeft":
+                if (spriteNum == 1) {
+                    image = diagonal_down_left1;
+                }
+                if (spriteNum == 2) {
+                    image = diagonal_down_left2;
+                }
+                break;
+            case "diagonalDownRight":
+                if (spriteNum == 1) {
+                    image = diagonal_down_right1;
+                }
+                if (spriteNum == 2) {
+                    image = diagonal_down_right2;
                 }
                 break;
         }
