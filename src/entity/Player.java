@@ -3,6 +3,7 @@ package entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import object.OBJ_FishingRod1;
+import object.OBJ_FishingRod2;
 import tile.TileManager;
 
 import java.awt.*;
