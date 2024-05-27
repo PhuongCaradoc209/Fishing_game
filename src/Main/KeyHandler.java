@@ -4,8 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
-    //DEBUG
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, fPressed;
+    public boolean AnnouceCompleteAnimation;
+    // DEBUG
     boolean checkDrawTime = false;
     GamePanel gp;
     public boolean isMove = false;
@@ -26,6 +27,7 @@ public class KeyHandler implements KeyListener {
         int key = e.getKeyCode();
 
         //TITTLE STATE
+
         if (gp.gameState == gp.tittleState) {
             tittleState(key);
         }
@@ -74,6 +76,7 @@ public class KeyHandler implements KeyListener {
             }
         } else if (gp.currentMap == 1) {
             gameFishTankState(key);
+
         }
     }
 
@@ -99,6 +102,9 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_SPACE) {
             spacePressed = false;
         }
+        if (key == KeyEvent.VK_F) {
+            fPressed = false;
+        }
     }
 
     public void tittleState(int key) {
@@ -122,7 +128,7 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.selectPlayerState;
             }
             if (gp.ui.commandNum == 1) {
-                //add later
+                // add later
             }
             if (gp.ui.commandNum == 2) {
                 System.exit(0);
@@ -177,15 +183,17 @@ public class KeyHandler implements KeyListener {
             enterPressed = true;
         }
         if (key == KeyEvent.VK_SPACE) {
-            if (gp.cChecker.checkNearWater(gp.player)) {
-                spacePressed = true;
-            }
+            spacePressed = true;
+        }
+        if (key == KeyEvent.VK_F) {
+            fPressed = true;
         }
         if (key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.optionState;
             gp.music.stop("Bird");
             gp.music.stop("Background");
         }
+
         if (key == KeyEvent.VK_H) {
             gp.player.physical = gp.player.maxPhysical;
         }
@@ -321,6 +329,7 @@ public class KeyHandler implements KeyListener {
 //            }w
             if ((gp.ui.target_Y + gp.tileSize / 2) >= gp.ui.range_Y && (gp.ui.target_Y + gp.tileSize / 2) <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
                 gp.collectionM.Fishing(gp.player.rod);
+
                 gp.gameState = gp.afterFishingState;
             } else {
                 gp.gameState = gp.notificationState;
@@ -455,13 +464,13 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-//    @Override
-//    public void mouseWheelMoved(MouseWheelEvent e) {
-//        int scroll = e.getWheelRotation();
-//        if (scroll < 0) {
-//            gp.zoomInOut(2);
-//        } else {
-//            gp.zoomInOut(-2);
-//        }
-//    }
+    // @Override
+    // public void mouseWheelMoved(MouseWheelEvent e) {
+    // int scroll = e.getWheelRotation();
+    // if (scroll < 0) {
+    // gp.zoomInOut(2);
+    // } else {
+    // gp.zoomInOut(-2);
+    // }
+    // }
 }

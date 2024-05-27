@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class Entity {
     GamePanel gp;
-    protected int size;
+    protected int size;   
     public double worldX, worldY;
     public double speed;
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
