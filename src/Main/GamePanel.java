@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     public TileManager tileMgr = new TileManager(this);
-    public InventoryManagement inventoryMng = new InventoryManagement(this);
+    public CollectionManagement collectionM = new CollectionManagement(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int notificationState = 5;
     public final int optionState = 6;
     public final int afterFishingState = 7;
-    public final int inventoryState = 8;
+    public final int collectionState = 8;
     public final int fishingState = 9;
     public final int selectPlayerState = 10;
     public final int tradeState = 11;
