@@ -103,7 +103,7 @@ public class Player extends Entity {
         standUp = setup("player/standUp", 32, 32);
         standDown = setup("player/standDown", 32, 32);
         standRight = setup("player/right", 32, 32);
-        standLeft = setup("player/left", 32, 32);
+        standLeft = setup("player/left", 32, 32); 
         up1 = setup("player/up_1", 32, 32);
         up2 = setup("player/up_2", 32, 32);
         down1 = setup("player/down_1", 32, 32);
@@ -260,7 +260,10 @@ public class Player extends Entity {
                     }
                     break;
                 case "Cow":
-//                        gp.playSoundEffect("Cow", 8);
+                    if (gp.keyHandler.enterPressed) {
+                        // gp.gameState = gp.dialogueState;
+                        target.speak();
+                    }
                     break;
             }
         }

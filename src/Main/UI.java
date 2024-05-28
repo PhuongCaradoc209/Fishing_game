@@ -160,6 +160,12 @@ public class UI {
             drawTradeScreen();
         }
 
+        // Feed cow state
+        if(gp.gameState == gp.feedCowState){
+            drawPlayerInformation();
+            drawFeedCowScreen();
+        }
+
         //TRANSITION STATE
         if (gp.gameState == gp.transitionState) {
             drawTransition();
@@ -692,7 +698,7 @@ public class UI {
 
     public void drawDialogueInteract() {
         double worldX, worldY;
-        double screenX, screenY;
+        double screenX, screenY; 
         int imageWidth, imageHeight;
         if (gp.player.interactEntity.get(gp.player.interactEntity_Index).name.equals("old man")) {
             worldX = gp.tileSize * 19.7;
@@ -1161,6 +1167,52 @@ public class UI {
                 drawSubWindow1(dFrameX, dFrameY, dFrameWidth, dFrameHeight,new Color(0xF4CE98), new Color(0x5e3622),10,30);
             }
         }
+    }
+
+    public void drawFeedCowScreen(){
+        drawDialogueScreen();
+
+        //Draw options pane
+        int x = gp.tileSize * 15;
+        int y = gp.tileSize * 4;
+        int width = gp.tileSize * 3;
+        int height = (int) (gp.tileSize * 3.5);
+        drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
+    
+        //DrawText
+        x += gp.tileSize;
+        y += gp.tileSize;
+        g2.drawString("Yes", x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - 24, y);
+            if (gp.keyHandler.enterPressed) {
+                // Check if grass available
+                int grassIndex = gp.player.searchItemInInventory("Grass");
+
+                if(grassIndex != 999){
+                    // delete a grass
+                    gp.player.inventory.remove(grassIndex);
+
+                }
+                else{
+                    
+                }
+            }
+        }
+
+
+        y += gp.tileSize;
+        g2.drawString("No", x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - 24, y);
+            if (gp.keyHandler.enterPressed) {
+                commandNum = 0;
+                gp.keyHandler.enterPressed = false;
+                gp.gameState = gp.playState;
+                
+            }
+        }
+        
     }
 
     public void drawTradeScreen() {
