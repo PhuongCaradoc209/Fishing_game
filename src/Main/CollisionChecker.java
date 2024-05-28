@@ -289,7 +289,7 @@ public class CollisionChecker {
         return index;
     }
 
-    public int checkEntity(Entity entity, ArrayList<Entity>[] target) {
+    public <T extends Entity> int checkEntity(Entity entity, ArrayList<T>[] target) {
         int index = 999;
         for (int i = 0; i < target[gp.currentMap].size(); i++) {
             if (target[gp.currentMap].get(i) != null) {

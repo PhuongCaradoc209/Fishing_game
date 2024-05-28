@@ -314,6 +314,6 @@ public class AssetSetter {
         mapNum = 0;
 
         i = 0;
-        gp.iTile[mapNum][i] = new IT_Door_close(gp, 10, 12);
+        gp.iTile[mapNum].add(new IT_Door_close(gp,20,12));
     }
 }

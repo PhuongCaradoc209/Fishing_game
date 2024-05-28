@@ -26,6 +26,9 @@ public class Player extends Entity {
     public int rod = 3;
     public ArrayList<Entity> interactEntity;
 
+    //INDEX
+    private int npcIndex, animalIndex, iTileIndex;
+
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
         this.key = key;
@@ -52,11 +55,10 @@ public class Player extends Entity {
         direction = "down";
     }
 
-    public void setPlayerImage(String playerType){
-        if (playerType.equals("Human")){
+    public void setPlayerImage(String playerType) {
+        if (playerType.equals("Human")) {
             getPlayerImage_HumanVer();
-        }
-        else
+        } else
             getPlayerImage_DinoVer();
     }
 
@@ -73,12 +75,12 @@ public class Player extends Entity {
         currentFishingRod = new OBJ_FishingRod1(gp);
     }
 
-    public void setItems(){
+    public void setItems() {
         inventory.add(currentFishingRod);
 
     }
 
-    public void getPlayerImage_DinoVer(){
+    public void getPlayerImage_DinoVer() {
         standUp = setup("player/dino_up_1", 16, 16);
         standDown = setup("player/dino_down_1", 16, 16);
         standRight = setup("player/dino_down_1", 16, 16);
@@ -141,18 +143,22 @@ public class Player extends Entity {
         solidArea.height = (35 * gp.tileSize) / 48;
 
         //CHECK AUTO DISPLAY
-        if (!interactEntity.contains(gp.npc[0].get(0)))
-        {
+        if (!interactEntity.contains(gp.npc[0].get(0))) {
             interactEntity.add(gp.npc[0].get(0));
         }
         if (!interactEntity.contains(gp.animal[0].get(4))) {
             interactEntity.add(gp.animal[0].get(4));
         }
+
         interactEntity_Index = checkNear(interactEntity);
 
-        if (interactEntity_Index <= interactEntity.size()){
+        if (interactEntity_Index <= interactEntity.size()) {
             messageOn(interactEntity.get(interactEntity_Index));
         }
+
+        //CHECK INTERACT TILE COLLISION
+        iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+        hitInteractiveTile(iTileIndex);
 
         //CHECK TILE COLLISION
         collisionOn = false;
@@ -163,11 +169,12 @@ public class Player extends Entity {
 //        pickUpObject(objIndex);
 
         //CHECK NPC COLLISION
-        int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+        npcIndex = gp.cChecker.checkEntity(this, gp.npc);
         interactNPC(npcIndex);
 
         //CHECK ANIMAL COLLISION
-        int animalIndex = gp.cChecker.checkEntity(this, gp.animal);
+        animalIndex = gp.cChecker.checkEntity(this, gp.animal);
+
 
 //        //CHECK TO OPEN DOOR
 //        checkAtSpecifiedPst(0);
@@ -212,6 +219,21 @@ public class Player extends Entity {
 //        } else
 //            gp.aSetter.setDoorStatus(true);
 //    }
+
+    public void hitInteractiveTile(int i) {
+        if (i != 999 && !gp.iTile[0].get(i).isOpen) {
+            gp.playSoundEffect("Door open", 4);
+            gp.iTile[0].add(gp.iTile[0].get(i).getInteractedForm());
+            gp.iTile[0].remove(i);
+        }
+        if (i == 999) {
+            if (!gp.iTile[0].contains(gp.iTile[0].get(0).getInteractedForm()) && gp.iTile[0].get(0).name.equals("Door Open")) {
+                gp.playSoundEffect("Door close", 5);
+                gp.iTile[0].add(gp.iTile[0].get(0).getInteractedForm());
+                gp.iTile[0].remove(0);
+            }
+        }
+    }
 
     public void interactNPC(int i) {
         if (i != 999) {
@@ -284,26 +306,26 @@ public class Player extends Entity {
         return 999;
     }
 
-    public boolean canObtainItem(Entity item){
+    public boolean canObtainItem(Entity item) {
         boolean canContain = false;
 
         //Check if stackable
-        if(item.stackable == true){
+        if (item.stackable == true) {
             int index = searchItemInInventory(item.name);
 
-            if(index != 999){
+            if (index != 999) {
                 inventory.get(index).amount++;
                 canContain = true;
-            }else{
+            } else {
                 //New item so need to track vacancy
-                if(inventory.size() != maxInventorySize){
+                if (inventory.size() != maxInventorySize) {
                     inventory.add(item);
                     canContain = true;
                 }
             }
-        }else{
+        } else {
             //Not stackable so check vacancy
-            if(inventory.size() != maxInventorySize){
+            if (inventory.size() != maxInventorySize) {
                 inventory.add(item);
                 canContain = true;
             }
@@ -311,11 +333,11 @@ public class Player extends Entity {
         return canContain;
     }
 
-    public int searchItemInInventory(String itemName){
+    public int searchItemInInventory(String itemName) {
         int itemIndex = 999;
 
-        for(int i = 0; i < inventory.size(); i++){
-            if(inventory.get(i).name.equals(itemName)){
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).name.equals(itemName)) {
                 itemIndex = i;
                 break;
             }
