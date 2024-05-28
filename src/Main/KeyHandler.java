@@ -66,9 +66,12 @@ public class KeyHandler implements KeyListener {
                 afterFishingState(key);
             }
 
-            //INVENTORY STATE
+            //COLLECTION STATE
             else if (gp.gameState == gp.collectionState) {
                 collectionState(key);
+            }
+            else if (gp.gameState == gp.inventoryState) {
+                 inventoryState(key);
             }
             //TRADE STATE
             else if (gp.gameState == gp.tradeState) {
@@ -199,6 +202,9 @@ public class KeyHandler implements KeyListener {
         }
         if (key == KeyEvent.VK_C) {
             gp.gameState = gp.collectionState;
+        }
+        if (key == KeyEvent.VK_B) {
+            gp.gameState = gp.inventoryState;
         }
         if (key == KeyEvent.VK_L) {
             gp.gameState = gp.transitionState;
@@ -377,6 +383,35 @@ public class KeyHandler implements KeyListener {
         }
     }
 
+    public void inventoryState(int key) {
+        if (key == KeyEvent.VK_D) {
+            if (gp.ui.inventorySlotCol != 4) {
+                gp.ui.inventorySlotCol++;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if (key == KeyEvent.VK_A) {
+            if (gp.ui.inventorySlotCol != 0) {
+                gp.ui.inventorySlotCol--;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if (key == KeyEvent.VK_W) {
+            if (gp.ui.inventorySlotRow != 0) {
+                gp.ui.inventorySlotRow--;
+                gp.playSoundEffect("select_sound", 6);
+            }
+        }
+        if (key == KeyEvent.VK_S) {
+            if (gp.ui.inventorySlotRow != 3) {
+                gp.ui.inventorySlotRow++;
+                gp.playSoundEffect("select_sound", 6);
+            }
+
+        } else if (key == KeyEvent.VK_B) {
+            gp.gameState = gp.playState;
+        }
+    }
     public void tradeState(int key) {
         if (key == KeyEvent.VK_ENTER) {
             enterPressed = true;
