@@ -230,6 +230,13 @@ public class GamePanel extends JPanel implements Runnable {
                     animal[1].get(i).update(true);
                 }
             }
+
+            //OBJECT
+            for (int i = 0; i < obj[1].size(); i++) {
+                if (obj[1].get(i) != null) {
+                    obj[1].get(i).update(false);
+                }
+            }
         }
     }
 
@@ -298,6 +305,11 @@ public class GamePanel extends JPanel implements Runnable {
            for (int i =0; i < animal[1].size(); i++){
                animal[1].get(i).draw(g2);
            }
+
+           //DRAW OBJ
+            for (int i =0; i < obj[1].size(); i++){
+                obj[1].get(i).draw(g2);
+            }
         }
 
         //UI

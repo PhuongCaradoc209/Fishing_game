@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
-    GamePanel gp;
+    public GamePanel gp;
     protected int size;
     public double worldX, worldY;
     public double speed;
