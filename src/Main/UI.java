@@ -1285,6 +1285,15 @@ public class UI {
                             gp.player.currentFishingRod = npc.inventory.get(itemIndex);
                             //remove item in npc inventory
                             npc.inventory.remove(itemIndex);
+                            //remove item in player inventory
+                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
+                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
+                                gp.player.inventory.remove(previousItemIndex);
+                            }
+                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
+                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
+                                gp.player.inventory.remove(previousItemIndex);
+                            }
                         }
                     } else {
                         subState = 0;
