@@ -53,8 +53,8 @@ public class Entity {
     public String fishRarity;
     public BufferedImage fishFrame;
     public int count;
+    public int tradeCount;
     public boolean caught = false;
-    //    public BufferedImage fishImage;
     public BufferedImage fishFinalImage;
     public String desCollections;
     public String desFishing;

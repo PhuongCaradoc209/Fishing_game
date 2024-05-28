@@ -189,6 +189,7 @@ public class CollectionManagement {
         gp.ui.fishImage = gp.collectionM.collection[i].collection_image;
         gp.ui.fishFrame = gp.collectionM.collection[i].fishFrame;
         gp.ui.desFishing = gp.collectionM.collection[i].desFishing;
+        gp.collectionM.collection[i].tradeCount ++;
         statistic(i);
     }
 
