@@ -10,6 +10,7 @@ public class OBJ_FishingRod1 extends Entity{
             name = "Fishing Rod 1";
             price = 5;
             count = 0;
+            tradeCount = 1;
             collection_image = setup("Item/fishingrod1",gp.tileSize,gp.tileSize);
             tradeState_image = setup("Item/fishingrod1",gp.tileSize,gp.tileSize);
             desTrading = "A long, thin, and flexible tool to catch level 1\nfishes";

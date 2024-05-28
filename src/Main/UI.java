@@ -803,7 +803,7 @@ public class UI {
         setFontAndColor(font, new Color(0x74342E));
 
         g2.drawString("COLLECTIONS", center("COLLECTIONS", gp.tileSize, gp.tileSize * 15 / 2), gp.tileSize * 13 / 4);
-        drawInventoryItemImage_Border_Number();
+        drawCollectionItemImage_Border_Number();
         drawCursor();
         displayItemIsChosen();
         displayStatistic();
