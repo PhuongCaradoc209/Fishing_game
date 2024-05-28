@@ -26,16 +26,16 @@ public class UI {
     public String currentTittle = "";
     public int commandNum = 0;
     int subState = 0;
-    public int playerSlotCol = 0;
-    public int playerSlotRow = 0;
-    public int npcSlotCol = 0;
-    public int npcSlotRow = 0;
+    public int playerSlotCol = 0,playerSlotRow = 0;
+    public int npcSlotCol = 0, npcSlotRow = 0;
     BufferedImage image, fishFrame;
+
+    public int collectionSlotCol = 0,collectionSlotRow = 0;
+    public int inventorySlotCol = 0,inventorySlotRow = 0;
+    public int commonFish = 0,uncommonFish = 0,rareFish = 0, legendaryFish = 0, total = 0;
+    public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
     final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin, bar_outside, bar_background, target;
-    public int collectionSlotCol = 0;
-    public int collectionSlotRow = 0;
-    public int commonFish = 0, uncommonFish = 0, rareFish = 0, legendaryFish = 0, total = 0;
-    public String fishName = "", fishPrice = "", fishRarity = " ", desFishing = " ", desCollections = " ";
+
     public Entity npc;
     private int counter = 0;
 
@@ -144,9 +144,12 @@ public class UI {
             drawAfterFishingScreen();
             drawPlayerInformation();
         }
-        //INVENTORY STATE
+        //COLLECTION STATE
         else if (gp.gameState == gp.collectionState) {
             drawCollectionScreen();
+        }
+        else if (gp.gameState == gp.inventoryState) {
+            drawInventoryScreen();
         }
         //FISHING STATE
         else if (gp.gameState == gp.fishingState) {
@@ -796,17 +799,19 @@ public class UI {
     }
 
     public void drawCollectionScreen() {
-        drawInventoryBackground();
+        drawCollectionBackground();
         setFontAndColor(font, new Color(0x74342E));
+
         g2.drawString("COLLECTIONS", center("COLLECTIONS", gp.tileSize, gp.tileSize * 15 / 2), gp.tileSize * 13 / 4);
-        drawInventoryItemImage_Border_Number();
+        drawCollectionItemImage_Border_Number();
         drawCursor();
         displayItemIsChosen();
         displayStatistic();
     }
 
-    public void drawInventoryBackground() {
-        int x = gp.tileSize;
+
+    public void drawCollectionBackground() {
+        int x = gp.tileSize ;
         int y = gp.tileSize * 3 / 2;
         int width = gp.tileSize * 15 / 2;
         int height = gp.tileSize * 19 / 2;
@@ -818,7 +823,7 @@ public class UI {
 
     }
 
-    public void drawInventoryItemImage_Border_Number() {
+    public void drawCollectionItemImage_Border_Number() {
         int count = 0;
         int imageAndBorderX = gp.tileSize * 2;
         int imageAndBorderY = gp.tileSize * 4;
@@ -939,6 +944,56 @@ public class UI {
         g2.drawString(total + "", x1 + gp.tileSize * 13 / 4, y);
     }
 
+    public void drawInventoryScreen(){
+        //DRAW BACKGROUND
+        int x = gp.tileSize*11/2;
+        int y = gp.tileSize*3/4;
+        drawSubWindow1(x,y,gp.tileSize*9,gp.tileSize*11,new Color(0xF4CE98),new Color(0x5e3622),7,30);
+        drawSubWindow1(x+gp.tileSize*1/2,y+gp.tileSize*3/4,gp.tileSize*8,gp.tileSize*3,new Color(0xF4CE98),new Color(0x5e3622),3,30);
+
+        // DRAW INVENTORY TITLE
+        drawSubWindow1(gp.tileSize*15/2,5+gp.tileSize/4,gp.tileSize*5,gp.tileSize-10,new Color(0xF4CE98),new Color(0x5e3622),5,30);
+        setFontAndColor(font5,new Color(0x7B342E));
+        g2.drawString("INVENTORY",center("INVENTORY",gp.tileSize*11/2,gp.tileSize*9),gp.tileSize);
+
+        // DRAW INVENTORY
+        x = gp.tileSize*49/8;
+        y +=  gp.tileSize*4;
+        for(int i = 0; i <gp.player.inventory.size();i++){
+            g2.drawImage(gp.player.inventory.get(i).collection_image,x,y,gp.tileSize*5/4,gp.tileSize*5/4,null);
+            drawSubWindow1(x,y,gp.tileSize*5/4,gp.tileSize*5/4,new Color(0,0,0,0),new Color(0x5e3622),3,5);
+            x += gp.tileSize*13/8;
+            if(i == 4|| i == 9 || i==14|| i ==19){
+                x =gp.tileSize*49/8;
+                y +=  gp.tileSize*13/8;
+            }
+        }
+
+        //DRAW CURSOR
+        final int xStart = gp.tileSize * 49/8;
+        final int yStart = gp.tileSize * 19/4;
+
+        int cursorX = xStart + (gp.tileSize * 13/8 * inventorySlotCol);
+        int cursorY = yStart + (gp.tileSize * 13/8 * inventorySlotRow);
+        drawSubWindow1(cursorX,cursorY,gp.tileSize*5/4,gp.tileSize*5/4,new Color(0,0,0,0),new Color(0xD46352),3,5);
+
+        //DISPLAY INFORMATION
+        int choose = inventorySlotCol + 5*inventorySlotRow;
+        x = gp.tileSize*13/2;
+        y = gp.tileSize*2;
+        if (choose < gp.player.inventory.size() ) {
+            g2.drawImage(gp.player.inventory.get(choose).collection_image, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
+            setFontAndColor(font4,new Color(0x7B342E));
+            x += gp.tileSize*3;
+            y += 40;
+            g2.drawString("Name: "+gp.player.inventory.get(choose).name,x,y);
+            y+= 30;
+            g2.drawString("Price: "+gp.player.inventory.get(choose).price,x,y);
+            y+= 30;
+            g2.drawString("Current quantity: "+gp.player.inventory.get(choose).tradeCount,x,y);
+
+        }
+    }
 
     public void drawAfterFishingScreen() {
         //display fish information
@@ -1281,10 +1336,21 @@ public class UI {
                 } else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
-                        if (npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3") {
+                        npc.inventory.get(itemIndex).tradeCount ++;
+                        if(npc.inventory.get(itemIndex).name == "Fishing Rod 1" || npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3"){
+
                             gp.player.currentFishingRod = npc.inventory.get(itemIndex);
                             //remove item in npc inventory
                             npc.inventory.remove(itemIndex);
+                            //remove item in player inventory
+                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
+                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
+                                gp.player.inventory.remove(previousItemIndex);
+                            }
+                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
+                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
+                                gp.player.inventory.remove(previousItemIndex);
+                            }
                         }
                     } else {
                         subState = 0;
@@ -1357,6 +1423,7 @@ public class UI {
                     if (gp.player.inventory.get(itemIndex).amount > 1) {
                         gp.player.inventory.get(itemIndex).amount--;
                     } else {
+                        gp.player.inventory.get(itemIndex).tradeCount --;
                         gp.player.inventory.remove(itemIndex);
                     }
                     gp.player.coin += price;

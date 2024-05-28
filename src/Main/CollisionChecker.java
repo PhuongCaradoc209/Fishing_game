@@ -167,81 +167,82 @@ public class CollisionChecker {
 //        }
     }
 
-    public boolean checkNearWater(Entity entity){
-        //CREATE COORDINATE OF 4 EDGES OF AN ENTITY
-        double entityLeftWorldX = (entity.worldX + entity.solidArea.x);
-        double entityRightWorldX = (entity.worldX + entity.solidArea.x + entity.solidArea.width);
 
-        double entityTopWorldY = (entity.worldY + entity.solidArea.y);
-        double entityBottomWorldY = (entity.worldY + entity.solidArea.y + entity.solidArea.height);
+    // public boolean checkNearWater(Entity entity){
+    //     //CREATE COORDINATE OF 4 EDGES OF AN ENTITY
+    //     double entityLeftWorldX = (entity.worldX + entity.solidArea.x);
+    //     double entityRightWorldX = (entity.worldX + entity.solidArea.x + entity.solidArea.width);
 
-        int entityLeftCol = (int) (entityLeftWorldX / gp.tileSize);
-        int entityRightCol = (int) (entityRightWorldX / gp.tileSize);
+    //     double entityTopWorldY = (entity.worldY + entity.solidArea.y);
+    //     double entityBottomWorldY = (entity.worldY + entity.solidArea.y + entity.solidArea.height);
 
-        int entityTopRow = (int) (entityTopWorldY / gp.tileSize);
-        int entityBottomRow = (int) (entityBottomWorldY / gp.tileSize);
-        //CHECK WHICH ARE TWO TILES FOR TWO SIDES OF ENTITY
-        int tileNum1, tileNum2;
-        switch (entity.direction) {
-            case "up":
-            case "standUp":
-                //because when Entity go up, the first one that interacts with tiles is Top Edge,
-                entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
-                //so we find out what tile the player is trying to step in
-                //tileNum1 is the point at the left-top conner of the entity
-                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
-                //tileNum1 is the point at the right-top conner of the entity
-                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
-                //CHECK NEAR WATER
-                for (int i = 27; i <= 40; i++) {
-                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
-                        return true;
-                    }
-                }
+    //     int entityLeftCol = (int) (entityLeftWorldX / gp.tileSize);
+    //     int entityRightCol = (int) (entityRightWorldX / gp.tileSize);
 
-                break;
+    //     int entityTopRow = (int) (entityTopWorldY / gp.tileSize);
+    //     int entityBottomRow = (int) (entityBottomWorldY / gp.tileSize);
+    //     //CHECK WHICH ARE TWO TILES FOR TWO SIDES OF ENTITY
+    //     int tileNum1, tileNum2;
+    //     switch (entity.direction) {
+    //         case "up":
+    //         case "standUp":
+    //             //because when Entity go up, the first one that interacts with tiles is Top Edge,
+    //             entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
+    //             //so we find out what tile the player is trying to step in
+    //             //tileNum1 is the point at the left-top conner of the entity
+    //             tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityLeftCol];
+    //             //tileNum1 is the point at the right-top conner of the entity
+    //             tileNum2 = gp.tileMgr.mapTileNum[entityTopRow][entityRightCol];
+    //             //CHECK NEAR WATER
+    //             for (int i = 27; i <= 40; i++) {
+    //                 if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+    //                     return true;
+    //                 }
+    //             }
 
-            case "down":
-            case "standDown":
-                entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
-                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
-                //CHECK NEAR WATER
-                for (int i = 27; i <= 40; i++) {
-                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
-                        return true;
-                    }
-                }
-                break;
+    //             break;
 
-            case "right":
-            case "standRight":
-                entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
-                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
-                //CHECK NEAR WATER
-                for (int i = 27; i <= 40; i++) {
-                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
-                        return true;
-                    }
-                }
-                break;
+    //         case "down":
+    //         case "standDown":
+    //             entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
+    //             tileNum1 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
+    //             tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
+    //             //CHECK NEAR WATER
+    //             for (int i = 27; i <= 40; i++) {
+    //                 if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+    //                     return true;
+    //                 }
+    //             }
+    //             break;
 
-            case "left":
-            case "standLeft":
-                entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
-                tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
-                //CHECK NEAR WATER
-                for (int i = 27; i <= 40; i++) {
-                    if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
-                        return true;
-                    }
-                }
-                break;
-        }
-        return false;
-    }
+    //         case "right":
+    //         case "standRight":
+    //             entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
+    //             tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityRightCol];
+    //             tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityRightCol];
+    //             //CHECK NEAR WATER
+    //             for (int i = 27; i <= 40; i++) {
+    //                 if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+    //                     return true;
+    //                 }
+    //             }
+    //             break;
+
+    //         case "left":
+    //         case "standLeft":
+    //             entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
+    //             tileNum1 = gp.tileMgr.mapTileNum[entityTopRow][entityLeftCol];
+    //             tileNum2 = gp.tileMgr.mapTileNum[entityBottomRow][entityLeftCol];
+    //             //CHECK NEAR WATER
+    //             for (int i = 27; i <= 40; i++) {
+    //                 if (gp.tileMgr.tile[tileNum1] == gp.tileMgr.tile[i] || gp.tileMgr.tile[tileNum2] == gp.tileMgr.tile[i]) {
+    //                     return true;
+    //                 }
+    //             }
+    //             break;
+    //     }
+    //     return false;
+    // }
 
     public int checkObj(Entity entity, boolean isPlayer) {
         int index = 999;
