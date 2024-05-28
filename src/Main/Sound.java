@@ -25,6 +25,7 @@ public class Sound {
         soundURL[6] = getClass().getResource("/sound/select_sound.wav");
         soundURL[7] = getClass().getResource("/sound/click_sound.wav");
         soundURL[8] = getClass().getResource("/sound/cow_umbo.wav");
+        soundURL[9] = getClass().getResource("/sound/start_FishTank.wav");
     }
 
     public void setField(int i) {

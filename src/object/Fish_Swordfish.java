@@ -14,7 +14,7 @@ public class Fish_Swordfish extends Entity {
         fishStar = 3;
 
         getImage(gp);
-        size = gp.tileSize * 4;
+        size = gp.tileSize * 3;
         speed = 3;
         
         count = 0;

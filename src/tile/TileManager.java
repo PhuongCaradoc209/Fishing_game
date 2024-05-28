@@ -20,6 +20,7 @@ public class TileManager {
     ArrayList<String> fileNames = new ArrayList<>();
     ArrayList<String> collisionStatus = new ArrayList<>();
 
+
     public TileManager(GamePanel gp) {
         this.gp = gp;
 

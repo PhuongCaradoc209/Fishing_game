@@ -14,7 +14,7 @@ public class Fish_Remora extends Entity {
         fishStar = 2;
 
         getImage(gp);
-        size = gp.tileSize;
+        size = gp.tileSize + gp.tileSize/2;
         speed = 2;
         
         count = 0;

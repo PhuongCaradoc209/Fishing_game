@@ -3,7 +3,9 @@ package entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import object.OBJ_FishingRod1;
+import object.OBJ_FishingRod2;
 import tile.TileManager;
+import object.Fishing_Rod;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,14 +24,19 @@ public class Player extends Entity {
     public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
-    public int rod = 1;
+    public int rod = 3;
     public ArrayList<Entity> interactEntity;
+
+    public Fishing_Rod fishingRod;
 
     public Player(GamePanel gp, KeyHandler key, TileManager tileM) {
         super(gp);
         this.key = key;
         this.tileM = tileM;
         size = gp.tileSize + 10;
+
+        fishingRod = new Fishing_Rod(gp, this, key);
+        fishingRod.setLevel(rod);
 
         screenX = (double) gp.screenWidth / 2 - ((double) gp.tileSize / 2); //set the player at then center of the screen
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
@@ -133,6 +140,7 @@ public class Player extends Entity {
             // STOP SOUND
             gp.stopMusic("grass");
         }
+        
         //UPDATE the solidArea due to zoom in and out
         solidArea.x = (10 * gp.tileSize) / 48;
         solidArea.y = (20 * gp.tileSize) / 48;
@@ -170,9 +178,13 @@ public class Player extends Entity {
 
 //        //CHECK TO OPEN DOOR
 //        checkAtSpecifiedPst(0);
+        
+        // update fishing rod
+        fishingRod.update();
 
         //CHECK EVENT
-        gp.eHandler.checkEvent(1);
+        gp.eHandler.checkEvent(rod);
+        
 
         //CHECK IF AT EDGE
         gp.cChecker.checkAtEdge(this);
@@ -334,6 +346,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = up2;
                 }
+                fishingRod.reset();
                 break;
             case "down":
                 if (spriteNum == 1) {
@@ -342,6 +355,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = down2;
                 }
+                fishingRod.reset();
                 break;
             case "left":
                 if (spriteNum == 1) {
@@ -350,6 +364,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = left2;
                 }
+                fishingRod.reset();
                 break;
             case "right":
                 if (spriteNum == 1) {
@@ -358,6 +373,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = right2;
                 }
+                fishingRod.reset();
                 break;
             case "standUp":
                 image = standUp;
@@ -395,7 +411,12 @@ public class Player extends Entity {
             y = gp.screenHeight - (gp.worldHeight - worldY);
         }
         ////////////////////////
-
+        if(fishingRod.getFrame() != null){
+            image = fishingRod.getFrame();
+            g.drawImage(image, (int) (x - ( this.direction=="standLeft" ? (size) : 0)), (int) y, null);
+        }
+        else 
         g.drawImage(image, (int) x, (int) y, size, size, null);
+
     }
 }
