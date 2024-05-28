@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
     //ANIMAL
     public ArrayList<Entity>[] animal = new ArrayList[maxMap];
     //INTERACT TILE
-    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][10];
+    public ArrayList<InteractiveTile>[] iTile = new ArrayList[maxMap];
     ArrayList<Entity> entityList = new ArrayList<>();
 
 
@@ -83,7 +83,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tradeState = 11;
     public final int transitionState = 12;
     public final int fishTankState = 13;
-    public final int feedCowState = 14;
+    public final int inventoryState = 14;
+    public final int feedCowState = 15;
 
     //FPS (Frame Per Second)
     int FPS = 60;
@@ -103,6 +104,7 @@ public class GamePanel extends JPanel implements Runnable {
             obj[i] = new ArrayList<>();
             npc[i] = new ArrayList<>();
             animal[i] = new ArrayList<>();
+            iTile[i] = new ArrayList<>();
         }
         aSetter.setObject();
         aSetter.setNPC();
@@ -212,12 +214,11 @@ public class GamePanel extends JPanel implements Runnable {
                     } else animal[0].get(i).update(false);
                 }
             }
-            for (int i = 0; i < iTile[0].length; i++) {
-                if (iTile[0][i] != null) {
-                    iTile[0][i].update();
+            for (int i = 0; i < iTile[0].size(); i++) {
+                if (iTile[0].get(i) != null) {
+                    iTile[0].get(i).update(false);
                 }
             }
-
             //ENVIRONMENT
             enviMgr.update();
         }
@@ -229,6 +230,13 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < animal[1].size(); i++) {
                 if (animal[1].get(i) != null) {
                     animal[1].get(i).update(true);
+                }
+            }
+
+            //OBJECT
+            for (int i = 0; i < obj[1].size(); i++) {
+                if (obj[1].get(i) != null) {
+                    obj[1].get(i).update(false);
                 }
             }
         }
@@ -245,15 +253,15 @@ public class GamePanel extends JPanel implements Runnable {
             //TILE
             tileMgr.draw(g2);
 
+            //ADD ENTITIES TO THE LIST
+            entityList.add(player);
+
             //INTERACTIVE TILE
             for (InteractiveTile interactiveTile : iTile[currentMap]) {
                 if (interactiveTile != null) {
-                    interactiveTile.draw(g2);
+                    entityList.add(interactiveTile);
                 }
             }
-
-            //ADD ENTITIES TO THE LIST
-            entityList.add(player);
 
             for (Entity entity : npc[currentMap]) {
                 if (entity != null) {
@@ -299,6 +307,11 @@ public class GamePanel extends JPanel implements Runnable {
            for (int i =0; i < animal[1].size(); i++){
                animal[1].get(i).draw(g2);
            }
+
+           //DRAW OBJ
+            for (int i =0; i < obj[1].size(); i++){
+                obj[1].get(i).draw(g2);
+            }
         }
 
         //UI

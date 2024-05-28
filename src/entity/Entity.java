@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
-    GamePanel gp;
-    protected int size;   
+    public GamePanel gp;
+    protected int size;
     public double worldX, worldY;
     public double speed;
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
@@ -53,8 +53,8 @@ public class Entity {
     public String fishRarity;
     public BufferedImage fishFrame;
     public int count;
+    public int tradeCount;
     public boolean caught = false;
-    //    public BufferedImage fishImage;
     public BufferedImage fishFinalImage;
     public String desCollections;
     public String desFishing;
