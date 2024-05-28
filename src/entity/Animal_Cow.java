@@ -1,6 +1,7 @@
 package entity;
 
 import Main.GamePanel;
+import Main.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,17 +23,18 @@ public class Animal_Cow extends Entity {
         solidArea.height = 3 * size / 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        dialogues[0] = "Do you want to feed the cow?";
     }
 
     public void getImage() {
-//        down1 = setup("Animal/cow_down1", gp.tileSize, gp.tileSize);
-//        down2 = setup("Animal/cow_down2", gp.tileSize, gp.tileSize);
-//        left1 = setup("Animal/cow_left1", gp.tileSize, gp.tileSize);
-//        left2 = setup("Animal/cow_left2", gp.tileSize, gp.tileSize);
-//        right1 = setup("Animal/cow_right1", gp.tileSize, gp.tileSize);
-//        right2 = setup("Animal/cow_right2", gp.tileSize, gp.tileSize);
-//        up1 = setup("Animal/cow_up1", gp.tileSize, gp.tileSize);
-//        up2 = setup("Animal/cow_up2", gp.tileSize, gp.tileSize);
+        // down1 = setup("Animal/cow_down1", gp.tileSize, gp.tileSize);
+        // down2 = setup("Animal/cow_down2", gp.tileSize, gp.tileSize);
+        // left1 = setup("Animal/cow_left1", gp.tileSize, gp.tileSize);
+        // left2 = setup("Animal/cow_left2", gp.tileSize, gp.tileSize);
+        // right1 = setup("Animal/cow_right1", gp.tileSize, gp.tileSize);
+        // right2 = setup("Animal/cow_right2", gp.tileSize, gp.tileSize);
+        // up1 = setup("Animal/cow_up1", gp.tileSize, gp.tileSize);
+        // up2 = setup("Animal/cow_up2", gp.tileSize, gp.tileSize);
         stand1 = setup("Animal/cowStand_1", gp.tileSize, gp.tileSize);
         stand2 = setup("Animal/cowStand_2", gp.tileSize, gp.tileSize);
         stand3 = setup("Animal/cowStand_3", gp.tileSize, gp.tileSize);
@@ -48,74 +50,81 @@ public class Animal_Cow extends Entity {
         if (spriteNum == 1) {
             setAction();
         }
+
         if (!isDuck) {
             spriteCounter++;
-                if (direction.equals("stand")) {
-                    if (spriteCounter > 14) {
-                        if (spriteNum == 1)
-                            spriteNum = 2;
-                        else if (spriteNum == 2)
-                            spriteNum = 3;
-                        else if (spriteNum == 3)
-                            spriteNum = 4;
-                        else if (spriteNum == 4)
-                            spriteNum = 1;
+            if (direction.equals("stand")) {
+                if (spriteCounter > 14) {
+                    if (spriteNum == 1)
+                        spriteNum = 2;
+                    else if (spriteNum == 2)
+                        spriteNum = 3;
+                    else if (spriteNum == 3)
+                        spriteNum = 4;
+                    else if (spriteNum == 4)
+                        spriteNum = 1;
 
-                        spriteCounter = 0;
-                    }
-                } else if (direction.equals("eat")) {
-                    if (spriteCounter > 12) {
-                        if (spriteNum == 1)
-                            spriteNum = 2;
-                        else if (spriteNum == 2)
-                            spriteNum = 3;
-                        else if (spriteNum == 3)
-                            spriteNum = 4;
-                        else if (spriteNum == 4)    //START EATING
-                            spriteNum = 5;
-                        else if (spriteNum == 5)
-                            spriteNum = 6;
-                        else if (spriteNum == 6)
-                            spriteNum = 7;
-                        else if (spriteNum == 7)
-                            spriteNum = 8;
-                        else if (spriteNum == 8)
-                            spriteNum = 9;
-                        else if (spriteNum == 9)
-                            spriteNum = 10;
-                        else if (spriteNum == 10)
-                            spriteNum = 11;
-                        else if (spriteNum == 11)
-                            spriteNum = 12;
-                        else
-                            spriteNum = 1;
+                    spriteCounter = 0;
+                }
+            } else if (direction.equals("eat")) {
+                if (spriteCounter > 12) {
+                    if (spriteNum == 1)
+                        spriteNum = 2;
+                    else if (spriteNum == 2)
+                        spriteNum = 3;
+                    else if (spriteNum == 3)
+                        spriteNum = 4;
+                    else if (spriteNum == 4) // START EATING
+                        spriteNum = 5;
+                    else if (spriteNum == 5)
+                        spriteNum = 6;
+                    else if (spriteNum == 6)
+                        spriteNum = 7;
+                    else if (spriteNum == 7)
+                        spriteNum = 8;
+                    else if (spriteNum == 8)
+                        spriteNum = 9;
+                    else if (spriteNum == 9)
+                        spriteNum = 10;
+                    else if (spriteNum == 10)
+                        spriteNum = 11;
+                    else if (spriteNum == 11)
+                        spriteNum = 12;
+                    else
+                        spriteNum = 1;
 
-                        spriteCounter = 0;
-                    }
+                    spriteCounter = 0;
                 }
             }
         }
+
+    }   
+    @Override
+    public void speak(){
+        super.speak();
+        gp.gameState = gp.feedCowState;
+    }
 
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
         double screenX = worldX - gp.player.worldX + gp.player.screenX;
         double screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        //STOP MOVING THE CAMERA AT EDGE (ENTITY CAN NOT MOVE IF AT EDGE)
-        //TOP
+        // STOP MOVING THE CAMERA AT EDGE (ENTITY CAN NOT MOVE IF AT EDGE)
+        // TOP
         if (gp.player.screenX >= gp.player.worldX) {
             screenX = worldX;
         }
-        //LEFT
+        // LEFT
         if (gp.player.screenY >= gp.player.worldY) {
             screenY = worldY;
         }
-        //RIGHT
+        // RIGHT
         double rightOffSet = gp.screenWidth - gp.player.screenX;
         if (rightOffSet >= gp.worldWidth - gp.player.worldX) {
             screenX = gp.screenWidth - (gp.worldWidth - worldX);
         }
-        //BOTTOM
+        // BOTTOM
         double bottomOffSet = gp.screenHeight - gp.player.screenY;
         if (bottomOffSet >= gp.worldHeight - gp.player.worldY) {
             screenY = gp.screenHeight - (gp.worldHeight - worldY);
