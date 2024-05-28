@@ -148,23 +148,24 @@ public class Fishing_Rod {
         }
         int x = (int) xMap;
         int y = (int) yMap;
-
-        int currentTile = gp.tileMgr.mapTileNum[x][y];
+        if (x == -1 || y == -1) return false;
+        
+        int currentTile = gp.tileMgr.mapTileNum[gp.currentMap][x][y];
         // System.out.println(player.direction + " " + currentTile + " " + x + " " + y);
         if ((currentTile >= 41 && currentTile <= 58) || (currentTile >= 118 && currentTile <= 122)) {
-            System.out.println("trueeee");
+            // System.out.println("trueeee");
             return true;
         } else{
-            System.out.println("falseee");
-            System.out.println(currentTile);
-            System.out.println(player.direction);
+            // System.out.println("falseee");
+            // System.out.println(currentTile);
+            // System.out.println(player.direction);
             return false;
         }
     }
 
     public void reset() {
         isFishing = false;
-        castFrame = 0;
+        castFrame = 0; 
         rodFrame = 0;
         key.AnnouceCompleteAnimation = false;
     }

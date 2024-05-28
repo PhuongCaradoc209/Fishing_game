@@ -36,6 +36,7 @@ public class Player extends Entity {
         size = gp.tileSize + 10;
 
         fishingRod = new Fishing_Rod(gp, this, key);
+        fishingRod.setLevel(rod);
 
         screenX = (double) gp.screenWidth / 2 - ((double) gp.tileSize / 2); //set the player at then center of the screen
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
@@ -177,12 +178,13 @@ public class Player extends Entity {
 
 //        //CHECK TO OPEN DOOR
 //        checkAtSpecifiedPst(0);
-
+        
         // update fishing rod
         fishingRod.update();
 
         //CHECK EVENT
-        gp.eHandler.checkEvent(1);
+        gp.eHandler.checkEvent(rod);
+        
 
         //CHECK IF AT EDGE
         gp.cChecker.checkAtEdge(this);
