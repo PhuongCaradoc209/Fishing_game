@@ -154,6 +154,16 @@ public class AssetSetter {
         gp.obj[mapNum].get(i).worldY = (13 * gp.tileSize) - 15;
         i++;
 
+        mapNum = 1;
+        i = 0;
+        gp.obj[mapNum].add(new FishTank_SeaWeed(gp, 4 * gp.tileSize));
+        gp.obj[mapNum].get(i).worldX = 16 * gp.tileSize;
+        gp.obj[mapNum].get(i).worldY = 5 * gp.tileSize;
+        i++;
+        gp.obj[mapNum].add(new FishTank_SeaWeed(gp, 3 * gp.tileSize));
+        gp.obj[mapNum].get(i).worldX = 1 * gp.tileSize;
+        gp.obj[mapNum].get(i).worldY = 5 * gp.tileSize;
+        i++;
     }
 
     public void setNPC() {
