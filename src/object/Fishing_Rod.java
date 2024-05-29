@@ -152,12 +152,12 @@ public class Fishing_Rod {
         
         int currentTile = gp.tileMgr.mapTileNum[gp.currentMap][x][y];
         // System.out.println(player.direction + " " + currentTile + " " + x + " " + y);
-        if ((currentTile >= 41 && currentTile <= 58) || (currentTile >= 118 && currentTile <= 122)) {
+        if ((currentTile >= 41 && currentTile <= 58) || (currentTile >= 74 && currentTile <= 82) || (currentTile >= 118 && currentTile <= 122)) {
             // System.out.println("trueeee");
             return true;
         } else{
             // System.out.println("falseee");
-            // System.out.println(currentTile);
+            System.out.println(currentTile);
             // System.out.println(player.direction);
             return false;
         }
