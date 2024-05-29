@@ -4,6 +4,7 @@ import Main.GamePanel;
 import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
+import javax.swing.plaf.PanelUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -35,8 +36,6 @@ public class Entity {
     public int maxPhysical;
     public int physical;
     public int coin;
-    public Entity currentFishingRod;
-
     //OBJ
     public BufferedImage image, image2, image3, image4, image5;
     public String name;
@@ -47,7 +46,7 @@ public class Entity {
     public int amount = 1;
     public boolean stackable = false;
 
-    //Fish
+    //FISH
     public BufferedImage collection_image, tradeState_image;
     public int fishStar;
     public String fishRarity;
@@ -60,6 +59,8 @@ public class Entity {
     public String desFishing;
     public String desTrading = "";
 
+    //ROD
+    public int rod;
 
     public Entity(GamePanel gp) {
         this.gp = gp;

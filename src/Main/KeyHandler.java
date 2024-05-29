@@ -339,7 +339,7 @@ public class KeyHandler implements KeyListener {
 //                gp.gameState = gp.afterFishingState;
 //            }w
             if ((gp.ui.target_Y + gp.tileSize / 2) >= gp.ui.range_Y && (gp.ui.target_Y + gp.tileSize / 2) <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
-                gp.collectionM.Fishing(gp.player.rod);
+                gp.collectionM.Fishing(gp.player.currentFishingRod.rod);
 
                 gp.gameState = gp.afterFishingState;
             } else {

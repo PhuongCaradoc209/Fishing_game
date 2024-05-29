@@ -24,9 +24,9 @@ public class Player extends Entity {
     public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
-    public int rod = 3;
     public ArrayList<Entity> interactEntity;
     public Fishing_Rod fishingRod;
+    public Entity currentFishingRod;
     //INDEX
     private int npcIndex, animalIndex, iTileIndex;
   
@@ -37,14 +37,16 @@ public class Player extends Entity {
         this.tileM = tileM;
         size = gp.tileSize + 10;
 
+        setDefaultValues();
+        setItems();
+
         fishingRod = new Fishing_Rod(gp, this, key);
-        fishingRod.setLevel(rod);
+        fishingRod.setLevel(currentFishingRod.rod);
 
         screenX = (double) gp.screenWidth / 2 - ((double) gp.tileSize / 2); //set the player at then center of the screen
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
-        setDefaultValues();
-        setItems();
+
         interactEntity = new ArrayList<>();
 
         //AREA COLLISION
@@ -189,7 +191,7 @@ public class Player extends Entity {
         fishingRod.update();
 
         //CHECK EVENT
-        gp.eHandler.checkEvent(rod);
+        gp.eHandler.checkEvent(currentFishingRod.rod);
         
 
         //CHECK IF AT EDGE

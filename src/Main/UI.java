@@ -1162,7 +1162,7 @@ public class UI {
             g2.drawImage(entity.inventory.get(i).tradeState_image, slotX, slotY, null);
           
             //Equip Cursor
-            if(entity.inventory.get(i) == entity.currentFishingRod){
+            if(entity.inventory.get(i) == gp.player.currentFishingRod){
                 g2.setColor(Color.RED);
                 drawSubWindow1(slotX,slotY,gp.tileSize,gp.tileSize,new Color(0,0,0,0),new Color(0xD46352),3,10);
                 // g2.drawRoundRect(slotX,slotY,gp.tileSize,gp.tileSize,10,10);
@@ -1395,14 +1395,14 @@ public class UI {
                             //remove item in npc inventory
                             npc.inventory.remove(itemIndex);
                             //remove item in player inventory
-                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
-                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
-                                gp.player.inventory.remove(previousItemIndex);
-                            }
-                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
-                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
-                                gp.player.inventory.remove(previousItemIndex);
-                            }
+//                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
+//                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
+//                                gp.player.inventory.remove(previousItemIndex);
+//                            }
+//                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
+//                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
+//                                gp.player.inventory.remove(previousItemIndex);
+//                            }
                         }
                     } else {
                         subState = 0;
