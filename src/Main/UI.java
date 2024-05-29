@@ -19,7 +19,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font pixel;
-    Font font, font1, font2, font3, font3a, font4, font4a, font5, font6, font7;
+    Font font, font1,font1a, font2, font3, font3a, font4, font4a,font4b, font5, font6, font7,font8;
     BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2, fishImage;
     public String currentDialogue = "";
     public String currentNotification = "";
@@ -90,14 +90,17 @@ public class UI {
         physical_2 = physical.image5;
         font = pixel.deriveFont(Font.BOLD, 60f);
         font1 = pixel.deriveFont(Font.BOLD, 30f);
+        font1a = pixel.deriveFont(Font.PLAIN, 32f);
         font2 = pixel.deriveFont(Font.BOLD, 10f);
         font3 = pixel.deriveFont(Font.BOLD, 20f);
         font3a = pixel.deriveFont(Font.PLAIN, 20f);
         font4 = pixel.deriveFont(Font.BOLD, 25f);
         font4a = pixel.deriveFont(Font.PLAIN, 22f);
+        font4b = pixel.deriveFont(Font.PLAIN, 25f);
         font5 = pixel.deriveFont(Font.BOLD, 38f);
         font6 = pixel.deriveFont(Font.PLAIN, 18f);
         font7 = pixel.deriveFont(Font.BOLD, 15f);
+        font8 = pixel.deriveFont(Font.BOLD, 45f);
 
     }
 
@@ -148,6 +151,7 @@ public class UI {
         else if (gp.gameState == gp.collectionState) {
             drawCollectionScreen();
         }
+        //INVENTORY STATE
         else if (gp.gameState == gp.inventoryState) {
             drawInventoryScreen();
         }
@@ -503,10 +507,12 @@ public class UI {
         int textY;
 
         //TITLE
+        g2.setFont(font);
         String text = "OPTIONS";
         textX = getXforCenteredText(text);
         textY = frameY + gp.tileSize;
-        g2.drawString(text, textX, textY);
+        g2.drawString(text, textX, textY+gp.tileSize*3/4);
+        g2.setFont(font1a);
 
         //FULL SCREEN ON/OFF
         textX = frameX + gp.tileSize;
@@ -578,15 +584,18 @@ public class UI {
 
         //MUSIC VOLUME
         textY += gp.tileSize;
-        g2.drawRect(textX, textY, 120, 24);
+        g2.drawRect(textX, textY+6, 120, 12);
         int volumeWidth = 24 * gp.music.volumeScale;
-        g2.fillRect(textX, textY, volumeWidth, 24);
+        g2.fillRect(textX, textY+6, volumeWidth, 12);
+        g2.fillRoundRect(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,5,5);
 
         //SE VOLUME
         textY += gp.tileSize;
-        g2.drawRect(textX, textY, 120, 24);
+        g2.drawRect(textX, textY+6, 120, 12);
         volumeWidth = 24 * gp.soundEffect.volumeScale;
-        g2.fillRect(textX, textY, volumeWidth, 24);
+        g2.fillRect(textX, textY+6, volumeWidth, 12);
+        g2.fillRoundRect(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,5,5);
+
     }
 
     private void options_fullScreenNotification(int frameX, int frameY) {
@@ -614,39 +623,38 @@ public class UI {
         int textX;
         int textY;
 
-        //TITLE
-        String text = "Control";
-        textX = getXforCenteredText(text);
-        textY = frameY + gp.tileSize;
-        g2.drawString(text, textX, textY);
+        //DISPLAY TITTLE AND KEY
+        String text = "CONTROL";
+        textY = frameY + gp.tileSize*3/2;
+        g2.setFont(font8);
+        g2.drawString(text, center(text,gp.tileSize*6, gp.tileSize*8), textY);
+        g2.setFont(font4b);
 
-        textX = frameX + gp.tileSize;
+        textX = frameX + gp.tileSize*3/2;
+        int textX1  = textX + gp.tileSize * 4;
         textY += gp.tileSize;
         g2.drawString("Move", textX, textY);
+        g2.drawString("W,A,S,D", textX1, textY);
 
         textY += gp.tileSize;
         g2.drawString("Fishing", textX, textY);
+        g2.drawString("Space", textX1, textY);
 
         textY += gp.tileSize;
         g2.drawString("Bag", textX, textY);
+        g2.drawString("B", textX1, textY);
 
         textY += gp.tileSize;
         g2.drawString("Menu", textX, textY);
-
-        //DISPLAY KEY
-        textX = frameX + gp.tileSize * 6;
-        textY = frameY + gp.tileSize;
-        textY += gp.tileSize;
-        g2.drawString("W,A,S,D", textX, textY);
+        g2.drawString("ESC", textX1, textY);
 
         textY += gp.tileSize;
-        g2.drawString("F", textX, textY);
+        g2.drawString("Collection", textX, textY);
+        g2.drawString("C", textX1, textY);
 
         textY += gp.tileSize;
-        g2.drawString("B", textX, textY);
-
-        textY += gp.tileSize;
-        g2.drawString("ESC", textX, textY);
+        g2.drawString("Fish tank", textX, textY);
+        g2.drawString("L", textX1, textY);
 
         //BACK
         textX = frameX + gp.tileSize;

@@ -382,7 +382,7 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect("select_sound", 6);
             }
 
-        } else if (key == KeyEvent.VK_C) {
+        } else if (key == KeyEvent.VK_C || key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
@@ -412,7 +412,7 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect("select_sound", 6);
             }
 
-        } else if (key == KeyEvent.VK_B) {
+        } else if (key == KeyEvent.VK_B || key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
