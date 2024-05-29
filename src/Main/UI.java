@@ -380,6 +380,7 @@ public class UI {
     public void drawPlayerInformation() {
         drawPlayerCoin();
         drawPlayerPhysical();
+        drawPlayerCurrentFishingRod();
     }
 
     public void drawPlayerCoin() {
@@ -432,6 +433,15 @@ public class UI {
             i++;
             x += gp.tileSize;
         }
+    }
+
+    public void drawPlayerCurrentFishingRod(){
+        //DRAW BACKGROUND
+        drawSubWindow1(gp.tileSize/2 + 5, gp.tileSize * 2 - 15, 2*gp.tileSize, gp.tileSize/2, new Color(0xefc096), new Color(0x9a512e), 3, 25);
+
+        String curentRod_text = String.format("Rod level: %s", gp.player.currentFishingRod.rod);
+        setFontAndColor(g2.getFont().deriveFont(Font.BOLD, 20f), new Color(0x7b342e));
+        g2.drawString(curentRod_text, gp.tileSize - 5, gp.tileSize * 2 + 7);
     }
 
     public void drawNotificationScreen() {
