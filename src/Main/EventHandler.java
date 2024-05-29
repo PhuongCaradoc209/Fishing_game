@@ -40,10 +40,16 @@ public class EventHandler {
                         gp.ui.range_Y = gp.ui.random.nextInt(gp.ui.bar_Y + 7*gp.tileSize - gp.ui.heightOfRange - 20 - gp.ui.bar_Y - 10 + 1) + gp.ui.bar_Y + 15;
                         gp.ui.speedOfRange = -gp.ui.speedOfRange;
                         gp.gameState = gp.fishingState;
+
                     }
                     else
                     {
                         outOfEnergy(gp.notificationState);
+
+                        //GameOver
+                        if(gp.player.coin < 5){
+                            gameOver(gp.gameOverState);
+                        }
                     }
                 }else{
                     fullOfInventory(gp.notificationState);
@@ -53,9 +59,8 @@ public class EventHandler {
         if (!gp.keyHandler.AnnouceCompleteAnimation) {
             count = 0;
         }
-//        if (hit(20, 12, "Up")){
-//
-//        }
+
+
     }
 
     public boolean hit(int map, int col, int row, String reqDirection){
@@ -103,5 +108,8 @@ public class EventHandler {
         gp.gameState = game_State;
         gp.ui.currentTittle = "OOPS!";
         gp.ui.currentNotification = "You cannot carry any more!";
+    }
+    public void gameOver(int game_State){
+        gp.gameState = game_State;
     }
 }

@@ -85,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int fishTankState = 13;
     public final int inventoryState = 14;
     public final int feedCowState = 15;
+    public final int gameOverState = 16;
 
     //FPS (Frame Per Second)
     int FPS = 60;
@@ -118,6 +119,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 //        setFullScreen();
+    }
+
+    public void restart(){
+        player.setDefaultValues();
+        player.setDefaultCharacterImage();
+        player.setItems();
     }
 
 //    public void zoomInOut(int i) {

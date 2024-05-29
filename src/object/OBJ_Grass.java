@@ -7,7 +7,7 @@ public class OBJ_Grass extends Entity{
         public OBJ_Grass(GamePanel gp){
             super(gp);
             name = "Grass";
-            price = 2;
+            price = 5;
             count = 0;
             tradeCount = 0;
             collection_image = setup("Item/Grass",gp.tileSize,gp.tileSize);
