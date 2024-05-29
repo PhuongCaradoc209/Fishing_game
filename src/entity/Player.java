@@ -76,7 +76,7 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 0;
+        coin = 100;
         currentFishingRod = new OBJ_FishingRod1(gp);
     }
 
@@ -353,7 +353,7 @@ public class Player extends Entity {
     }
 
     public int searchItemInInventory(String itemName) {
-        int itemIndex = 999;
+        int itemIndex = 50;
 
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).name.equals(itemName)) {
