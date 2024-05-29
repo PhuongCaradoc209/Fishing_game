@@ -18,8 +18,6 @@ public class Player extends Entity {
 
     public double screenX;
     public double screenY;
-    public final double worldX_fishTank = 0;
-    public final double worldY_fishTank = 0;
     public double temp_worldX;
     public double temp_worldY;
     private int objIndex;
