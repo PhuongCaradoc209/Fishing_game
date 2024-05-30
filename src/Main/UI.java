@@ -4,6 +4,7 @@ import entity.Entity;
 import object.OBJ_FishingRod1;
 import object.OBJ_FishingRod2;
 import object.OBJ_FishingRod3;
+import object.OBJ_Milk;
 import object.OBJ_PHYSICAL;
 
 import javax.imageio.ImageIO;
@@ -167,6 +168,12 @@ public class UI {
         if(gp.gameState == gp.feedCowState){
             drawPlayerInformation();
             drawFeedCowScreen();
+        }
+
+        // Feed Cow Yes State
+        if(gp.gameState == gp.feedCowYesState) {
+            drawPlayerInformation();
+            drawFeedCowYesScreen();
         }
 
         //TRANSITION STATE
@@ -1231,7 +1238,7 @@ public class UI {
         int x = gp.tileSize * 15;
         int y = gp.tileSize * 4;
         int width = gp.tileSize * 3;
-        int height = (int) (gp.tileSize * 3.5);
+        int height = (int) (gp.tileSize * 3);
         drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
     
         //DrawText
@@ -1243,18 +1250,24 @@ public class UI {
             if (gp.keyHandler.enterPressed) {
                 // Check if grass available
                 int grassIndex = gp.player.searchItemInInventory("Grass");
+                // int grassAmount = ;
 
                 if(grassIndex != 999){
                     // delete a grass
+                    gp.player.inventory.get(grassIndex).tradeCount--;
                     gp.player.inventory.remove(grassIndex);
-
+                    currentDialogue = "Cow gives you a bottle of pure cow's milk!";
+                    gp.player.canObtainItem(new OBJ_Milk(gp));
+                    int milkIndex = gp.player.searchItemInInventory("Milk");
+                    gp.player.inventory.get(milkIndex).tradeCount++;
+                    gp.gameState = gp.feedCowYesState;
                 }
-                else{
-                    
+                else {
+                    currentDialogue = "No grass left :(( huhu";     
+                    gp.gameState = gp.feedCowYesState;               
                 }
             }
         }
-
 
         y += gp.tileSize;
         g2.drawString("No", x, y);
@@ -1268,6 +1281,10 @@ public class UI {
             }
         }
         
+    }
+
+    public void drawFeedCowYesScreen() {
+        drawDialogueScreen();     
     }
 
     public void drawTradeScreen() {
