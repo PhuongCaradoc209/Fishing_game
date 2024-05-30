@@ -1263,7 +1263,7 @@ public class UI {
                     gp.gameState = gp.feedCowYesState;
                 }
                 else {
-                    currentDialogue = "No grass left :(( huhu";     
+                    currentDialogue = "No grass left :(( huhu\nBuy more :>";     
                     gp.gameState = gp.feedCowYesState;               
                 }
             }
