@@ -24,6 +24,7 @@ public class Animal_Cow extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         dialogues[0] = "Do you want to feed the cow?";
+        // dialogues[1] = "Cow gives you a bottle of pure cow's milk!";
     }
 
     public void getImage() {

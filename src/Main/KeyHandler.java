@@ -26,7 +26,7 @@ public class KeyHandler implements KeyListener {
         isMove = true;
         int key = e.getKeyCode();
 
-        //TITTLE STATE
+        // TITTLE STATE
 
         if (gp.gameState == gp.tittleState) {
             tittleState(key);
@@ -36,44 +36,43 @@ public class KeyHandler implements KeyListener {
             selectPlayerState(key);
         }
         if (gp.currentMap == 0) {
-            //PLAY STATE
+            // PLAY STATE
             if (gp.gameState == gp.playState || gp.gameState == gp.autoDisplayState) {
                 gamePlayerState(key);
             }
 
-            //DIALOG STATE
+            // DIALOG STATE
             else if (gp.gameState == gp.dialogueState) {
                 dialogState(key);
             }
 
-            //NOTIFICATION STATE
+            // NOTIFICATION STATE
             else if (gp.gameState == gp.notificationState) {
                 notificationState(key);
             }
 
-            //OPTIONS STATE
+            // OPTIONS STATE
             else if (gp.gameState == gp.optionState) {
                 optionState(key);
             }
 
-            //FISHING STATE
+            // FISHING STATE
             else if (gp.gameState == gp.fishingState) {
                 fishingState(key);
             }
 
-            //AFTER FISHING STATE
+            // AFTER FISHING STATE
             else if (gp.gameState == gp.afterFishingState) {
                 afterFishingState(key);
             }
 
-            //COLLECTION STATE
+            // COLLECTION STATE
             else if (gp.gameState == gp.collectionState) {
                 collectionState(key);
+            } else if (gp.gameState == gp.inventoryState) {
+                inventoryState(key);
             }
-            else if (gp.gameState == gp.inventoryState) {
-                 inventoryState(key);
-            }
-            //TRADE STATE
+            // TRADE STATE
             else if (gp.gameState == gp.tradeState) {
                 tradeState(key);
             }
@@ -81,9 +80,15 @@ public class KeyHandler implements KeyListener {
             else if (gp.gameState == gp.feedCowState) {
                 feedCowState(key);
             }
+
+            // Feed Cow Yes State
+            else if (gp.gameState == gp.feedCowYesState) {
+                feedCowYesState(key);
+              
             // Game Over State
             else if (gp.gameState == gp.gameOverState) {
                 gameOverState(key);
+
             }
         } else if (gp.currentMap == 1) {
             gameFishTankState(key);
@@ -224,7 +229,7 @@ public class KeyHandler implements KeyListener {
             gp.player.temp_worldY = gp.player.worldY;
         }
 
-        //DEBUG
+        // DEBUG
         if (key == KeyEvent.VK_T) {
             checkDrawTime = (checkDrawTime == true) ? false : true;
         }
@@ -336,6 +341,7 @@ public class KeyHandler implements KeyListener {
 
     public void fishingState(int key) {
         if (key == KeyEvent.VK_SPACE) {
+
 //            gp.ui.completion += 10;
 //            if (gp.ui.completion >= 100) {
 //                gp.ui.completion = 0;
@@ -420,6 +426,7 @@ public class KeyHandler implements KeyListener {
             gp.gameState = gp.playState;
         }
     }
+
     public void tradeState(int key) {
         if (key == KeyEvent.VK_ENTER) {
             enterPressed = true;
@@ -455,25 +462,36 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    public void feedCowState(int key){
-        if (key == KeyEvent.VK_ESCAPE) gp.gameState = gp.playState;
+    public void feedCowState(int key) {
+        if (key == KeyEvent.VK_ESCAPE)
+            gp.gameState = gp.playState;
         if (key == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
-            if (key == KeyEvent.VK_W) {
-                gp.ui.commandNum--;
-                if (gp.ui.commandNum < 0) {
-                    gp.ui.commandNum = 1;
-                }
-                gp.playSoundEffect("select_sound", 6);
+        if (key == KeyEvent.VK_W) {
+            gp.ui.commandNum--;
+            if (gp.ui.commandNum < 0) {
+                gp.ui.commandNum = 1;
             }
-            if (key == KeyEvent.VK_S) {
-                gp.ui.commandNum++;
-                if (gp.ui.commandNum > 1) {
-                    gp.ui.commandNum = 0;
-                }
-                gp.playSoundEffect("select_sound", 6);
+            gp.playSoundEffect("select_sound", 6);
+        }
+        if (key == KeyEvent.VK_S) {
+            gp.ui.commandNum++;
+            if (gp.ui.commandNum > 1) {
+                gp.ui.commandNum = 0;
             }
+            gp.playSoundEffect("select_sound", 6);
+        }
+    }
+
+    public void feedCowYesState(int key) {
+        if (key == KeyEvent.VK_ESCAPE) {
+            gp.gameState = gp.playState;
+        }
+
+        if (key == KeyEvent.VK_ENTER) {
+            gp.gameState = gp.feedCowYesState;
+        }
     }
 
     public void tradePlayerInventory(int key) {
