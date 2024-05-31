@@ -181,6 +181,11 @@ public class UI {
 //        if (gp.gameState == gp.fishTankState){
 //            drawFishTank();
 //        }
+
+        //GameOver State
+        if(gp.gameState == gp.gameOverState){
+            drawGameOverScreen();
+        }
     }
 
     public void drawTittleScreen() {
@@ -384,6 +389,7 @@ public class UI {
     public void drawPlayerInformation() {
         drawPlayerCoin();
         drawPlayerPhysical();
+        drawPlayerCurrentFishingRod();
     }
 
     public void drawPlayerCoin() {
@@ -436,6 +442,15 @@ public class UI {
             i++;
             x += gp.tileSize;
         }
+    }
+
+    public void drawPlayerCurrentFishingRod(){
+        //DRAW BACKGROUND
+        drawSubWindow1(gp.tileSize/2 + 5, gp.tileSize * 2 - 15, 2*gp.tileSize, gp.tileSize/2, new Color(0xefc096), new Color(0x9a512e), 3, 25);
+
+        String curentRod_text = String.format("Rod level: %s", gp.player.currentFishingRod.rod);
+        setFontAndColor(g2.getFont().deriveFont(Font.BOLD, 20f), new Color(0x7b342e));
+        g2.drawString(curentRod_text, gp.tileSize - 5, gp.tileSize * 2 + 7);
     }
 
     public void drawNotificationScreen() {
@@ -1399,18 +1414,21 @@ public class UI {
                         npc.inventory.get(itemIndex).tradeCount ++;
                         if(npc.inventory.get(itemIndex).name == "Fishing Rod 1" || npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3"){
 
+                            //Change default fishingRod
                             gp.player.currentFishingRod = npc.inventory.get(itemIndex);
+
                             //remove item in npc inventory
                             npc.inventory.remove(itemIndex);
+
                             //remove item in player inventory
-//                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
-//                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
-//                                gp.player.inventory.remove(previousItemIndex);
-//                            }
-//                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
-//                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
-//                                gp.player.inventory.remove(previousItemIndex);
-//                            }
+                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
+                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
+                                gp.player.inventory.remove(previousItemIndex);
+                            }
+                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
+                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
+                                gp.player.inventory.remove(previousItemIndex);
+                            }
                         }
                     } else {
                         subState = 0;
@@ -1490,6 +1508,46 @@ public class UI {
                 }
 
             }
+        }
+    }
+
+    public void drawGameOverScreen(){
+
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+
+        text = "Game Over";
+        //Shadow
+        g2.setColor(Color.BLACK);
+        x = getXforCenteredText(text);
+        y = gp.tileSize*4;
+        g2.drawString(text, x, y);
+        //Main
+        g2.setColor(Color.white);
+        g2.drawString(text, x-4, y-4);
+
+        //Restart
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "Restart";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*4;
+        g2.drawString(text,x,y);
+        if(commandNum == 0){
+            g2.drawString(">", x-40,y);
+        }
+
+        //Back to titleScreen
+        text = "Quit";
+        x = getXforCenteredText(text);
+        y += 55;
+        g2.drawString(text, x, y);
+        if(commandNum == 1){
+            g2.drawString(">", x-40, y);
         }
     }
 
