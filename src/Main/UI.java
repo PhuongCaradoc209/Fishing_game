@@ -37,7 +37,7 @@ public class UI {
     public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
     final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin, bar_outside, bar_background, target;
 
-    public Entity npc;
+    public Entity npc,cow;
     private int counter = 0;
 
     //FISHING GAMEPLAY
@@ -1280,9 +1280,9 @@ public class UI {
                     gp.player.inventory.get(grassIndex).tradeCount--;
                     gp.player.inventory.remove(grassIndex);
                     currentDialogue = "Cow gives you a bottle of pure cow's milk!";
-                    gp.player.canObtainItem(new OBJ_Milk(gp));
-                    int milkIndex = gp.player.searchItemInInventory("Milk");
-                    gp.player.inventory.get(milkIndex).tradeCount++;
+                    gp.player.canObtainItem(cow.inventory.get(0));
+                  //  int milkIndex = gp.player.searchItemInInventory("Milk");
+                    cow.inventory.get(0).tradeCount++;
                     gp.gameState = gp.feedCowYesState;
                 }
                 else {
