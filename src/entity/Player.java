@@ -18,15 +18,13 @@ public class Player extends Entity {
 
     public double screenX;
     public double screenY;
-    public final double worldX_fishTank = 0;
-    public final double worldY_fishTank = 0;
     public double temp_worldX;
     public double temp_worldY;
     private int objIndex;
     public int interactEntity_Index;
-    public int rod = 3;
     public ArrayList<Entity> interactEntity;
     public Fishing_Rod fishingRod;
+    public Entity currentFishingRod;
     //INDEX
     private int npcIndex, animalIndex, iTileIndex;
   
@@ -37,14 +35,16 @@ public class Player extends Entity {
         this.tileM = tileM;
         size = gp.tileSize + 10;
 
+        setDefaultValues();
+        setItems();
+
         fishingRod = new Fishing_Rod(gp, this, key);
-        fishingRod.setLevel(rod);
+        fishingRod.setLevel(currentFishingRod.rod);
 
         screenX = (double) gp.screenWidth / 2 - ((double) gp.tileSize / 2); //set the player at then center of the screen
         screenY = (double) gp.screenHeight / 2 - ((double) gp.tileSize / 2);
 
-        setDefaultValues();
-        setItems();
+
         interactEntity = new ArrayList<>();
 
         //AREA COLLISION
@@ -76,13 +76,19 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 500;
+        coin = 100;
         currentFishingRod = new OBJ_FishingRod1(gp);
     }
 
-    public void setItems() {
-        inventory.add(currentFishingRod);
+    public void setDefaultCharacterImage(){
+        //Use to change back to moving character image after fishing
+        fishingRod.reset();
+    }
 
+
+    public void setItems() {
+        inventory.clear();
+        inventory.add(currentFishingRod);
     }
 
     public void getPlayerImage_DinoVer() {
@@ -189,7 +195,7 @@ public class Player extends Entity {
         fishingRod.update();
 
         //CHECK EVENT
-        gp.eHandler.checkEvent(rod);
+        gp.eHandler.checkEvent(currentFishingRod.rod);
         
 
         //CHECK IF AT EDGE
@@ -347,7 +353,7 @@ public class Player extends Entity {
     }
 
     public int searchItemInInventory(String itemName) {
-        int itemIndex = 999;
+        int itemIndex = 50;
 
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).name.equals(itemName)) {
@@ -370,7 +376,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = up2;
                 }
-                fishingRod.reset();
+                setDefaultCharacterImage();
                 break;
             case "down":
                 if (spriteNum == 1) {
@@ -379,7 +385,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = down2;
                 }
-                fishingRod.reset();
+                setDefaultCharacterImage();
                 break;
             case "left":
                 if (spriteNum == 1) {
@@ -388,7 +394,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = left2;
                 }
-                fishingRod.reset();
+                setDefaultCharacterImage();
                 break;
             case "right":
                 if (spriteNum == 1) {
@@ -397,7 +403,7 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = right2;
                 }
-                fishingRod.reset();
+                setDefaultCharacterImage();
                 break;
             case "standUp":
                 image = standUp;

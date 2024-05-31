@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     //SCREEN SETTINGS
     private final int originalTileSize = 16;
     private final int scale = 3;
-    public int tileSize = originalTileSize * scale + 10; //58x58 (moej con dp)
+    public int tileSize = originalTileSize * scale + 10;
     private final int maxScreenCol = 20;
     private final int maxScreenRow = 12;
     public int screenWidth = maxScreenCol * tileSize;//1160 px
@@ -86,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int inventoryState = 14;
     public final int feedCowState = 15;
     public final int feedCowYesState = 16;
+    public final int gameOverState = 16;
 
     //FPS (Frame Per Second)
     int FPS = 60;
@@ -119,6 +120,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 //        setFullScreen();
+    }
+
+    public void restart(){
+        player.setDefaultValues();
+        player.setDefaultCharacterImage();
+        player.setItems();
     }
 
 //    public void zoomInOut(int i) {

@@ -80,9 +80,15 @@ public class KeyHandler implements KeyListener {
             else if (gp.gameState == gp.feedCowState) {
                 feedCowState(key);
             }
+
             // Feed Cow Yes State
             else if (gp.gameState == gp.feedCowYesState) {
                 feedCowYesState(key);
+              
+            // Game Over State
+            else if (gp.gameState == gp.gameOverState) {
+                gameOverState(key);
+
             }
         } else if (gp.currentMap == 1) {
             gameFishTankState(key);
@@ -335,15 +341,15 @@ public class KeyHandler implements KeyListener {
 
     public void fishingState(int key) {
         if (key == KeyEvent.VK_SPACE) {
-            // gp.ui.completion += 10;
-            // if (gp.ui.completion >= 100) {
-            // gp.ui.completion = 0;
-            // gp.inventoryMng.Fishing(gp.player.rod);
-            // gp.gameState = gp.afterFishingState;
-            // }w
-            if ((gp.ui.target_Y + gp.tileSize / 2) >= gp.ui.range_Y
-                    && (gp.ui.target_Y + gp.tileSize / 2) <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
-                gp.collectionM.Fishing(gp.player.rod);
+
+//            gp.ui.completion += 10;
+//            if (gp.ui.completion >= 100) {
+//                gp.ui.completion = 0;
+//                gp.inventoryMng.Fishing(gp.player.rod);
+//                gp.gameState = gp.afterFishingState;
+//            }w
+            if ((gp.ui.target_Y + gp.tileSize / 2) >= gp.ui.range_Y && (gp.ui.target_Y + gp.tileSize / 2) <= (gp.ui.range_Y + gp.ui.heightOfRange)) {
+                gp.collectionM.Fishing(gp.player.currentFishingRod.rod);
 
                 gp.gameState = gp.afterFishingState;
             } else {
@@ -386,7 +392,7 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect("select_sound", 6);
             }
 
-        } else if (key == KeyEvent.VK_C) {
+        } else if (key == KeyEvent.VK_C || key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
@@ -416,7 +422,7 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect("select_sound", 6);
             }
 
-        } else if (key == KeyEvent.VK_B) {
+        } else if (key == KeyEvent.VK_B || key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
@@ -540,6 +546,34 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect("select_sound", 6);
             }
         }
+    }
+
+    public void gameOverState(int key){
+
+        if (key == KeyEvent.VK_W) {
+            gp.ui.commandNum--;
+            if (gp.ui.commandNum < 0) {
+                gp.ui.commandNum = 1;
+            }
+            gp.playSoundEffect("select_sound", 6);
+        }
+        if (key == KeyEvent.VK_S) {
+            gp.ui.commandNum++;
+            if (gp.ui.commandNum > 1) {
+                gp.ui.commandNum = 0;
+            }
+            gp.playSoundEffect("select_sound", 6);
+        }
+        if(key == KeyEvent.VK_ENTER){
+            if(gp.ui.commandNum == 0){
+                gp.gameState = gp.playState;
+                gp.restart();
+            }
+            else if(gp.ui.commandNum == 1){
+                gp.gameState = gp.tittleState;
+            }
+        }
+
     }
 
     // @Override

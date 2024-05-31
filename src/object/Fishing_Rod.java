@@ -206,7 +206,7 @@ public class Fishing_Rod {
     }
 
     public void update() {
-        if (isFacingWater() == true && key.fPressed == true) {
+        if (isFacingWater() == true && key.spacePressed == true) {
             isFishing = true;
         }
 

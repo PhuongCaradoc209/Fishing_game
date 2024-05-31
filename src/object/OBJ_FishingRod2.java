@@ -10,11 +10,9 @@ public class OBJ_FishingRod2 extends Entity{
             name = "Fishing Rod 2";
             price = 15;
             count = 0;
+            rod = 2;
             collection_image = setup("Item/fishingrod2",gp.tileSize,gp.tileSize);
             tradeState_image = setup("Item/fishingrod2",gp.tileSize,gp.tileSize);
             desTrading = "A long, thin, and flexible tool to catch level 2\nfishes";
-
         }
-
-
 }
