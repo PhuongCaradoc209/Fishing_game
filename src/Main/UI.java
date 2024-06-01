@@ -9,6 +9,8 @@ import object.OBJ_PHYSICAL;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,23 +21,32 @@ import java.util.Random;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
+
+    //FONT AND TEXT
     Font pixel;
     Font font, font1,font1a, font2, font3, font3a, font4, font4a,font4b, font5, font6, font7,font8;
-    BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2, fishImage;
     public String currentDialogue = "";
     public String currentNotification = "";
     public String currentTittle = "";
+
+    //GRAPHICS
+    private final BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2;
+    private final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin, bar_outside, bar_background, target;
+    BufferedImage image, fishFrame, fishImage;
+    private Area screenArea;
+    private Color colorOfVolume;
+    private BasicStroke defaultStroke;
+
+    //SETTING
     public int commandNum = 0;
     int subState = 0;
     public int playerSlotCol = 0,playerSlotRow = 0;
     public int npcSlotCol = 0, npcSlotRow = 0;
-    BufferedImage image, fishFrame;
-
     public int collectionSlotCol = 0,collectionSlotRow = 0;
     public int inventorySlotCol = 0,inventorySlotRow = 0;
     public int commonFish = 0,uncommonFish = 0,rareFish = 0, legendaryFish = 0, total = 0;
     public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
-    final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin, bar_outside, bar_background, target;
+
 
     public Entity npc,cow;
     private int counter = 0;
@@ -60,6 +71,11 @@ public class UI {
         } catch (FontFormatException e) {
             throw new RuntimeException(e);
         }
+        //SET UP GRAPHICS
+        colorOfVolume = new Color(0x4155be);
+
+        //SET UP SCREEN AREA
+        screenArea = new Area(new Rectangle2D.Double(0, 0, gp.screenWidth, gp.screenHeight));
 
         //SET UP COIN IMAGE
         coin = setup("objects/coin_bronze", gp.tileSize, gp.tileSize);
@@ -107,6 +123,7 @@ public class UI {
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
+        defaultStroke = new BasicStroke(3);
 
         g2.setFont(pixel);
         g2.setColor(Color.white);
@@ -492,16 +509,18 @@ public class UI {
     }
 
     public void drawOptionScreen() {
-        g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(32F));
+        g2.setColor(new Color(0, 0, 0, 0.7f));
+        g2.fill(screenArea);
 
         //SUB WINDOW
         int frameX = gp.tileSize * 6;
         int frameY = gp.tileSize;
         int frameWidth = gp.tileSize * 8;
         int frameHeight = gp.tileSize * 10;
-        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
-
+//        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+        drawSubWindow1(frameX, frameY, frameWidth, frameHeight, new Color(0x94a2e3), Color.BLACK, 2, 25);
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(32F));
         switch (subState) {
             case 0:
                 option_top(frameX, frameY);
@@ -595,10 +614,11 @@ public class UI {
             }
         }
 
+        g2.setColor(colorOfVolume);
         //FULL SCREEN CHECK BOX
         textX = frameX + (int) (gp.tileSize * 4.5);
         textY = frameY + gp.tileSize * 2 + 35;
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(defaultStroke);
         g2.drawRect(textX, textY, 24, 24);
         if (gp.fullScreenOn) {
             g2.fillRect(textX, textY, 24, 24);
@@ -609,15 +629,16 @@ public class UI {
         g2.drawRect(textX, textY+6, 120, 12);
         int volumeWidth = 24 * gp.music.volumeScale;
         g2.fillRect(textX, textY+6, volumeWidth, 12);
-        g2.fillRoundRect(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,5,5);
+        drawSubWindow1(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,colorOfVolume, Color.BLACK,2,5);
 
+        g2.setStroke(defaultStroke);
         //SE VOLUME
+        g2.setColor(colorOfVolume);
         textY += gp.tileSize;
         g2.drawRect(textX, textY+6, 120, 12);
         volumeWidth = 24 * gp.soundEffect.volumeScale;
         g2.fillRect(textX, textY+6, volumeWidth, 12);
-        g2.fillRoundRect(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,5,5);
-
+        drawSubWindow1(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,colorOfVolume, Color.BLACK,2,5);
     }
 
     private void options_fullScreenNotification(int frameX, int frameY) {
@@ -1311,6 +1332,8 @@ public class UI {
     }
 
     public void drawTradeScreen() {
+        g2.setColor(new Color(0, 0, 0, 0.7f));
+        g2.fill(screenArea);
 
         switch (subState) {
             case 0:
