@@ -553,6 +553,7 @@ public class KeyHandler implements KeyListener {
             }
             else if(gp.ui.commandNum == 1){
                 gp.gameState = gp.tittleState;
+                gp.restart();
             }
         }
 

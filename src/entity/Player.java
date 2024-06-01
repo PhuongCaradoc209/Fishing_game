@@ -76,7 +76,7 @@ public class Player extends Entity {
         //PLAYER STATUS
         maxPhysical = 16;
         physical = maxPhysical;
-        coin = 100;
+        coin = 0;
         currentFishingRod = new OBJ_FishingRod1(gp);
     }
 
