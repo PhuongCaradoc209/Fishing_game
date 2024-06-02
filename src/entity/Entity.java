@@ -24,19 +24,19 @@ public class Entity {
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public Rectangle solidArea;//by this, you can manage which part of tile can be collision
+    public Rectangle solidArea;// by this, you can manage which part of tile can be collision
     public boolean collisionOn = false;
     public int actionLookCounter = 0;
 
-    //DIALOG
+    // DIALOG
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
 
-    //CHARACTER PHYSICAL
+    // CHARACTER PHYSICAL
     public int maxPhysical;
     public int physical;
     public int coin;
-    //OBJ
+    // OBJ
     public BufferedImage image, image2, image3, image4, image5;
     public String name;
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Entity {
     public int amount = 1;
     public boolean stackable = false;
 
-    //FISH
+    // FISH
     public BufferedImage collection_image, tradeState_image;
     public int fishStar;
     public String fishRarity;
@@ -59,7 +59,7 @@ public class Entity {
     public String desFishing;
     public String desTrading = "";
 
-    //ROD
+    // ROD
     public int rod;
 
     public Entity(GamePanel gp) {
@@ -74,31 +74,31 @@ public class Entity {
         if (dialogues[dialogueIndex] == null) {
             gp.gameState = gp.playState;
             dialogueIndex = 0;
-        } else {
-            gp.ui.currentDialogue = dialogues[dialogueIndex];
-            dialogueIndex++;
-            switch (gp.player.direction) {
-                case "up":
-                    direction = "down";
-                    break;
-                case "down":
-                    direction = "up";
-                    break;
-                case "left":
-                    direction = "right";
-                    break;
-                case "right":
-                    direction = "left";
-                    break;
-            }
         }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+        switch (gp.player.direction) {
+            case "up":
+                direction = "down";
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "left":
+                direction = "right";
+                break;
+            case "right":
+                direction = "left";
+                break;
+        }
+
     }
 
     public void update(boolean isDuck) {
         setAction();
         collisionOn = isDuck;
 
-        if (gp.currentMap == 0){
+        if (gp.currentMap == 0) {
             gp.cChecker.checkObj(this, false);
             gp.cChecker.checkEntity(this, gp.npc);
             gp.cChecker.checkEntity(this, gp.animal);
@@ -107,9 +107,9 @@ public class Entity {
         gp.cChecker.checkTile(this, isDuck);
         gp.cChecker.checkAtEdge(this);
 
-        //IF COLLISION IS FALSE, PLAYER CAN MOVE
+        // IF COLLISION IS FALSE, PLAYER CAN MOVE
         if (!collisionOn) {
-//            System.out.println(direction);
+            // System.out.println(direction);
             switch (direction) {
                 case "up":
                     worldY -= speed;
@@ -154,21 +154,21 @@ public class Entity {
         double screenX = worldX - gp.player.worldX + gp.player.screenX;
         double screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        //STOP MOVING THE CAMERA AT EDGE (ENTITY CAN NOT MOVE IF AT EDGE)
-        //TOP
+        // STOP MOVING THE CAMERA AT EDGE (ENTITY CAN NOT MOVE IF AT EDGE)
+        // TOP
         if (gp.player.screenX >= gp.player.worldX) {
             screenX = worldX;
         }
-        //LEFT
+        // LEFT
         if (gp.player.screenY >= gp.player.worldY) {
             screenY = worldY;
         }
-        //RIGHT
+        // RIGHT
         double rightOffSet = gp.screenWidth - gp.player.screenX;
         if (rightOffSet >= gp.worldWidth - gp.player.worldX) {
             screenX = gp.screenWidth - (gp.worldWidth - worldX);
         }
-        //BOTTOM
+        // BOTTOM
         double bottomOffSet = gp.screenHeight - gp.player.screenY;
         if (bottomOffSet >= gp.worldHeight - gp.player.worldY) {
             screenY = gp.screenHeight - (gp.worldHeight - worldY);
@@ -240,7 +240,7 @@ public class Entity {
                 }
                 break;
         }
-        //IF PLAYER AT THE EDGE
+        // IF PLAYER AT THE EDGE
         if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
@@ -258,7 +258,8 @@ public class Entity {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(imagePath + ".png")));
+            image = ImageIO
+                    .read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(imagePath + ".png")));
             image = uTool.scaleImage(image, width, height);
         } catch (IOException e) {
             e.printStackTrace();

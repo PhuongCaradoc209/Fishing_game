@@ -48,7 +48,7 @@ public class UI {
     public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
 
 
-    public Entity npc,cow;
+    public Entity npc, cow;
     private int counter = 0;
 
     //FISHING GAMEPLAY
@@ -1297,7 +1297,7 @@ public class UI {
                 int grassIndex = gp.player.searchItemInInventory("Grass");
                 // int grassAmount = ;
 
-                if(grassIndex != 999){
+                if(grassIndex != 100){
                     // delete a grass
                     gp.player.inventory.get(grassIndex).tradeCount--;
                     gp.player.inventory.remove(grassIndex);

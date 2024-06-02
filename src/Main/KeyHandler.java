@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -492,7 +493,7 @@ public class KeyHandler implements KeyListener {
         }
 
         if (key == KeyEvent.VK_ENTER) {
-            gp.gameState = gp.feedCowYesState;
+            gp.gameState = gp.playState;
         }
     }
 

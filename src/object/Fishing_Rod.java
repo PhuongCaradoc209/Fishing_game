@@ -81,7 +81,7 @@ public class Fishing_Rod {
         rod[9] = setup("GoFishing/dinoCatchFish20", gp.tileSize, gp.tileSize);
 
 
-        cast[0][0] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
+        cast[0][0] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize); 
         cast[0][1] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
         cast[0][2] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
         cast[0][3] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
