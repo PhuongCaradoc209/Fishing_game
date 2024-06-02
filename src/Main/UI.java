@@ -9,6 +9,8 @@ import object.OBJ_PHYSICAL;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,25 +21,34 @@ import java.util.Random;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
+
+    //FONT AND TEXT
     Font pixel;
     Font font, font1,font1a, font2, font3, font3a, font4, font4a,font4b, font5, font6, font7,font8;
-    BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2, fishImage;
     public String currentDialogue = "";
     public String currentNotification = "";
     public String currentTittle = "";
+
+    //GRAPHICS
+    private final BufferedImage physical_0, physical_0_5, physical_1, physical_1_5, physical_2;
+    private final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin, bar_outside, bar_background, target;
+    BufferedImage image, fishFrame, fishImage;
+    private Area screenArea;
+    private Color colorOfVolume;
+    private BasicStroke defaultStroke;
+
+    //SETTING
     public int commandNum = 0;
     int subState = 0;
     public int playerSlotCol = 0,playerSlotRow = 0;
     public int npcSlotCol = 0, npcSlotRow = 0;
-    BufferedImage image, fishFrame;
-
     public int collectionSlotCol = 0,collectionSlotRow = 0;
     public int inventorySlotCol = 0,inventorySlotRow = 0;
     public int commonFish = 0,uncommonFish = 0,rareFish = 0, legendaryFish = 0, total = 0;
     public String fishName = "", fishPrice = "", fishRarity = " ",desFishing  = " ",desCollections= " ";
-    final BufferedImage tittle, humanImg, dinoImg, humanUnselect, dinoUnselect, coin, bar_outside, bar_background, target;
 
-    public Entity npc;
+
+    public Entity npc,cow;
     private int counter = 0;
 
     //FISHING GAMEPLAY
@@ -60,6 +71,11 @@ public class UI {
         } catch (FontFormatException e) {
             throw new RuntimeException(e);
         }
+        //SET UP GRAPHICS
+        colorOfVolume = new Color(0x4155be);
+
+        //SET UP SCREEN AREA
+        screenArea = new Area(new Rectangle2D.Double(0, 0, gp.screenWidth, gp.screenHeight));
 
         //SET UP COIN IMAGE
         coin = setup("objects/coin_bronze", gp.tileSize, gp.tileSize);
@@ -107,6 +123,7 @@ public class UI {
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
+        defaultStroke = new BasicStroke(3);
 
         g2.setFont(pixel);
         g2.setColor(Color.white);
@@ -154,6 +171,7 @@ public class UI {
         }
         //INVENTORY STATE
         else if (gp.gameState == gp.inventoryState) {
+            drawPlayerCoin();
             drawInventoryScreen();
         }
         //FISHING STATE
@@ -492,16 +510,18 @@ public class UI {
     }
 
     public void drawOptionScreen() {
-        g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(32F));
+        g2.setColor(new Color(0, 0, 0, 0.7f));
+        g2.fill(screenArea);
 
         //SUB WINDOW
         int frameX = gp.tileSize * 6;
         int frameY = gp.tileSize;
         int frameWidth = gp.tileSize * 8;
         int frameHeight = gp.tileSize * 10;
-        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
-
+//        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+        drawSubWindow1(frameX, frameY, frameWidth, frameHeight, new Color(0x94a2e3), Color.BLACK, 2, 25);
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(32F));
         switch (subState) {
             case 0:
                 option_top(frameX, frameY);
@@ -595,10 +615,11 @@ public class UI {
             }
         }
 
+        g2.setColor(colorOfVolume);
         //FULL SCREEN CHECK BOX
         textX = frameX + (int) (gp.tileSize * 4.5);
         textY = frameY + gp.tileSize * 2 + 35;
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(defaultStroke);
         g2.drawRect(textX, textY, 24, 24);
         if (gp.fullScreenOn) {
             g2.fillRect(textX, textY, 24, 24);
@@ -609,15 +630,16 @@ public class UI {
         g2.drawRect(textX, textY+6, 120, 12);
         int volumeWidth = 24 * gp.music.volumeScale;
         g2.fillRect(textX, textY+6, volumeWidth, 12);
-        g2.fillRoundRect(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,5,5);
+        drawSubWindow1(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,colorOfVolume, Color.BLACK,2,5);
 
+        g2.setStroke(defaultStroke);
         //SE VOLUME
+        g2.setColor(colorOfVolume);
         textY += gp.tileSize;
         g2.drawRect(textX, textY+6, 120, 12);
         volumeWidth = 24 * gp.soundEffect.volumeScale;
         g2.fillRect(textX, textY+6, volumeWidth, 12);
-        g2.fillRoundRect(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,5,5);
-
+        drawSubWindow1(volumeWidth +5+ gp.tileSize * 41 / 4, textY , 13, 25,colorOfVolume, Color.BLACK,2,5);
     }
 
     private void options_fullScreenNotification(int frameX, int frameY) {
@@ -1280,9 +1302,9 @@ public class UI {
                     gp.player.inventory.get(grassIndex).tradeCount--;
                     gp.player.inventory.remove(grassIndex);
                     currentDialogue = "Cow gives you a bottle of pure cow's milk!";
-                    gp.player.canObtainItem(new OBJ_Milk(gp));
-                    int milkIndex = gp.player.searchItemInInventory("Milk");
-                    gp.player.inventory.get(milkIndex).tradeCount++;
+                    gp.player.canObtainItem(cow.inventory.get(0));
+                  //  int milkIndex = gp.player.searchItemInInventory("Milk");
+                    cow.inventory.get(0).tradeCount++;
                     gp.gameState = gp.feedCowYesState;
                 }
                 else {
@@ -1311,6 +1333,8 @@ public class UI {
     }
 
     public void drawTradeScreen() {
+        g2.setColor(new Color(0, 0, 0, 0.7f));
+        g2.fill(screenArea);
 
         switch (subState) {
             case 0:
@@ -1399,7 +1423,7 @@ public class UI {
             y = (int) (gp.tileSize * 5.5);
             width = (int) (gp.tileSize * 2.5);
             height = gp.tileSize;
-            drawSubWindow1(x, y, width, height,new Color(0xF4CE98), new Color(0x5e3622),10,30);
+            drawSubWindow1(x, y, width, height, new Color(0xF4CE98), new Color(0x5e3622), 10, 30);
             g2.drawImage(coin, x + 10, y + 10, 40, 40, null);
 
             int price = npc.inventory.get(itemIndex).price;
@@ -1407,13 +1431,13 @@ public class UI {
             x = getXforAlignToRightText(text, gp.tileSize * 8);
             g2.drawString(text, x - 28, y + 45);
             //Description
-            int textX = gp.tileSize*2 + 20;
-            int textY = gp.tileSize*6 + gp.tileSize * 3/4;
+            int textX = gp.tileSize * 2 + 20;
+            int textY = gp.tileSize * 6 + gp.tileSize * 3 / 4;
             setFontAndColor(font4, new Color(0xF5e3622));
-            g2.drawString(npc.inventory.get(itemIndex).name,textX,textY);
+            g2.drawString(npc.inventory.get(itemIndex).name, textX, textY);
             textY += 30;
             setFontAndColor(font3a, new Color(0xF5e3622));
-            for(String line: npc.inventory.get(itemIndex).desTrading.split("\n")){
+            for (String line : npc.inventory.get(itemIndex).desTrading.split("\n")) {
                 g2.drawString(line, textX, textY);
                 textY += 20;
             }
@@ -1426,36 +1450,41 @@ public class UI {
                     currentDialogue = "You need more coin to buy that!";
                     drawDialogueScreen();
                 } else {
-                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
-                        gp.player.coin -= npc.inventory.get(itemIndex).price;
-                        npc.inventory.get(itemIndex).tradeCount ++;
-                        if(npc.inventory.get(itemIndex).name == "Fishing Rod 1" || npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3"){
-
-                            //Change default fishingRod
-                            gp.player.currentFishingRod = npc.inventory.get(itemIndex);
-
-                            //remove item in npc inventory
-                            npc.inventory.remove(itemIndex);
-
-                            //remove item in player inventory
-                            if(gp.player.currentFishingRod.name == "Fishing Rod 2"){
-                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
-                                gp.player.inventory.remove(previousItemIndex);
-                            }
-                            if(gp.player.currentFishingRod.name == "Fishing Rod 3"){
-                                int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
-                                gp.player.inventory.remove(previousItemIndex);
-                            }
-                        }
-                    } else {
+                    if (gp.player.currentFishingRod.name == "Fishing Rod 1" && npc.inventory.get(itemIndex).name == "Fishing Rod 3") {
                         subState = 0;
                         gp.gameState = gp.dialogueState;
-                        currentDialogue = "You cannot carry any more!";
+                        currentDialogue = "You need to buy Fising Rod 2 first!";
+                    } else {
+                        if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                            gp.player.coin -= npc.inventory.get(itemIndex).price;
+                            npc.inventory.get(itemIndex).tradeCount++;
+                            if (npc.inventory.get(itemIndex).name == "Fishing Rod 2" || npc.inventory.get(itemIndex).name == "Fishing Rod 3") {
 
+                                //Change default fishingRod
+                                gp.player.currentFishingRod = npc.inventory.get(itemIndex);
+
+                                //remove item in npc inventory
+                                npc.inventory.remove(itemIndex);
+
+                                //remove item in player inventory
+                                if (gp.player.currentFishingRod.name == "Fishing Rod 2") {
+                                    int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 1");
+                                    gp.player.inventory.remove(previousItemIndex);
+                                }
+                                if (gp.player.currentFishingRod.name == "Fishing Rod 3") {
+                                    int previousItemIndex = gp.player.searchItemInInventory("Fishing Rod 2");
+                                    gp.player.inventory.remove(previousItemIndex);
+                                }
+                            }
+                        } else {
+                            subState = 0;
+                            gp.gameState = gp.dialogueState;
+                            currentDialogue = "You cannot carry any more!";
+
+                        }
                     }
                 }
             }
-
         }
     }
 

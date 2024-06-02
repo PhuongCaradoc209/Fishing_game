@@ -69,6 +69,7 @@ public class KeyHandler implements KeyListener {
             // COLLECTION STATE
             else if (gp.gameState == gp.collectionState) {
                 collectionState(key);
+            // INVENTORY STATE
             } else if (gp.gameState == gp.inventoryState) {
                 inventoryState(key);
             }
@@ -83,18 +84,19 @@ public class KeyHandler implements KeyListener {
 
             // Feed Cow Yes State
             else if (gp.gameState == gp.feedCowYesState) {
-                feedCowYesState(key);
-              
-            // Game Over State
+                feedCowYesState(key);}
+
+                // Game Over State
             else if (gp.gameState == gp.gameOverState) {
-                gameOverState(key);
+                    gameOverState(key);
+
+                }
+            } else if (gp.currentMap == 1) {
+                gameFishTankState(key);
 
             }
-        } else if (gp.currentMap == 1) {
-            gameFishTankState(key);
-
         }
-    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
