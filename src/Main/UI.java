@@ -171,6 +171,7 @@ public class UI {
         }
         //INVENTORY STATE
         else if (gp.gameState == gp.inventoryState) {
+            drawPlayerCoin();
             drawInventoryScreen();
         }
         //FISHING STATE

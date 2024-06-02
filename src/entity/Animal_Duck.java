@@ -23,7 +23,7 @@ public class Animal_Duck extends Entity {
         solidArea.x = 0;
         solidArea.y = 0;
         solidArea.width = size + 10;
-        solidArea.height = size/2 + 10;
+        solidArea.height = size*2 + 10;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }

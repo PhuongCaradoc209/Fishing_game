@@ -153,6 +153,9 @@ public class AssetSetter {
         gp.obj[mapNum].get(i).worldX = (23 * gp.tileSize) - 15;
         gp.obj[mapNum].get(i).worldY = (13 * gp.tileSize) - 15;
         i++;
+//        gp.obj[mapNum].add(new OBJ_Tree(gp));
+//        gp.obj[mapNum].get(i).worldX = 16 * gp.tileSize - 20;
+//        gp.obj[mapNum].get(i).worldY = 11 * gp.tileSize + 20;
 
         mapNum = 1;
         i = 0;
