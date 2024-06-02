@@ -69,33 +69,38 @@ public class KeyHandler implements KeyListener {
             // COLLECTION STATE
             else if (gp.gameState == gp.collectionState) {
                 collectionState(key);
+            }
+
             // INVENTORY STATE
-            } else if (gp.gameState == gp.inventoryState) {
+            else if (gp.gameState == gp.inventoryState) {
                 inventoryState(key);
             }
+
             // TRADE STATE
             else if (gp.gameState == gp.tradeState) {
                 tradeState(key);
             }
-            // Feed Cow State
+
+            // FEED COW STATE
             else if (gp.gameState == gp.feedCowState) {
                 feedCowState(key);
             }
 
             // Feed Cow Yes State
             else if (gp.gameState == gp.feedCowYesState) {
-                feedCowYesState(key);}
+                feedCowYesState(key);
+            }
 
-                // Game Over State
+            // Game Over State
             else if (gp.gameState == gp.gameOverState) {
-                    gameOverState(key);
-
-                }
-            } else if (gp.currentMap == 1) {
-                gameFishTankState(key);
+                gameOverState(key);
 
             }
+        } else if (gp.currentMap == 1) {
+            gameFishTankState(key);
+
         }
+    }
 
 
     @Override
@@ -210,6 +215,7 @@ public class KeyHandler implements KeyListener {
             gp.gameState = gp.optionState;
             gp.music.stop("Bird");
             gp.music.stop("Background");
+            gp.playSoundEffect("Music", 10);
         }
 
         if (key == KeyEvent.VK_H) {
@@ -267,11 +273,12 @@ public class KeyHandler implements KeyListener {
     public void optionState(int key) {
         if (key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
+            gp.playSoundEffect("Menu", 10);
             gp.ui.subState = 0;
         }
         if (key == KeyEvent.VK_ENTER) {
             enterPressed = true;
-            gp.playSoundEffect("click_sound", 7);
+            gp.playSoundEffect("Menu_setting", 12);
         }
         int maxCommandNum;
         switch (gp.ui.subState) {
@@ -279,14 +286,14 @@ public class KeyHandler implements KeyListener {
                 maxCommandNum = 5;
                 if (key == KeyEvent.VK_W) {
                     gp.ui.commandNum--;
-                    gp.playSoundEffect("select_sound", 6);
+                    gp.playSoundEffect("Menu_button", 11);
                     if (gp.ui.commandNum < 0) {
                         gp.ui.commandNum = maxCommandNum;
                     }
                 }
                 if (key == KeyEvent.VK_S) {
                     gp.ui.commandNum++;
-                    gp.playSoundEffect("select_sound", 6);
+                    gp.playSoundEffect("Menu_button", 11);
                     if (gp.ui.commandNum > maxCommandNum) {
                         gp.ui.commandNum = 0;
                     }
@@ -296,11 +303,11 @@ public class KeyHandler implements KeyListener {
                         if (gp.ui.commandNum == 1 && gp.music.volumeScale > 0) {
                             gp.music.volumeScale--;
                             gp.music.checkVolume();
-                            gp.playSoundEffect("select_sound", 6);
+                            gp.playSoundEffect("Menu_setting", 12);
                         }
                         if (gp.ui.commandNum == 2 && gp.soundEffect.volumeScale > 0) {
                             gp.soundEffect.volumeScale--;
-                            gp.playSoundEffect("select_sound", 6);
+                            gp.playSoundEffect("Menu_setting", 12);
                         }
                     }
                 }
@@ -309,15 +316,15 @@ public class KeyHandler implements KeyListener {
                         if (gp.ui.commandNum == 1 && gp.music.volumeScale >= 0) {
                             if (gp.music.volumeScale < 5) {
                                 gp.music.volumeScale++;
+                                gp.music.checkVolume();
+                                gp.playSoundEffect("Menu_setting", 12);
                             }
-                            gp.music.checkVolume();
-                            gp.playSoundEffect("select_sound", 6);
                         }
                         if (gp.ui.commandNum == 2 && gp.soundEffect.volumeScale >= 0) {
                             if (gp.soundEffect.volumeScale < 5) {
                                 gp.soundEffect.volumeScale++;
+                                gp.playSoundEffect("Menu_setting", 12);
                             }
-                            gp.playSoundEffect("select_sound", 6);
                         }
                     }
                 }
@@ -373,25 +380,25 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_D) {
             if (gp.ui.collectionSlotCol != 3) {
                 gp.ui.collectionSlotCol++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_A) {
             if (gp.ui.collectionSlotCol != 0) {
                 gp.ui.collectionSlotCol--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_W) {
             if (gp.ui.collectionSlotRow != 0) {
                 gp.ui.collectionSlotRow--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_S) {
             if (gp.ui.collectionSlotRow != 3) {
                 gp.ui.collectionSlotRow++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
 
         } else if (key == KeyEvent.VK_C || key == KeyEvent.VK_ESCAPE) {
@@ -403,25 +410,25 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_D) {
             if (gp.ui.inventorySlotCol != 4) {
                 gp.ui.inventorySlotCol++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_A) {
             if (gp.ui.inventorySlotCol != 0) {
                 gp.ui.inventorySlotCol--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_W) {
             if (gp.ui.inventorySlotRow != 0) {
                 gp.ui.inventorySlotRow--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_S) {
             if (gp.ui.inventorySlotRow != 3) {
                 gp.ui.inventorySlotRow++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
 
         } else if (key == KeyEvent.VK_B || key == KeyEvent.VK_ESCAPE) {
@@ -440,14 +447,14 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum < 0) {
                     gp.ui.commandNum = 2;
                 }
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("Menu_button", 11);
             }
             if (key == KeyEvent.VK_S) {
                 gp.ui.commandNum++;
                 if (gp.ui.commandNum > 2) {
                     gp.ui.commandNum = 0;
                 }
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("Menu_button", 11);
             }
         }
         if (gp.ui.subState == 1) {
@@ -500,25 +507,25 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_W) {
             if (gp.ui.playerSlotRow != 0) {
                 gp.ui.playerSlotRow--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_S) {
             if (gp.ui.playerSlotRow != 3) {
                 gp.ui.playerSlotRow++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_A) {
             if (gp.ui.playerSlotCol != 0) {
                 gp.ui.playerSlotCol--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_D) {
             if (gp.ui.playerSlotCol != 4) {
                 gp.ui.playerSlotCol++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
     }
@@ -527,30 +534,30 @@ public class KeyHandler implements KeyListener {
         if (key == KeyEvent.VK_W) {
             if (gp.ui.npcSlotRow != 0) {
                 gp.ui.npcSlotRow--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_S) {
             if (gp.ui.npcSlotRow != 3) {
                 gp.ui.npcSlotRow++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_A) {
             if (gp.ui.npcSlotCol != 0) {
                 gp.ui.npcSlotCol--;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
         if (key == KeyEvent.VK_D) {
             if (gp.ui.npcSlotCol != 4) {
                 gp.ui.npcSlotCol++;
-                gp.playSoundEffect("select_sound", 6);
+                gp.playSoundEffect("selectItem", 13);
             }
         }
     }
 
-    public void gameOverState(int key){
+    public void gameOverState(int key) {
 
         if (key == KeyEvent.VK_W) {
             gp.ui.commandNum--;
@@ -566,12 +573,11 @@ public class KeyHandler implements KeyListener {
             }
             gp.playSoundEffect("select_sound", 6);
         }
-        if(key == KeyEvent.VK_ENTER){
-            if(gp.ui.commandNum == 0){
+        if (key == KeyEvent.VK_ENTER) {
+            if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
                 gp.restart();
-            }
-            else if(gp.ui.commandNum == 1){
+            } else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.tittleState;
                 gp.restart();
             }

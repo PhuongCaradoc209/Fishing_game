@@ -26,6 +26,11 @@ public class Sound {
         soundURL[7] = getClass().getResource("/sound/click_sound.wav");
         soundURL[8] = getClass().getResource("/sound/cow_umbo.wav");
         soundURL[9] = getClass().getResource("/sound/start_FishTank.wav");
+        soundURL[10] = getClass().getResource("/sound/Menu.wav");
+        soundURL[11] = getClass().getResource("/sound/Menu_Button.wav");
+        soundURL[12] = getClass().getResource("/sound/Menu_setting.wav");
+        soundURL[13] = getClass().getResource("/sound/selectItem.wav");
+        soundURL[14] = getClass().getResource("/sound/clickItem.wav");
     }
 
     public void setField(int i) {
