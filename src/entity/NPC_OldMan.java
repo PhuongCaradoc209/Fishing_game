@@ -52,8 +52,8 @@ public class NPC_OldMan extends Entity {
 
     public void speak() {
         super.speak();
-        gp.gameState = gp.tradeState;
         gp.ui.npc = this;
+        gp.gameState = gp.tradeState;
     }
 
     public void update(boolean isDuck) {

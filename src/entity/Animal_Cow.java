@@ -113,6 +113,7 @@ public class Animal_Cow extends Entity {
     @Override
     public void speak(){
         super.speak();
+        gp.ui.cow = this;
         gp.gameState = gp.feedCowState;
     }
 
@@ -139,6 +140,10 @@ public class Animal_Cow extends Entity {
         double bottomOffSet = gp.screenHeight - gp.player.screenY;
         if (bottomOffSet >= gp.worldHeight - gp.player.worldY) {
             screenY = gp.screenHeight - (gp.worldHeight - worldY);
+        }
+
+        if(!direction.equals("stand") && !direction.equals("eat")) {
+            direction = "eat";
         }
         ////////////////////////
         if (direction.equals("stand")) {
