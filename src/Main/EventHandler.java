@@ -47,7 +47,7 @@ public class EventHandler {
                         outOfEnergy(gp.notificationState);
 
                         //GameOver
-                        if(gp.player.coin < 5){
+                        if(gp.player.coin < 5 || gp.player.searchItemInInventory( "Milk") == 100){
                             gameOver(gp.gameOverState);
                         }
                     }
