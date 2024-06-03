@@ -705,6 +705,7 @@ public class UI {
             if (gp.keyHandler.enterPressed) {
                 subState = 0;
                 gp.gameState = gp.tittleState;
+                gp.restart();
             }
         }
 
