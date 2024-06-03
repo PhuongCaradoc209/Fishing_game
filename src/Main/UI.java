@@ -1072,7 +1072,7 @@ public class UI {
                 gp.player.inventory.get(choose).tradeCount--;
                 gp.player.inventory.remove(choose);
 
-                gp.eHandler.addPhysical(4);
+                gp.eHandler.addPhysical(8);
             }
         }
 
