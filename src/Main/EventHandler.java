@@ -94,7 +94,12 @@ public class EventHandler {
     }
 
     public void addPhysical(int amount) {
-        gp.player.physical += amount;
+        if (gp.player.physical <= amount) {
+            gp.player.physical += amount;
+        } else {
+            amount = gp.player.maxPhysical - gp.player.physical;
+            gp.player.physical += amount;
+        }
     }
 
     public void outOfEnergy(int game_State)
