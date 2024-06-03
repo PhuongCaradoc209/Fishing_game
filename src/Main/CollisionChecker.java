@@ -75,18 +75,8 @@ public class CollisionChecker {
         int entityTopRow = (int) (entityTopWorldY / gp.tileSize);
         int entityBottomRow = (int) (entityBottomWorldY / gp.tileSize);
 
-//        System.out.println("leftx " + entityLeftWorldX);
-//        System.out.println("rightx " + entityRightWorldX);
-//        System.out.println("right " + entityRightCol);
-//        System.out.println("left " + entityLeftCol);
-//
-//        System.out.println("topy " + entityTopWorldY);
-//        System.out.println("boty " + entityBottomWorldY);
-//        System.out.println("topr " + entityTopRow);
-//        System.out.println("botr " + entityBottomRow);
-
         //CHECK WHICH ARE TWO TILES FOR TWO SIDES OF ENTITY
-        int tileNum1, tileNum2;
+        int tileNum1 = 1, tileNum2 = 1;
         if (entity.direction.equals("up") || entity.direction.equals("diagonalUpLeft") || entity.direction.equals("diagonalUpRight")){
             //because when Entity go up, the first one that interacts with tiles is Top Edge,
             entityTopRow = (int) ((entityTopWorldY - entity.speed) / gp.tileSize);
@@ -95,34 +85,33 @@ public class CollisionChecker {
             tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
             //tileNum1 is the point at the right-top conner of the entity
             tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
-            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                entity.collisionOn = !isDuck;
-            }
         }
         if (entity.direction.equals("down") || entity.direction.equals("diagonalDownLeft") || entity.direction.equals("diagonalDownRight")){
             entityBottomRow = (int) ((entityBottomWorldY + entity.speed) / gp.tileSize);
             tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
             tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
-            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                entity.collisionOn = !isDuck;
-            }
         }
         if (entity.direction.equals("left") || entity.direction.equals("diagonalUpLeft") || entity.direction.equals("diagonalDownLeft")) {
             entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / gp.tileSize);
             tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityLeftCol];
             tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityLeftCol];
-            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                entity.collisionOn = !isDuck;
-            }
         }
         if (entity.direction.equals("right") || entity.direction.equals("diagonalUpRight") || entity.direction.equals("diagonalDownRight")) {
             entityRightCol = (int) ((entityRightWorldX + entity.speed) / gp.tileSize);
             tileNum1 = gp.tileMgr.mapTileNum[gp.currentMap][entityTopRow][entityRightCol];
             tileNum2 = gp.tileMgr.mapTileNum[gp.currentMap][entityBottomRow][entityRightCol];
-            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
-                entity.collisionOn = !isDuck;
+        }
+        if(isDuck){
+            if (gp.tileMgr.tile[tileNum1].collision && gp.tileMgr.tile[tileNum2].collision) {
+                entity.collisionOn = false;
             }
         }
+        else {
+            if (gp.tileMgr.tile[tileNum1].collision || gp.tileMgr.tile[tileNum2].collision) {
+                entity.collisionOn = true;
+            }
+        }
+    }
 
 //        switch (entity.direction) {
 //            case "up":
@@ -165,7 +154,7 @@ public class CollisionChecker {
 //                }
 //                break;
 //        }
-    }
+//    }
 
 
     // public boolean checkNearWater(Entity entity){

@@ -2,6 +2,10 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import object.OBJ_FishingRod2;
+import object.OBJ_FishingRod3;
+import object.OBJ_Grass;
+import object.OBJ_Milk;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,6 +18,7 @@ public class Animal_Cow extends Entity {
         super(gp);
         name = "Cow";
         speed = 2;
+        setItem();
         getImage();
         direction = "stand";
         size = gp.tileSize * 2;
@@ -24,6 +29,12 @@ public class Animal_Cow extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         dialogues[0] = "Do you want to feed the cow?";
+        // dialogues[1] = "Cow gives you a bottle of pure cow's milk!";
+        gp.ui.cow = this;
+    }
+
+    public void setItem(){
+        inventory.add(new OBJ_Milk(gp));
     }
 
     public void getImage() {
@@ -102,6 +113,7 @@ public class Animal_Cow extends Entity {
     @Override
     public void speak(){
         super.speak();
+        gp.ui.cow = this;
         gp.gameState = gp.feedCowState;
     }
 
@@ -128,6 +140,10 @@ public class Animal_Cow extends Entity {
         double bottomOffSet = gp.screenHeight - gp.player.screenY;
         if (bottomOffSet >= gp.worldHeight - gp.player.worldY) {
             screenY = gp.screenHeight - (gp.worldHeight - worldY);
+        }
+
+        if(!direction.equals("stand") && !direction.equals("eat")) {
+            direction = "eat";
         }
         ////////////////////////
         if (direction.equals("stand")) {
