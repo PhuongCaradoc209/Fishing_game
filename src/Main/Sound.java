@@ -33,6 +33,7 @@ public class Sound {
         soundURL[14] = getClass().getResource("/sound/clickItem.wav");
         soundURL[15] = getClass().getResource("/sound/FishingRod.wav");
         soundURL[16] = getClass().getResource("/sound/spash.wav");
+        soundURL[17] = getClass().getResource("/sound/dialogAuto.wav");
     }
 
     public void setField(int i) {
@@ -57,6 +58,11 @@ public class Sound {
     }
 
     public void playSE(String soundName) {
+        clip.start();
+    }
+
+    public void playSpecifiedSE(String soundName) {
+        activeClips.put(soundName, clip);
         clip.start();
     }
 
