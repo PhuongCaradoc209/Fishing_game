@@ -113,7 +113,6 @@ public class Animal_Cow extends Entity {
     @Override
     public void speak(){
         super.speak();
-        gp.ui.cow = this;
         gp.gameState = gp.feedCowState;
     }
 

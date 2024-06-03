@@ -92,6 +92,11 @@ public class EventHandler {
     {
         gp.player.physical -= level_Rod;
     }
+
+    public void addPhysical(int amount) {
+        gp.player.physical += amount;
+    }
+
     public void outOfEnergy(int game_State)
     {
         gp.gameState = game_State;
