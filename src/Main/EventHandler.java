@@ -94,11 +94,10 @@ public class EventHandler {
     }
 
     public void addPhysical(int amount) {
-        if (gp.player.physical <= amount) {
+        if (gp.player.physical <= gp.player.maxPhysical - amount) {
             gp.player.physical += amount;
         } else {
-            amount = gp.player.maxPhysical - gp.player.physical;
-            gp.player.physical += amount;
+            gp.player.physical = gp.player.maxPhysical;
         }
     }
 
