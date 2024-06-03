@@ -119,7 +119,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2 = (Graphics2D) tempScreen.getGraphics();
 
 
-        setFullScreen();
+//        setFullScreen();
     }
 
     public void restart(){
