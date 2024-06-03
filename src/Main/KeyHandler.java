@@ -427,7 +427,13 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect("selectItem", 13);
             }
 
-        } else if (key == KeyEvent.VK_B || key == KeyEvent.VK_ESCAPE) {
+        } 
+        
+        if (key == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+
+        else if (key == KeyEvent.VK_B || key == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
