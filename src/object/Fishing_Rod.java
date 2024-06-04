@@ -230,6 +230,7 @@ public class Fishing_Rod {
     }
 
     public boolean isFacingWater() {
+        if(player.direction !="standRight" && player.direction != "standLeft") return false;
         double yMap = player.worldX / gp.tileSize;
         double xMap = player.worldY / gp.tileSize;
         int distance = 1;
@@ -339,20 +340,6 @@ public class Fishing_Rod {
                     if (timer >= delay) {
                         timer = 0;
                     }
-        if (isFishing) {
-            
-            if (castFrame >= 11) {
-                // reset();
-                
-                key.AnnouceCompleteAnimation = true;
-                return;
-            }
-            if (timer == 0) {
-                if (castFrame == 1 || castFrame == 2) {
-                    castFrame++;
-                } else {
-                    rodFrame++;
-                    castFrame++;
                 }
             }
         }
