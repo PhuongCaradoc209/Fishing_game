@@ -16,21 +16,25 @@ public class Fishing_Rod {
     GamePanel gp;
     Player player;
     KeyHandler key;
+
     private static final int duration = 120;
     private static final int originalFrame = 12;
     private static final double delay = duration / originalFrame;
     private int timer = 0;
     private int level = 1;
-
+    public static String playerType = "";
     private boolean isFishing = false;
+    private boolean addedImage = false;
 
     // animation
     public BufferedImage[][] cast = new BufferedImage[3][12];
-    public BufferedImage[] rod = new BufferedImage[10];
+    public BufferedImage[] rod = new BufferedImage[12];
+    public BufferedImage[] rod2 = new BufferedImage[12];
 
     // animation management
     private int castFrame = 0;
     private int rodFrame = 0;
+    private int rod2Frame = 0;
 
     public BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool uTool = new UtilityTool();
@@ -62,9 +66,9 @@ public class Fishing_Rod {
         this.player = player;
         this.key = key;
 
-        // load image
-        humanGoFishing();
-        
+        // // load image
+        // humanGoFishing();
+
     }
 
     public void dinoGoFishing() {
@@ -78,28 +82,94 @@ public class Fishing_Rod {
         rod[6] = setup("GoFishing/dinoCatchFish14", gp.tileSize, gp.tileSize);
         rod[7] = setup("GoFishing/dinoCatchFish16", gp.tileSize, gp.tileSize);
         rod[8] = setup("GoFishing/dinoCatchFish18", gp.tileSize, gp.tileSize);
+
         rod[9] = setup("GoFishing/dinoCatchFish20", gp.tileSize, gp.tileSize);
+        rod2[0] = setup("GoFishing/dinoCatchFish21", gp.tileSize, gp.tileSize);
 
+        rod[10] = setup("GoFishing/dinoCatchFish23", gp.tileSize, gp.tileSize);
+        rod2[1] = setup("GoFishing/dinoCatchFish24", gp.tileSize, gp.tileSize);
 
-        cast[0][0] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize); 
-        cast[0][1] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][2] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][3] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][4] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][5] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][6] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][7] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][8] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][9] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][10] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
-        cast[0][11] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
+        rod[11] = setup("GoFishing/dinoCatchFish26", gp.tileSize, gp.tileSize);
+        rod2[2] = setup("GoFishing/dinoCatchFish27", gp.tileSize, gp.tileSize);
 
+        cast[0][0] = setup("GoFishing/dinoCatchFish1", gp.tileSize, gp.tileSize);
+        cast[0][1] = setup("GoFishing/dinoCatchFish3", gp.tileSize, gp.tileSize);
+        cast[0][2] = setup("GoFishing/dinoCatchFish5", gp.tileSize, gp.tileSize);
+        cast[0][3] = setup("GoFishing/dinoCatchFish7", gp.tileSize, gp.tileSize);
+        cast[0][4] = setup("GoFishing/dinoCatchFish9", gp.tileSize, gp.tileSize);
+        cast[0][5] = setup("GoFishing/dinoCatchFish11", gp.tileSize, gp.tileSize);
+        cast[0][6] = setup("GoFishing/dinoCatchFish13", gp.tileSize, gp.tileSize);
+        cast[0][7] = setup("GoFishing/dinoCatchFish15", gp.tileSize, gp.tileSize);
+        cast[0][8] = setup("GoFishing/dinoCatchFish17", gp.tileSize, gp.tileSize);
+        cast[0][9] = setup("GoFishing/dinoCatchFish19", gp.tileSize, gp.tileSize);
+        cast[0][10] = setup("GoFishing/dinoCatchFish22", gp.tileSize, gp.tileSize);
+        cast[0][11] = setup("GoFishing/dinoCatchFish25", gp.tileSize, gp.tileSize);
+
+        // LEVEL 2
+        rod[0] = setup("GoFishing/dinoCatchFishGreen2", gp.tileSize, gp.tileSize);
+        rod[1] = setup("GoFishing/dinoCatchFishGreen4", gp.tileSize, gp.tileSize);
+        rod[2] = setup("GoFishing/dinoCatchFishGreen6", gp.tileSize, gp.tileSize);
+        rod[3] = setup("GoFishing/dinoCatchFishGreen8", gp.tileSize, gp.tileSize);
+        rod[4] = setup("GoFishing/dinoCatchFishGreen10", gp.tileSize, gp.tileSize);
+        rod[5] = setup("GoFishing/dinoCatchFishGreen12", gp.tileSize, gp.tileSize);
+        rod[6] = setup("GoFishing/dinoCatchFishGreen14", gp.tileSize, gp.tileSize);
+        rod[7] = setup("GoFishing/dinoCatchFishGreen16", gp.tileSize, gp.tileSize);
+        rod[8] = setup("GoFishing/dinoCatchFishGreen18", gp.tileSize, gp.tileSize);
+
+        rod[9] = setup("GoFishing/dinoCatchFishGreen20", gp.tileSize, gp.tileSize);
+
+        rod[10] = setup("GoFishing/dinoCatchFishGreen23", gp.tileSize, gp.tileSize);
+
+        rod[11] = setup("GoFishing/dinoCatchFishGreen26", gp.tileSize, gp.tileSize);
+
+        cast[1][0] = setup("GoFishing/dinoCatchFishGreen1", gp.tileSize, gp.tileSize);
+        cast[1][1] = setup("GoFishing/dinoCatchFishGreen3", gp.tileSize, gp.tileSize);
+        cast[1][2] = setup("GoFishing/dinoCatchFishGreen5", gp.tileSize, gp.tileSize);
+        cast[1][3] = setup("GoFishing/dinoCatchFishGreen7", gp.tileSize, gp.tileSize);
+        cast[1][4] = setup("GoFishing/dinoCatchFishGreen9", gp.tileSize, gp.tileSize);
+        cast[1][5] = setup("GoFishing/dinoCatchFishGreen11", gp.tileSize, gp.tileSize);
+        cast[1][6] = setup("GoFishing/dinoCatchFishGreen13", gp.tileSize, gp.tileSize);
+        cast[1][7] = setup("GoFishing/dinoCatchFishGreen15", gp.tileSize, gp.tileSize);
+        cast[1][8] = setup("GoFishing/dinoCatchFishGreen17", gp.tileSize, gp.tileSize);
+        cast[1][9] = setup("GoFishing/dinoCatchFishGreen19", gp.tileSize, gp.tileSize);
+        cast[1][10] = setup("GoFishing/dinoCatchFishGreen22", gp.tileSize, gp.tileSize);
+        cast[1][11] = setup("GoFishing/dinoCatchFishGreen25", gp.tileSize, gp.tileSize);
+
+        // LEVEL 3
+        rod[0] = setup("GoFishing/dinoCatchFishPink2", gp.tileSize, gp.tileSize);
+        rod[1] = setup("GoFishing/dinoCatchFishPink4", gp.tileSize, gp.tileSize);
+        rod[2] = setup("GoFishing/dinoCatchFishPink6", gp.tileSize, gp.tileSize);
+        rod[3] = setup("GoFishing/dinoCatchFishPink8", gp.tileSize, gp.tileSize);
+        rod[4] = setup("GoFishing/dinoCatchFishPink10", gp.tileSize, gp.tileSize);
+        rod[5] = setup("GoFishing/dinoCatchFishPink12", gp.tileSize, gp.tileSize);
+        rod[6] = setup("GoFishing/dinoCatchFishPink14", gp.tileSize, gp.tileSize);
+        rod[7] = setup("GoFishing/dinoCatchFishPink16", gp.tileSize, gp.tileSize);
+        rod[8] = setup("GoFishing/dinoCatchFishPink18", gp.tileSize, gp.tileSize);
+
+        rod[9] = setup("GoFishing/dinoCatchFishPink20", gp.tileSize, gp.tileSize);
+
+        rod[10] = setup("GoFishing/dinoCatchFishPink23", gp.tileSize, gp.tileSize);
+
+        rod[11] = setup("GoFishing/dinoCatchFishPink26", gp.tileSize, gp.tileSize);
+
+        cast[2][0] = setup("GoFishing/dinoCatchFishPink1", gp.tileSize, gp.tileSize);
+        cast[2][1] = setup("GoFishing/dinoCatchFishPink3", gp.tileSize, gp.tileSize);
+        cast[2][2] = setup("GoFishing/dinoCatchFishPink5", gp.tileSize, gp.tileSize);
+        cast[2][3] = setup("GoFishing/dinoCatchFishPink7", gp.tileSize, gp.tileSize);
+        cast[2][4] = setup("GoFishing/dinoCatchFishPink9", gp.tileSize, gp.tileSize);
+        cast[2][5] = setup("GoFishing/dinoCatchFishPink11", gp.tileSize, gp.tileSize);
+        cast[2][6] = setup("GoFishing/dinoCatchFishPink13", gp.tileSize, gp.tileSize);
+        cast[2][7] = setup("GoFishing/dinoCatchFishPink15", gp.tileSize, gp.tileSize);
+        cast[2][8] = setup("GoFishing/dinoCatchFishPink17", gp.tileSize, gp.tileSize);
+        cast[2][9] = setup("GoFishing/dinoCatchFishPink19", gp.tileSize, gp.tileSize);
+        cast[2][10] = setup("GoFishing/dinoCatchFishPink22", gp.tileSize, gp.tileSize);
+        cast[2][11] = setup("GoFishing/dinoCatchFishPink25", gp.tileSize, gp.tileSize);
     }
 
     public void humanGoFishing() {
         // LEVEL 1
         rod[0] = setup("GoFishing/catchfish2", gp.tileSize, gp.tileSize);
-        
+
         cast[0][0] = setup("GoFishing/catchfish1", gp.tileSize, gp.tileSize);
 
         cast[0][1] = setup("GoFishing/catchfish3", gp.tileSize, gp.tileSize);
@@ -183,16 +253,18 @@ public class Fishing_Rod {
         }
         int x = (int) xMap;
         int y = (int) yMap;
-        if (x == -1 || y == -1) return false;
-        
+        if (x == -1 || y == -1)
+            return false;
+
         int currentTile = gp.tileMgr.mapTileNum[gp.currentMap][x][y];
         // System.out.println(player.direction + " " + currentTile + " " + x + " " + y);
-        if ((currentTile >= 41 && currentTile <= 58) || (currentTile >= 74 && currentTile <= 82) || (currentTile >= 118 && currentTile <= 122)) {
+        if ((currentTile >= 41 && currentTile <= 58) || (currentTile >= 74 && currentTile <= 82)
+                || (currentTile >= 118 && currentTile <= 122)) {
             // System.out.println("trueeee");
             return true;
-        } else{
+        } else {
             // System.out.println("falseee");
-//            System.out.println(currentTile);
+            // System.out.println(currentTile);
             // System.out.println(player.direction);
             return false;
         }
@@ -200,62 +272,131 @@ public class Fishing_Rod {
 
     public void reset() {
         isFishing = false;
-        castFrame = 0; 
+        castFrame = 0;
         rodFrame = 0;
+        rod2Frame = 0;
         key.AnnouceCompleteAnimation = false;
     }
 
     public void update() {
+        if (!playerType.equals("") && addedImage == false) {
+            if (playerType.equals("Human")) {
+                humanGoFishing();
+                ;
+            } else {
+                dinoGoFishing();
+            }
+            addedImage = true;
+        }
+
         if (isFacingWater() == true && key.spacePressed == true) {
             isFishing = true;
         }
 
-        if (isFishing) {
-            if (castFrame >= 11) {
-                // reset();
-                key.AnnouceCompleteAnimation = true;
-                return;
-            }
-            if (timer == 0) {
-                if (castFrame == 1 || castFrame == 2) {
-                    castFrame++;
-                } else {
-                    rodFrame++;
-                    castFrame++;
+        if (!playerType.equals("")) {
+            if (playerType.equals("Human")) {
+                if (isFishing) {
+                    if (castFrame >= 11) {
+                        // reset();
+                        key.AnnouceCompleteAnimation = true;
+                        return;
+                    }
+                    if (timer == 0) {
+                        if (castFrame == 1 || castFrame == 2) {
+                            castFrame++;
+                        } else {
+                            rodFrame++;
+                            castFrame++;
+                        }
+                    }
+                    timer++;
+
+                    if (timer >= delay) {
+                        timer = 0;
+                    }
                 }
-            }
-            timer++;
-            if (timer >= delay) {
-                timer = 0;
+            } else {
+                if (isFishing) {
+                    if (castFrame >= 11) {
+                        key.AnnouceCompleteAnimation = true;
+                        return;
+                    }
+                    if (timer == 0) {
+                        if (castFrame == 9 || castFrame == 10 || castFrame == 11) {
+                            rod2Frame++;
+                        }
+                        rodFrame++;
+                        castFrame++;
+                    }
+                    timer++;
+
+                    if (timer >= delay) {
+                        timer = 0;
+                    }
+                }
             }
         }
     }
 
     public BufferedImage getFrame() {
-        if (isFishing && castFrame <= 11) {
-            int size = gp.tileSize + 10;
-            int marginRight = -1;
-            // combine cast and rod
-            // make rod[rodFrame] next to cast[castFrame]
-            BufferedImage combined = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g = combined.createGraphics();
-            if (castFrame == 1 || castFrame == 2) {
-                g.drawImage(cast[level - 1][castFrame], size + marginRight, 0, size, size, null);
+        if (!playerType.equals("")) {
+            if (playerType.equals("Human")) {
+                if (isFishing && castFrame <= 11) {
+                    int size = gp.tileSize + 10;
+                    int marginRight = -1;
+                    // combine cast and rod
+                    // make rod[rodFrame] next to cast[castFrame]
+                    BufferedImage combined = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g = combined.createGraphics();
+                    
+                    if (castFrame == 1 || castFrame == 2) {
+                        g.drawImage(cast[level - 1][castFrame], size + marginRight, 0, size, size, null);
+                    } else {
+                        g.drawImage(cast[level - 1][castFrame], size + marginRight, 0, size, size, null);
+                        g.drawImage(rod[rodFrame], 0, -1, size, size, null);
+                    }
+
+                    if (player.direction == "standRight") {
+                        BufferedImage flip = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2 = flip.createGraphics();
+                        g2.drawImage(combined, 0, 0, size * 2, size, size * 2, 0, 0, size, null);
+                        g2.dispose();
+                        return flip;
+                    }
+
+                    g.dispose();
+                    return combined;
+                }
+                return null;
             } else {
-                g.drawImage(cast[level - 1][castFrame], size + marginRight, 0, size, size, null);
-                g.drawImage(rod[rodFrame], 0, -1, size, size, null);
-            }
+                if (isFishing && castFrame <= 11) {
+                    int size = gp.tileSize + 10;
+                    int marginRight = -1;
+                    // combine cast and rod
+                    // make rod[rodFrame] next to cast[castFrame]
+                    BufferedImage combined = new BufferedImage(size * 3, size, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g = combined.createGraphics();
 
-            if (player.direction == "standRight") {
-                BufferedImage flip = new BufferedImage(size * 2, size, BufferedImage.TYPE_INT_ARGB);
-                Graphics2D g2 = flip.createGraphics();
-                g2.drawImage(combined, 0, 0, size * 2, size, size * 2, 0, 0, size, null);
-                g2.dispose();
-                return flip;
-            }
-            g.dispose();
-            return combined;
+                    g.drawImage(cast[level - 1][castFrame], (size + marginRight) * 2, 0, size, size, null);
+                    g.drawImage(rod[rodFrame], size + marginRight, 0, size, size, null);
 
+                    if (castFrame >= 9) {
+                        g.drawImage(rod2[rod2Frame], 0 + marginRight, 0, size, size, null);
+                    }
+
+                    if (player.direction == "standRight") {
+                        BufferedImage flip = new BufferedImage(size * 3, size, BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2 = flip.createGraphics();
+                        g2.drawImage(combined, 0, 0, size * 3, size, size * 3, 0, 0, size, null);
+                        g2.dispose();
+                        return flip;
+                    }
+
+                    g.dispose();
+                    return combined;
+                }
+            }
+            return null;
         }
         return null;
     }
