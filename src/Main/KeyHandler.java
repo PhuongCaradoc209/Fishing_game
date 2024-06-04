@@ -218,9 +218,11 @@ public class KeyHandler implements KeyListener {
             gp.player.physical = gp.player.maxPhysical;
         }
         if (key == KeyEvent.VK_C) {
+            gp.playSoundEffect("openAndCloseCollection", 15);
             gp.gameState = gp.collectionState;
         }
         if (key == KeyEvent.VK_B) {
+            gp.playSoundEffect("openAndCloseCollection", 15);
             gp.gameState = gp.inventoryState;
         }
         if (key == KeyEvent.VK_L) {
@@ -398,6 +400,7 @@ public class KeyHandler implements KeyListener {
             }
 
         } else if (key == KeyEvent.VK_C || key == KeyEvent.VK_ESCAPE) {
+            gp.playSoundEffect("openAndCloseCollection", 15);
             gp.gameState = gp.playState;
         }
     }
@@ -434,6 +437,7 @@ public class KeyHandler implements KeyListener {
         }
 
         else if (key == KeyEvent.VK_B || key == KeyEvent.VK_ESCAPE) {
+            gp.playSoundEffect("openAndCloseCollection", 15);
             gp.gameState = gp.playState;
         }
     }

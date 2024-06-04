@@ -1328,7 +1328,7 @@ public class UI {
         int y = gp.tileSize * 2;
         int width = gp.screenWidth - (gp.tileSize * 12);
         int height = gp.tileSize * 4;
-        drawSubWindow1(x, y, width, height, new Color(0xF4CE98), new Color(0x5e3622), 10, 30);
+        drawSubWindow1(x, y, width, height, new Color(0xF4CE98), new Color(0x5e3622), 5, 30);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 
         x += gp.tileSize;
