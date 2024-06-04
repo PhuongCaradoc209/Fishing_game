@@ -61,6 +61,7 @@ public class Player extends Entity {
     }
 
     public void setPlayerImage(String playerType) {
+        Fishing_Rod.playerType = playerType;
         if (playerType.equals("Human")) {
             getPlayerImage_HumanVer();
         } else
@@ -450,8 +451,14 @@ public class Player extends Entity {
         }
         ////////////////////////
         if(fishingRod.getFrame() != null){
-            image = fishingRod.getFrame();
-            g.drawImage(image, (int) (x - ( this.direction=="standLeft" ? (size) : 0)), (int) y, null);
+            if(Fishing_Rod.playerType == "Human"){
+                image = fishingRod.getFrame();
+                g.drawImage(image, (int) (x - ( this.direction=="standLeft" ? (size) : 0)), (int) y, null);
+            }
+            else {
+                image = fishingRod.getFrame();
+                g.drawImage(image, (int) (x - ( this.direction=="standLeft" ? (size * 2) : 0)), (int) y, null);
+            }
         }
         else 
         g.drawImage(image, (int) x, (int) y, size, size, null);
