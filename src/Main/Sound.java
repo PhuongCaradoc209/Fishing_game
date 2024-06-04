@@ -31,8 +31,11 @@ public class Sound {
         soundURL[12] = getClass().getResource("/sound/Menu_setting.wav");
         soundURL[13] = getClass().getResource("/sound/selectItem.wav");
         soundURL[14] = getClass().getResource("/sound/clickItem.wav");
-        soundURL[15] = getClass().getResource("/sound/openAndCloseCollection.wav");
-        soundURL[16] = getClass().getResource("/sound/openAndCloseCollection.wav");
+        soundURL[15] = getClass().getResource("/sound/FishingRod.wav");
+        soundURL[16] = getClass().getResource("/sound/spash.wav");
+        soundURL[17] = getClass().getResource("/sound/dialogAuto.wav");
+        soundURL[18] = getClass().getResource("/sound/openAndCloseCollection.wav");
+
     }
 
     public void setField(int i) {
@@ -57,6 +60,11 @@ public class Sound {
     }
 
     public void playSE(String soundName) {
+        clip.start();
+    }
+
+    public void playSpecifiedSE(String soundName) {
+        activeClips.put(soundName, clip);
         clip.start();
     }
 
