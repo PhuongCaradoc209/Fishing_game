@@ -34,6 +34,8 @@ public class Sound {
         soundURL[15] = getClass().getResource("/sound/FishingRod.wav");
         soundURL[16] = getClass().getResource("/sound/spash.wav");
         soundURL[17] = getClass().getResource("/sound/dialogAuto.wav");
+        soundURL[18] = getClass().getResource("/sound/openAndCloseCollection.wav");
+
     }
 
     public void setField(int i) {
